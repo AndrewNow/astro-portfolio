@@ -1,0 +1,282 @@
+@import url("./reset.css");
+
+:root {
+  --color-black: rgb(26, 26, 26);
+  --color-white: white;
+  --color-clay: #93a5a1;
+  --color-lightclay: #efefef;
+  --color-grey: #8c8c8c;
+  --color-lightgrey: #e5e5e5;
+  --color-green: #91f662;
+  --color-yellow: #f6f162;
+  --color-blue: #3c86f4;
+}
+
+@font-face {
+  font-family: 'FT-Polar-regular';
+  src: url('../fonts/ft-polar-regular.woff2') format('WOFF2');
+}
+
+@font-face {
+  font-family: 'Ft-Polar-light';
+  src: url('../fonts/ft-polar-light.woff2') format('WOFF2');
+}
+
+/* @font-face {
+  font-family: 'Azeret-Mono';
+  src: url('../fonts/azeret-mono-regular.woff2') format('WOFF2');
+} */
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  /* font-feature-settings: "calt" 0; */
+  font-weight: 300;
+  margin: 0;
+}
+
+div[data-scroll-trigger] {
+  opacity: 0;
+  transform: rotateX(360);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+div[data-scroll-trigger].is-active {
+  opacity: 1;
+  transform: rotateX(0);
+}
+
+
+.width-wrapper {
+  width: 90vw;
+  max-width: 1850px;
+  margin: 0 auto;
+}
+
+
+.call-to-action-btn {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.05s linear;
+  will-change: transform;
+}
+
+/* .focus {
+  color: white;
+  background-color: black;
+  transition: color 0.2s;
+} */
+
+::selection {
+  background: #f6f162;
+}
+::-moz-selection {
+  background: #f6f162;
+}
+
+.tab[data-active='true'] {
+  color: white;
+}
+
+/* .custom-progress {
+  background-color: white;
+  transition: .5s ease;
+}
+
+.progress {
+  background-color: red;
+} */
+
+.embla__dot {
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  background: none;
+  width: 40px;
+  height: 30px;
+  margin-right: 7.5px;
+  margin-left: 7.5px;
+  display: flex;
+  align-items: center;
+}
+
+.embla__dot:after {
+  background-color: var(--color-grey);
+  opacity: 0.5;
+  width: 100%;
+  height: 2px;
+  border-radius: 5px;
+  content: '';
+}
+
+.embla__dot.is-selected:after {
+  background-color: var(--color-grey);
+  opacity: 1;
+}
+
+
+h1 {
+  font-size: 96px;
+  font-family: 'FT-Polar-Regular';
+}
+h2 {
+  font-size: 72px;
+  font-family: 'FT-Polar-Regular';
+}
+h3 {
+  font-size: 48px;
+  font-family: 'FT-Polar-Regular';
+}
+h4 {
+  font-size: 36px;
+  line-height: 150%;
+  font-family: 'FT-Polar-Regular';
+}
+h5 {
+  font-size: 18px;
+  font-family: 'FT-Polar-Regular';
+}
+h6 {
+  font-size: 16px;
+  font-family: 'FT-Polar-regular';
+}
+p,
+input,
+label {
+  font-size: 24px;
+  line-height: 140%;
+  font-family: 'FT-Polar-Regular';
+}
+small {
+  font-size: 18px;
+  font-family: 'FT-Polar-Regular';
+  color: var(--color-grey);
+}
+
+small > p {
+  font-size: inherit;
+}
+
+small > p > a:hover {
+  color: var(--color-clay);
+}
+
+@media (max-width: 1500px) {
+  h1 {
+    font-size: 80px;
+  }
+  h2 {
+    font-size: 65px;
+  }
+  h3 {
+    font-size: 45px;
+  }
+  h4 {
+    font-size: 28px;
+  }
+  p,
+  input,
+  label {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 1280px) {
+  h1 {
+    font-size: 70px;
+  }
+  h2 {
+    font-size: 55px;
+  }
+  h4 {
+    font-size: 26px;
+  }
+  p {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 992px) {
+  h1 {
+    font-size: 65px;
+  }
+  h2 {
+    font-size: 45px;
+  }
+  h4 {
+    font-size: 28px;
+  }
+  h6 {
+    font-size: 14px;
+  }
+  small {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 35px;
+  }
+  h4 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 55px;
+  }
+  h2 {
+    font-size: 25px;
+  }
+  h3 {
+    font-size: 35px;
+  }
+  h4 {
+    font-size: 21px;
+  }
+  h5 {
+    font-size: 18px;
+  }
+  h6 {
+    font-size: 14px;
+  }
+  p,
+  input,
+  label {
+    font-size: 18px;
+  }
+  small {
+    font-size: 14px;
+    color: var(--color-grey);
+  }
+}

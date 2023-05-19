@@ -1,15 +1,61 @@
 ---
+import Layout from "../layouts/BaseLayout.astro";
+import Landing from "../components/Landing.astro";
+
+const projectData = [
+  {
+    title: "Revue Moebius",
+    description:
+      "Revue Moebius is an experimental French literature publication house that needed a website overhaul to retain their status as an innovative publisher.",
+    imageUrl: "testurl",
+    slug: "revue-moebius",
+    branding: true,
+    development: true,
+  },
+  {
+    title: "Eight Branches",
+    description:
+      "Eight Branches is a traditional Chinese medicine academy based in Toronto, Canada. Rebranded with an approachable, professional and refreshing tone.",
+    imageUrl: "testurl",
+    slug: "eight-branches",
+    branding: true,
+    development: true,
+  },
+  {
+    title: "Wonder Works",
+    description:
+      "Wonder Works is a Roblox Metaverse gaming development studio based in Austin, Texas. Creating a playful, animated website for a younger (but still tech-savvy!) target demographic.",
+    imageUrl: "testurl",
+    slug: "eight-branches",
+    branding: true,
+    development: true,
+  },
+];
+
+const projectCount = projectData.length;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <Landing />
+  <div class="width-wrapper">
+    <div class="selected-works">
+      <p>Selected Works ({projectCount})</p>
+    </div>
+    <div class="projects">
+      {
+        projectData.map((project) => {
+          return <div class="project">{project.title}</div>;
+        })
+      }
+    </div>
+  </div>
+</Layout>
+<style lang="scss">
+  .selected-works {
+    margin: 0 auto;
+    text-align: center;
+  }
+  .projects {
+    border: 1px solid red;
+  }
+</style>
