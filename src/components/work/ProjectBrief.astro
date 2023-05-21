@@ -1,0 +1,48 @@
+---
+const { mainDesc, secondaryDesc } = Astro.props;
+---
+
+<div class="wrapper">
+  <div class="pill">
+    <p>Project Brief</p>
+  </div>
+  <div class="text-wrapper">
+    <h3>{mainDesc}</h3>
+    {secondaryDesc && <p>{secondaryDesc}</p>}
+  </div>
+</div>
+
+<style lang="scss">
+  .pill {
+    display: inline-block;
+    padding: 10px 40px;
+    background: var(--yellow);
+    border-radius: 40px;
+  }
+  .wrapper {
+    width: 95%;
+    margin: 0 auto;
+    display: block;
+  }
+  .text-wrapper {
+    width: min(100%, 1300px);
+    h3 {
+      margin: 2rem 0;
+    }
+    p {
+      width: min(100%, 823px);
+      color: var(--grey-300);
+    }
+  }
+  @media (max-width: 576px) {
+    .pill {
+      padding: 5px 20px;
+    }
+    .text-wrapper {
+      h3 {
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+</style>

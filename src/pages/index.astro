@@ -1,33 +1,34 @@
 ---
 import Layout from "../layouts/BaseLayout.astro";
 import Landing from "../components/Landing.astro";
+import ProjectContainer from "../components/homepage/ProjectContainer.astro";
 
 const projectData = [
   {
     title: "Revue Moebius",
     description:
-      "Revue Moebius is an experimental French literature publication house that needed a website overhaul to retain their status as an innovative publisher.",
-    imageUrl: "testurl",
+      "Revue Moebius is a literature publication house that needed a website overhaul to refresh their visual identity and accommodate their digital poetry residencies.",
+    imageUrl: "/assets/rm/thumbnail.png",
     slug: "revue-moebius",
-    branding: true,
+    design: true,
     development: true,
   },
   {
     title: "Eight Branches",
     description:
       "Eight Branches is a traditional Chinese medicine academy based in Toronto, Canada. Rebranded with an approachable, professional and refreshing tone.",
-    imageUrl: "testurl",
+    imageUrl: "/assets/8b/thumbnail.png",
     slug: "eight-branches",
-    branding: true,
+    design: true,
     development: true,
   },
   {
     title: "Wonder Works",
     description:
       "Wonder Works is a Roblox Metaverse gaming development studio based in Austin, Texas. Creating a playful, animated website for a younger (but still tech-savvy!) target demographic.",
-    imageUrl: "testurl",
+    imageUrl: "/assets/ww/thumbnail.png",
     slug: "eight-branches",
-    branding: true,
+    design: true,
     development: true,
   },
 ];
@@ -35,7 +36,7 @@ const projectData = [
 const projectCount = projectData.length;
 ---
 
-<Layout>
+<Layout seo={}>
   <Landing />
   <div class="width-wrapper">
     <div class="selected-works">
@@ -44,7 +45,7 @@ const projectCount = projectData.length;
     <div class="projects">
       {
         projectData.map((project) => {
-          return <div class="project">{project.title}</div>;
+          return <ProjectContainer data={project} />;
         })
       }
     </div>
@@ -56,6 +57,5 @@ const projectCount = projectData.length;
     text-align: center;
   }
   .projects {
-    border: 1px solid red;
   }
 </style>

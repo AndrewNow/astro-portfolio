@@ -10,7 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.4.1",
-    "sass": "^1.62.1"
+    "@astrojs/image": "^0.16.9",
+    "astro": "^2.5.1",
+    "sass": "^1.62.1",
+    "sharp": "^0.32.1"
   }
 }

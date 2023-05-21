@@ -1,0 +1,103 @@
+---
+import { Image } from "@astrojs/image/components";
+
+const { data } = Astro.props;
+---
+
+<footer class="next-project-wrapper">
+  <div class="next-project-inner">
+    <h4>Next project</h4>
+    <h2>
+      {data.title}
+    </h2>
+    <div class="img-container container-md">
+      <Image
+        class="image-fill"
+        src={data.image}
+        alt=`Preview thumbnail for ${data.title}`
+        width={1682}
+        height={784}
+      />
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+  .image-fill {
+    object-fit: cover;
+    height: 100%;
+  }
+  .next-project-wrapper {
+    background: var(--grey-200);
+    border-radius: 90px 90px 0px 0px;
+  }
+
+  .next-project-inner {
+    width: var(--project-width);
+    margin: 0 auto;
+    padding: 10rem 0;
+    padding-top: 5rem;
+
+    h4 {
+      color: var(--grey-300);
+      letter-spacing: -0.05rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-start;
+      margin: 2rem 0;
+      &:before {
+        content: "";
+        background: var(--blue);
+        width: 24px;
+        height: 24px;
+        border-radius: 100%;
+        margin-right: 2rem;
+        position: relative;
+        display: block;
+      }
+    }
+
+    .img-container {
+      margin: 0 auto;
+      margin-top: 3rem;
+    }
+  }
+  @media (max-width: 992px) {
+    .next-project-wrapper {
+      border-radius: 40px 40px 0px 0px;
+    }
+    .next-project-inner {
+      padding: 5rem 0;
+      padding-top: 3.5rem;
+      h4 {
+        &:before {
+          width: 15px;
+          height: 15px;
+        }
+      }
+    }
+  }
+  @media (max-width: 576px) {
+    .next-project-inner {
+      width: 90vw;
+      padding: 5rem 0;
+      padding-top: 3.5rem;
+      h4, h2 {
+        width: 95%;
+        margin: 0 auto;
+      }
+      h4 {
+        margin: 1rem auto;
+        &:before {
+          transform: translateY(-3px);
+          margin-right: .5rem;
+          width: 9px;
+          height: 9px;
+        }
+      }
+      .img-container {
+        margin-top: 1.5rem;
+      }
+    }
+  }
+</style>

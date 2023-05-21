@@ -1,0 +1,111 @@
+---
+import ProjectBrief from "../../components/work/ProjectBrief.astro";
+import WorkLayout from "../../layouts/WorkLayout.astro";
+import { Image } from "@astrojs/image/components";
+
+const seo = {
+  //
+};
+
+const projectData = {
+  title:
+    "Revue Moebius is an experimental French literature publication house founded in 1977.",
+  url: "https://www.revuemoebius.com/",
+  details: [
+    {
+      label: "Role",
+      data: ["Brand planning", "Web development", "Graphic design"],
+    },
+    { label: "Team", data: ["Sarah Wong"] },
+    {
+      label: "Tools",
+      data: [
+        "NextJS",
+        "Framer Motion",
+        "Sanity CMS",
+        "Algolia Search",
+        "Stripe",
+        "Figma",
+      ],
+    },
+    {
+      label: "Date",
+      data: ["2022"],
+    },
+  ],
+  mainDescription:
+    "Revue Moebius' previous website was showing its age, no longer reflecting the progressive and innovative ethos of their publications.",
+  secondaryDescription:
+    "Upon surveying their demographic, we looked to create a website refresh that created space for new digital literature innovations without completely alienating their older, less tech-literate userbase. ",
+  nextProjectData: {
+    title: "Eight Branches",
+    image: "/assets/8b/thumbnail.png",
+  },
+};
+---
+
+<WorkLayout seo={seo} data={projectData}>
+  <div class="img-container container-md">
+    <Image
+      src="/assets/rm/1.png"
+      alt=`Project thumbnail for Revue Moebius`
+      width={1682}
+      height={784}
+      quality={100}
+      format="webp"
+      class="image-fill"
+      background="rgba(248, 248, 248, 1)"
+    />
+  </div>
+  <ProjectBrief
+    mainDesc={projectData.mainDescription}
+    secondaryDesc={projectData.secondaryDescription}
+  />
+  <div class="img-container container-lg">
+    <Image
+      src="/assets/rm/2.png"
+      alt=`Project thumbnail for Revue Moebius`
+      width={1280}
+      height={860}
+      quality={100}
+      format="webp"
+      class="image-contain"
+      background="rgba(248, 248, 248, 1)"
+    />
+  </div>
+  <div class="img-container container-lg">
+    <Image
+      src="/assets/rm/3.png"
+      alt=`Project thumbnail for Revue Moebius`
+      width={893}
+      height={806}
+      quality={100}
+      format="webp"
+      class="image-contain"
+      background="rgba(248, 248, 248, 1)"
+    />
+  </div>
+  <div class="img-container container-lg">
+    <Image
+      src="/assets/rm/5.png"
+      alt=`Project thumbnail for Revue Moebius`
+      width={1652}
+      height={701}
+      quality={100}
+      format="webp"
+      class="image-contain"
+      background="rgba(248, 248, 248, 1)"
+    />
+  </div>
+</WorkLayout>
+
+<style>
+  .image-fill {
+    object-fit: cover;
+    height: 100%;
+  }
+  .image-contain {
+    object-fit: contain;
+    height: 100%;
+  }
+</style>
