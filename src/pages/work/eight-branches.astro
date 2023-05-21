@@ -1,0 +1,183 @@
+---
+import ProjectBrief from "../../components/work/ProjectBrief.astro";
+import WorkLayout from "../../layouts/WorkLayout.astro";
+import { Image } from "@astrojs/image/components";
+import LogoEightBranches from "../../assets/LogoEightBranches.astro";
+
+const seo = {
+  //
+};
+
+const projectData = {
+  title:
+    "Eight Branches is a traditional Chinese medicine college based in Toronto, Canada.",
+  url: "https://www.eightbranches.ca/",
+  details: [
+    {
+      label: "Role",
+      data: ["Brand planning", "Web development", "Graphic design"],
+    },
+    {
+      label: "Team",
+      data: [
+        { name: "Sarah Wong", role: "lead design" },
+        {
+          name: "Leah Wei",
+          role: "design & strategy",
+        },
+        {
+          name: "Judy Gu",
+          role: "photography",
+        },
+      ],
+    },
+    {
+      label: "Tools",
+      data: ["GatsbyJS", "Framer Motion", "Netlify CMS", "Figma"],
+    },
+    {
+      label: "Date",
+      data: ["2021"],
+    },
+  ],
+  mainDescription:
+    "Eight Branches wanted to stand out from rival colleges by incorporating modern design trends in a way that wouldn't alienate some of their older students.",
+  secondaryDescription:
+    "Following a thorough strategy phase which consisted of market analysis and user research, our team created a visual system that would reflect the compassionate, approachable and professional values of the academy.",
+  nextProjectData: {
+    title: "Wonder Works",
+    image: "/assets/ww/thumbnail.png",
+  },
+};
+---
+
+<WorkLayout seo={seo} data={projectData}>
+  <div class="img-container container-md cover-img">
+    <div class="eight-branches-logo">
+      <div class="logo-svg">
+        <LogoEightBranches />
+      </div>
+    </div>
+  </div>
+  <ProjectBrief
+    mainDesc={projectData.mainDescription}
+    secondaryDesc={projectData.secondaryDescription}
+  />
+  <div class="text-container-wrapper">
+    <div class="img-container container-lg">
+      <Image
+        src="/assets/8b/1.png"
+        alt=`Project image for Eight Branches, showcasing three iPhone screens of social media applications of the branding.`
+        width={1682}
+        height={961}
+        quality={100}
+        format="webp"
+        class="image-contain"
+        background="rgba(248, 248, 248, 1)"
+      />
+    </div>
+    <h6>
+      The stamp logomark is central to Eight Branches' visual system. When use
+      of the full logomark may not be appropriate, it can be used on its own
+      (middle). The border radius can also be used to frame images (right). The
+      leaf forms within the stamp can be used as a pattern for other
+      applications (left).
+    </h6>
+  </div>
+  <div class="text-container-wrapper">
+    <div class="img-container container-lg">
+      <video
+        class="video-player"
+        autoplay="true"
+        muted="true"
+        src="https://nowacki-portfolio.s3.ca-central-1.amazonaws.com/eightbranches_brandbook_1.mp4"
+      ></video>
+    </div>
+    <h6>
+      With the college's future growth in mind, we created an expansive brand
+      book that set specific guidelines for brand applications. Download the PDF
+      <a href="/assets/8b/Eight-Branches-Brand-Book-2022.pdf" download=""
+        >here.</a
+      >
+    </h6>
+  </div>
+  <div class="img-container container-lg">
+    <Image
+      src="/assets/8b/2.png"
+      alt=`Project image for Eight Branches showcasing two street-side billboards against a forest-green background wall.`
+      width={1682}
+      height={961}
+      quality={100}
+      format="webp"
+      class="image-contain"
+      background="rgba(248, 248, 248, 1)"
+    />
+  </div>
+  <div class="text-container-wrapper">
+    <div class="img-container container-lg">
+      <Image
+        src="/assets/8b/3.png"
+        alt=`Eight Branches web screenshots featuring the Teaching Clinic page and the Admissions page.`
+        width={1682}
+        height={961}
+        quality={100}
+        format="webp"
+        class="image-contain"
+        background="rgba(248, 248, 248, 1)"
+      />
+    </div>
+    <h6>
+      It was important for Eight Branches to be able to manage their website's
+      content on the fly. Everything from the bulletin board annoucements to
+      academic requirements and an individual program's information is connected
+      to a CMS for maximum flexibility.
+    </h6>
+  </div>
+  <div class="img-container container-lg">
+    <Image
+      src="/assets/8b/4.png"
+      alt=`Eight Branches web screenshots showcasing different screens about the different program pages.`
+      width={1682}
+      height={961}
+      quality={100}
+      format="webp"
+      class="image-contain"
+      background="rgba(248, 248, 248, 1)"
+    />
+  </div>
+</WorkLayout>
+
+<style lang="scss">
+  .cover-img {
+    margin-top: 2rem;
+  }
+  .image-fill {
+    object-fit: cover;
+    height: 100%;
+  }
+  .image-contain {
+    object-fit: contain;
+    height: 100%;
+  }
+  .video-player {
+    width: min(90%, 980px);
+    margin: 3rem;
+  }
+  .eight-branches-logo {
+    display: grid;
+    place-items: center;
+    background: #82af82;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .logo-svg {
+    position: relative;
+    width: max(30%, 200px);
+  }
+  @media (max-width: 992px) {
+    .cover-img {
+      margin-top: 0;
+    }
+  }
+</style>

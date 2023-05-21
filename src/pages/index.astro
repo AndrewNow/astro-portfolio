@@ -34,21 +34,21 @@ const projectData = [
 ];
 
 const projectCount = projectData.length;
+
+const seo = {};
 ---
 
-<Layout seo={}>
+<Layout seo={seo}>
   <Landing />
-  <div class="width-wrapper">
-    <div class="selected-works">
-      <p>Selected Works ({projectCount})</p>
-    </div>
-    <div class="projects">
-      {
-        projectData.map((project) => {
-          return <ProjectContainer data={project} />;
-        })
-      }
-    </div>
+  <div class="selected-works">
+    <p>Selected Works ({projectCount})</p>
+  </div>
+  <div class="projects">
+    {
+      projectData.map((project) => {
+        return <ProjectContainer data={project} />;
+      })
+    }
   </div>
 </Layout>
 <style lang="scss">

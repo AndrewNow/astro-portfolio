@@ -36,6 +36,10 @@ const { url } = Astro.props;
     .magnetic-button-inner {
       padding: 0.5rem 1.5rem;
     }
+    .magnetic-button-inner:hover {
+      scale: 1;
+      filter: brightness(0.95);
+    }
   }
 </style>
 
@@ -119,5 +123,7 @@ const { url } = Astro.props;
   }
 
   const button = document.querySelector(".magnetic-button");
-  new MagneticObject(button);
+  if (window.innerWidth > 576) {
+    new MagneticObject(button);
+  }
 </script>

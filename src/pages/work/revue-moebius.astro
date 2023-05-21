@@ -16,7 +16,7 @@ const projectData = {
       label: "Role",
       data: ["Brand planning", "Web development", "Graphic design"],
     },
-    { label: "Team", data: ["Sarah Wong"] },
+    { label: "Team", data: [{ name: "Sarah Wong", role: "design" }] },
     {
       label: "Tools",
       data: [
@@ -99,7 +99,7 @@ const projectData = {
   </div>
 </WorkLayout>
 
-<style>
+<style lang="scss">
   .image-fill {
     object-fit: cover;
     height: 100%;
