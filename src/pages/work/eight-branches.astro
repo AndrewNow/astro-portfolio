@@ -107,7 +107,7 @@ const src4mobile = await getImage({
     secondaryDesc={projectData.secondaryDescription}
   />
   <div class="text-container-wrapper">
-    <div class="img-container container-lg">
+    <div class="img-container">
       <Image
         src="/assets/8b/1.png"
         alt=`Project image for Eight Branches, showcasing three iPhone screens of social media applications of the branding.`
@@ -128,11 +128,12 @@ const src4mobile = await getImage({
     </h6>
   </div>
   <div class="text-container-wrapper">
-    <div class="img-container container-lg">
+    <div class="img-container">
       <video
         class="video-player"
         autoplay="true"
         muted="true"
+        controls
         src="https://nowacki-portfolio.s3.ca-central-1.amazonaws.com/eightbranches_brandbook_1.mp4"
       ></video>
     </div>
@@ -144,7 +145,7 @@ const src4mobile = await getImage({
       >
     </h6>
   </div>
-  <div class="img-container container-lg">
+  <div class="img-container">
     <Image
       src="/assets/8b/2.png"
       alt=`Project image for Eight Branches showcasing two street-side billboards against a forest-green background wall.`
@@ -157,7 +158,7 @@ const src4mobile = await getImage({
     />
   </div>
   <div class="text-container-wrapper">
-    <div class="img-container container-lg">
+    <div class="img-container">
       <picture class="image-fill">
         <source media="(max-width: 576px)" srcset={src3mobile.src} />
         <img src={src3.src} />
@@ -206,9 +207,6 @@ const src4mobile = await getImage({
   @media (max-width: 992px) {
     .logo-svg {
       width: max(30%, 150px);
-    }
-    .cover-img {
-      margin-top: 0;
     }
   }
 </style>

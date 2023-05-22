@@ -272,6 +272,9 @@ small > p {
   .container-md {
     // height: 380px;
   }
+  .cover-img {
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -287,12 +290,18 @@ small > p {
   .img-container {
     border-radius: 14px;
     margin: 50px auto;
+    margin-bottom: 0rem;
   }
   .container-lg {
     // height: 500px;
   }
   .container-md {
     // height: 280px;
+  }
+  .text-container-wrapper {
+    .img-container { 
+      margin-bottom: 1rem;
+    }
   }
 }
 
@@ -347,7 +356,6 @@ small > p {
   }
   .img-container {
     border-radius: 7px;
-    margin: 50px auto;
   }
   .container-lg {
     // height: 300px;
