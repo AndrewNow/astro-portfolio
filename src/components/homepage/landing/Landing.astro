@@ -1,0 +1,257 @@
+<div class="landing-wrapper">
+  <div class="top left">
+    <h6>
+      <span class="clock"></span>
+      <span class="weather"></span>
+    </h6>
+    <h6><span class="area"></span></h6>
+  </div>
+  <div class="top right">
+    <h6>
+      <a
+        href="https://www.instagram.com/andrewnowacki_/"
+        rel="noreferrer"
+        target="_blank">Instagram</a
+      >
+    </h6>
+    <h6>
+      <a
+        href="https://www.are.na/andrew-nowacki/"
+        rel="noreferrer"
+        target="_blank">Are.na</a
+      >
+    </h6>
+    <h6>
+      <a
+        href="mailto:andrew.p.nowacki@gmail.com"
+        rel="noreferrer"
+        target="_blank">Email</a
+      >
+    </h6>
+  </div>
+  <div class="bio">
+    <div class="bio-inner">
+      <h1>Andrew Nowacki designs and <br />develops digital experiences.</h1>
+    </div>
+    <svg
+      class="bio-top-left"
+      width="9"
+      height="9"
+      viewBox="0 0 9 9"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      ><path fill="#fff" stroke="#3C86F4" d="M.5.5h8v8h-8z"></path></svg
+    >
+    <svg
+      class="bio-top-right"
+      width="9"
+      height="9"
+      viewBox="0 0 9 9"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      ><path fill="#fff" stroke="#3C86F4" d="M.5.5h8v8h-8z"></path></svg
+    >
+    <svg
+      class="bio-bottom-left"
+      width="9"
+      height="9"
+      viewBox="0 0 9 9"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      ><path fill="#fff" stroke="#3C86F4" d="M.5.5h8v8h-8z"></path></svg
+    >
+    <svg
+      class="bio-bottom-right"
+      width="9"
+      height="9"
+      viewBox="0 0 9 9"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      ><path fill="#fff" stroke="#3C86F4" d="M.5.5h8v8h-8z"></path></svg
+    >
+  </div>
+  <div class="bg-green"></div>
+</div>
+
+<style lang="scss">
+  .landing-wrapper {
+    overflow: hidden;
+    // background: var(--grey-200);
+    min-height: 95vh;
+    position: relative;
+  }
+  .top {
+    color: var(--black);
+    padding-top: 3rem;
+    line-height: 150%;
+  }
+  .left {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 5vw;
+    .clock {
+      display: inline-block;
+      min-width: 64px;
+    }
+  }
+  .right {
+    z-index: 10;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 5vw;
+    h6 {
+      :hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .bio {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 85vw;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--blue);
+    .bio-top-left {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+    }
+    .bio-bottom-left {
+      position: absolute;
+      bottom: -5px;
+      left: -5px;
+    }
+    .bio-top-right {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+    }
+    .bio-bottom-right {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+    }
+
+    &:before {
+      content: "";
+      width: 1px;
+      height: 300vh;
+      position: absolute;
+      z-index: 0;
+      top: -100%;
+      left: 50%;
+      border: 1px dashed #3c86f4;
+    }
+    
+    &:after {
+      content: "";
+      width: 300vw;
+      height: 1px;
+      position: absolute;
+      z-index: 0;
+      top: 50%;
+      left: -50%;
+      border: 1px dashed #3c86f4;
+    }
+
+  }
+  .bio-inner {
+    position: relative;
+    z-index: 9;
+    box-sizing: content-box;
+    border-radius: 40px;
+    background: var(--orange);
+    border: 1px solid var(--blue);
+    h1 {
+      user-select: none;
+      letter-spacing: -0.25rem;
+      text-align: center;
+      padding: 4rem;
+    }
+  }
+
+  .bg-green {
+    position: absolute;
+    top: -2.5%;
+    left: -5%;
+    width: 530px;
+    height: 200px;
+    background: var(--green);
+    border-radius: 500px;
+  }
+</style>
+
+<script>
+  // get clock
+  function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+
+    // Format the time
+    const timeString = `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+    // Update the clock element
+    const clockElement = document.querySelector(".clock");
+    clockElement.textContent = timeString;
+  }
+
+  // Update the clock immediately
+  updateClock();
+
+  // Update the clock every second
+  setInterval(updateClock, 1000);
+
+  // get weather
+  const apiKey = import.meta.env.PUBLIC_WEATHER_API_KEY;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Montreal&units=metric&appid=${apiKey}`;
+
+  fetch(apiUrl)
+    .then((res) => res.json())
+    .then((data) => {
+      const weatherID = data.weather[0].id;
+
+      function getWeatherEmoji(weatherID) {
+        if (weatherID === 800) {
+          return "Sunny ☀️";
+        } else if (weatherID > 800 && weatherID < 804) {
+          return "Scattered clouds 🌤";
+        } else if (weatherID === 804) {
+          return "Overcast ☁";
+        } else if (weatherID < 781 && weatherID > 700) {
+          return "Foggy 🌫";
+        } else if (weatherID === 781) {
+          return "Tornado 🌪";
+        } else if (weatherID < 700 && weatherID >= 600) {
+          return "Snowy 🌨";
+        } else if (weatherID < 600 && weatherID > 500) {
+          return "🌧";
+        } else if (weatherID === 500) {
+          return "Light Rain 🌦";
+        } else if (weatherID < 500 && weatherID >= 300) {
+          return "Drizzle 🌨";
+        } else if (weatherID <= 221 && weatherID >= 200) {
+          return "Thunderstorm 🌩";
+        } else if (weatherID <= 232 && weatherID >= 230) {
+          return "Thunderstorm ⛈";
+        }
+        return "";
+      }
+      const weatherDescription = getWeatherEmoji(weatherID);
+      const temperature = Math.trunc(`${data.main.temp}`);
+
+      const weatherElement = document.querySelector(".weather");
+      weatherElement.textContent = `${temperature}°C, ${weatherDescription}`;
+
+      const areaElement = document.querySelector(".area");
+      areaElement.textContent = `${data.name}, QC`;
+    });
+</script>

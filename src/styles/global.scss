@@ -9,7 +9,12 @@
   --green: #91f662;
   --yellow: #f6f162;
   --blue: #3c86f4;
+  --orange: #FABB17;
   --project-width: min(90vw, 1680px);
+  --border-l: 30px;
+  --border-m: 20px;
+  --border-s: 14px;
+  --border-xs: 7px;
 }
 
 @font-face {
@@ -105,7 +110,7 @@ div[data-scroll-trigger].is-active {
   position: relative;
   margin: 3rem auto;
   width: auto;
-  border-radius: 20px;
+  border-radius: var(--border-m);
   // display: grid;
   // place-items: center;
   overflow: hidden;
@@ -115,7 +120,7 @@ div[data-scroll-trigger].is-active {
   position: relative;
   margin: 175px auto;
   width: auto;
-  border-radius: 20px;
+  border-radius: var(--border-m);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -219,6 +224,10 @@ small > p {
 }
 
 @media (max-width: 1280px) {
+
+  ::root {
+    --border-m: 14px;
+  }
   h1 {
     font-size: 70px;
   }
@@ -232,7 +241,6 @@ small > p {
     font-size: 22px;
   }
   .img-container {
-    border-radius: 14px;
     margin: 100px auto;
   }
   .container-lg {
@@ -288,7 +296,6 @@ small > p {
     font-size: 16px;
   }
   .img-container {
-    border-radius: 14px;
     margin: 50px auto;
     margin-bottom: 0rem;
   }
@@ -308,6 +315,7 @@ small > p {
 @media (max-width: 576px) {
   :root {
   --project-width: min(95vw, 1680px);
+  --border-m: 14px;
   }
 
   h1 {
@@ -338,10 +346,6 @@ small > p {
     font-size: 14px;
     color: var(--color-grey);
   }
-  .img-container {
-    border-radius: 14px;
-    margin: 50px auto;
-  }
   .container-md {
     // height: 190px;
   }
@@ -353,9 +357,7 @@ small > p {
 @media (max-width: 374px) {
   :root {
     --project-width: min(90vw, 1680px);
-  }
-  .img-container {
-    border-radius: 7px;
+    --border-m: 7px;
   }
   .container-lg {
     // height: 300px;
