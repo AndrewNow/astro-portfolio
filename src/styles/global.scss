@@ -106,8 +106,8 @@ div[data-scroll-trigger].is-active {
   margin: 3rem auto;
   width: auto;
   border-radius: 20px;
-  display: grid;
-  place-items: center;
+  // display: grid;
+  // place-items: center;
   overflow: hidden;
   background: var(--grey-200);
 }
