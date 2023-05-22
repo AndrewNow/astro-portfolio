@@ -95,7 +95,7 @@ const src4mobile = await getImage({
 ---
 
 <WorkLayout seo={seo} data={projectData}>
-  <div class="img-container container-md cover-img">
+  <div class="container-md cover-img">
     <div class="eight-branches-logo">
       <div class="logo-svg">
         <LogoEightBranches />
@@ -170,7 +170,7 @@ const src4mobile = await getImage({
       to a CMS for maximum flexibility.
     </h6>
   </div>
-  <div class="img-container container-lg">
+  <div class="img-container">
     <picture class="image-fill">
       <source media="(max-width: 576px)" srcset={src4mobile.src} />
       <img src={src4.src} />
@@ -179,9 +179,6 @@ const src4mobile = await getImage({
 </WorkLayout>
 
 <style lang="scss">
-  .cover-img {
-    margin-top: 2rem;
-  }
   .image-fill {
     object-fit: cover;
     height: 100%;

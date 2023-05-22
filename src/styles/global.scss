@@ -101,6 +101,16 @@ div[data-scroll-trigger].is-active {
     margin-bottom: 2rem;
   }
 }
+.cover-img {
+  position: relative;
+  margin: 3rem auto;
+  width: auto;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--grey-200);
+}
 .img-container {
   position: relative;
   margin: 175px auto;
@@ -327,8 +337,8 @@ small > p {
     // height: 190px;
   }
   .container-lg {
-    aspect-ratio: 1/1;
-    // height: 400px;
+    aspect-ratio: auto;
+    // height: 450px;
   }
 }
 @media (max-width: 374px) {
