@@ -134,6 +134,8 @@ const src4mobile = await getImage({
         autoplay="true"
         muted="true"
         controls
+        playsinline
+        loop
         src="https://nowacki-portfolio.s3.ca-central-1.amazonaws.com/eightbranches_brandbook_1.mp4"
       ></video>
     </div>
@@ -202,6 +204,8 @@ const src4mobile = await getImage({
   }
   .logo-svg {
     position: relative;
+    height: auto;
+    min-height: 200px;
     width: max(22%, 150px);
   }
   @media (max-width: 992px) {
