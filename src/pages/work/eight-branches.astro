@@ -171,12 +171,10 @@ const src4mobile = await getImage({
     </h6>
   </div>
   <div class="img-container container-lg">
-    <div class="img-container container-lg">
-      <picture class="image-fill">
-        <source media="(max-width: 576px)" srcset={src4mobile.src} />
-        <img src={src4.src} />
-      </picture>
-    </div>
+    <picture class="image-fill">
+      <source media="(max-width: 576px)" srcset={src4mobile.src} />
+      <img src={src4.src} />
+    </picture>
   </div>
 </WorkLayout>
 
