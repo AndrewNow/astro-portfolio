@@ -3,6 +3,7 @@ import ProjectBrief from "../../components/work/ProjectBrief.astro";
 import WorkLayout from "../../layouts/WorkLayout.astro";
 import { Image } from "@astrojs/image/components";
 import LogoEightBranches from "../../assets/LogoEightBranches.astro";
+import { getImage } from "@astrojs/image";
 
 const seo = {
   //
@@ -49,6 +50,48 @@ const projectData = {
     image: "/assets/ww/thumbnail.png",
   },
 };
+
+// images - art direct to serve different images for mobile
+
+const src3 = await getImage({
+  src: "/assets/8b/3.png",
+  alt: `Eight Branches web screenshots featuring the Teaching Clinic page and the Admissions page.`,
+  width: 1682,
+  height: 961,
+  quality: 100,
+  format: "webp",
+  background: "rgba(248, 248, 248, 1)",
+});
+
+const src3mobile = await getImage({
+  src: "/assets/8b/mobile/3.png",
+  alt: `Eight Branches web screenshots featuring the Teaching Clinic page and the Admissions page.`,
+  width: 450,
+  height: 450,
+  quality: 100,
+  format: "webp",
+  background: "rgba(248, 248, 248, 1)",
+});
+
+const src4 = await getImage({
+  src: "/assets/8b/4.png",
+  alt: `Eight Branches web screenshots showcasing different screens about the different program pages.`,
+  width: 1682,
+  height: 961,
+  quality: 100,
+  format: "webp",
+  background: "rgba(248, 248, 248, 1)",
+});
+
+const src4mobile = await getImage({
+  src: "/assets/8b/mobile/4.png",
+  alt: `Eight Branches web screenshots showcasing different screens about the different program pages.`,
+  width: 450,
+  height: 450,
+  quality: 100,
+  format: "webp",
+  background: "rgba(248, 248, 248, 1)",
+});
 ---
 
 <WorkLayout seo={seo} data={projectData}>
@@ -115,16 +158,10 @@ const projectData = {
   </div>
   <div class="text-container-wrapper">
     <div class="img-container container-lg">
-      <Image
-        src="/assets/8b/3.png"
-        alt=`Eight Branches web screenshots featuring the Teaching Clinic page and the Admissions page.`
-        width={1682}
-        height={961}
-        quality={100}
-        format="webp"
-        class="image-contain"
-        background="rgba(248, 248, 248, 1)"
-      />
+      <picture class="image-fill">
+        <source media="(max-width: 576px)" srcset={src3mobile.src} />
+        <img src={src3.src} class="image-fill" />
+      </picture>
     </div>
     <h6>
       It was important for Eight Branches to be able to manage their website's
@@ -134,16 +171,12 @@ const projectData = {
     </h6>
   </div>
   <div class="img-container container-lg">
-    <Image
-      src="/assets/8b/4.png"
-      alt=`Eight Branches web screenshots showcasing different screens about the different program pages.`
-      width={1682}
-      height={961}
-      quality={100}
-      format="webp"
-      class="image-contain"
-      background="rgba(248, 248, 248, 1)"
-    />
+    <div class="img-container container-lg">
+      <picture class="image-fill">
+        <source media="(max-width: 576px)" srcset={src4mobile.src} />
+        <img src={src4.src} class="image-fill" />
+      </picture>
+    </div>
   </div>
 </WorkLayout>
 
@@ -173,9 +206,12 @@ const projectData = {
   }
   .logo-svg {
     position: relative;
-    width: max(30%, 200px);
+    width: max(22%, 150px);
   }
   @media (max-width: 992px) {
+    .logo-svg {
+      width: max(30%, 150px);
+    }
     .cover-img {
       margin-top: 0;
     }
