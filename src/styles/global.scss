@@ -85,6 +85,22 @@ div[data-scroll-trigger].is-active {
   transform: rotateX(0);
 }
 
+.err {
+  display: inline-block;
+  position: relative;
+}
+.err.showError:before {
+  content: "~~~~~~~~~~~~";
+  font-size: 0.6em;
+  font-weight: 700;
+  color: red;
+  width: 100%;
+  position: absolute;
+  top: 30%;
+  left: -1px;
+  overflow: hidden;
+}
+
 
 .width-wrapper {
   width: 90vw;
