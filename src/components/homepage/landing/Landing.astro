@@ -1,239 +1,81 @@
 <div class="landing-wrapper">
-  <div class="top left">
-    <h6>
-      <span class="clock"></span>
-      <span class="weather"></span>
-    </h6>
-    <h6><span class="area"></span></h6>
-  </div>
-  <div class="top right">
-    <h6>
-      <a
-        href="https://www.instagram.com/andrewnowacki_/"
-        rel="noreferrer"
-        target="_blank">Instagram</a
-      >
-    </h6>
-    <h6>
-      <a
-        href="https://www.are.na/andrew-nowacki/"
-        rel="noreferrer"
-        target="_blank">Are.na</a
-      >
-    </h6>
-    <h6>
-      <a
-        href="mailto:andrew.p.nowacki@gmail.com"
-        rel="noreferrer"
-        target="_blank">Email</a
-      >
-    </h6>
-  </div>
-  <div class="bio">
-    <div class="bio-inner">
-      <div class="bio-text">
-        <h1 id="bioText">&nbsp;</h1>
-      </div>
-    </div>
-    <svg
-      class="bio-top-left"
-      width="9"
-      height="9"
-      viewBox="0 0 9 9"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      ><path fill="#fff" stroke="#3C86F4" d="M.5.5h8v8h-8z"></path></svg
+  <div class="marquee-wrapper"></div>
+  <div class="details">
+    <small class="detail-text">
+      <span class="weather"></span><br />
+      Montreal, QC
+      <!-- <br /> Working internationally -->
+    </small>
+    <small class="detail-text"
+      >UX/UI Design <br />Web Development <br /> Brand Strategy</small
     >
-    <svg
-      class="bio-top-right"
-      width="9"
-      height="9"
-      viewBox="0 0 9 9"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      ><path fill="#fff" stroke="#3C86F4" d="M.5.5h8v8h-8z"></path></svg
+    <small class="detail-text details-flex"
+      ><span class="label">Socials</span>
+      <span>
+        <a
+          href="https://www.are.na/andrew-nowacki/"
+          rel="noreferrer"
+          target="_blank">Are.na</a
+        >
+        <br />
+        <a
+          href="https://www.instagram.com/andrewnowacki_/"
+          rel="noreferrer"
+          target="_blank">Instagram</a
+        >
+      </span></small
     >
-    <svg
-      class="bio-bottom-left"
-      width="9"
-      height="9"
-      viewBox="0 0 9 9"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      ><path fill="#fff" stroke="#3C86F4" d="M.5.5h8v8h-8z"></path></svg
-    >
-    <svg
-      class="bio-bottom-right"
-      width="9"
-      height="9"
-      viewBox="0 0 9 9"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      ><path fill="#fff" stroke="#3C86F4" d="M.5.5h8v8h-8z"></path></svg
-    >
-  </div>
-  <div class="bg-green"></div>
-  <div class="cursor">
-    <svg
-      class="cursor-svg"
-      width="50"
-      height="50"
-      viewBox="0 0 50 50"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M14.0265 10.7378L14.0265 10.7381L16.02 34.4364C16.02 34.4365 16.02 34.4366 16.02 34.4366C16.094 35.3134 17.1883 35.6697 17.7647 35.0017L14.0265 10.7378ZM14.0265 10.7378C14.0108 10.5521 14.0476 10.3658 14.1327 10.2C14.2178 10.0343 14.3477 9.89571 14.5077 9.80019C14.6677 9.70466 14.8513 9.656 15.0376 9.65974C15.2239 9.66348 15.4054 9.71948 15.5614 9.82135L15.5616 9.82147L35.9841 23.1493L35.9843 23.1494C36.7246 23.6324 36.5135 24.7708 35.6473 24.9555C35.6473 24.9555 35.6473 24.9555 35.6472 24.9555C35.647 24.9555 35.6468 24.9556 35.6466 24.9556L30.0462 26.1411L28.6698 26.4325L29.3975 27.6367L34.5355 36.1391L34.5357 36.1394C34.9001 36.7419 35.0114 37.4641 34.8453 38.1483C34.6792 38.8326 34.2492 39.4234 33.6492 39.7918L32.1735 40.6964L32.1733 40.6966C31.8743 40.88 31.542 41.0026 31.1955 41.0574C30.849 41.1121 30.4951 41.098 30.1541 41.0158C29.8131 40.9336 29.4916 40.7849 29.2082 40.5782C28.9247 40.3716 28.6848 40.111 28.5022 39.8115L28.5021 39.8114L23.0485 30.8684L22.3332 29.6955L21.4369 30.7366L17.765 35.0013L14.0265 10.7378Z"
-        fill="black"
-        stroke="white"
-        stroke-width="2"></path>
-    </svg>
+    <small class="detail-text details-flex"
+      ><span class="label">Contact</span>
+      <span>
+        <a
+          href="mailto:andrew.p.nowacki@gmail.com"
+          rel="noreferrer"
+          target="_blank">andrew.p.nowacki@gmail.com</a
+        >
+        <br />
+        <a href="sms:4388847079"> (438) 884-7079</a>
+      </span>
+    </small>
   </div>
 </div>
 
 <style lang="scss">
   .landing-wrapper {
+    border-radius: 60px;
     overflow: hidden;
+    background: var(--white);
+    position: relative;
+  }
+  .marquee-wrapper {
+    border-radius: 30px;
+    margin: 2.5rem;
     background: var(--grey-200);
-    min-height: 95vh;
-    position: relative;
+    height: 500px;
   }
-  .top {
-    color: var(--black);
-    padding-top: 3rem;
-    line-height: 150%;
+  .details {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
   }
-  .left {
-    z-index: 10;
-    position: absolute;
-    top: 0;
-    left: 5vw;
-    .clock {
-      display: inline-block;
-      min-width: 64px;
-    }
-  }
-  .right {
-    z-index: 10;
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 5vw;
-    h6 {
-      :hover {
-        text-decoration: underline;
-      }
+  .detail-text {
+    letter-spacing: 0.03rem;
+    text-transform: uppercase;
+    &:not(.label) {
+      color: var(--grey-300);
     }
   }
-  .bio.animating {
-    border: 2px solid var(--blue);
-    &:before {
-      content: "";
-      width: 1px;
-      height: 1000vh;
-      position: absolute;
-      z-index: 0;
-      top: -50%;
-      transform: translateY(-50%);
-      left: 50%;
-      border: 1px dashed #3c86f4;
+  .details-flex {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    .label {
+      margin-right: 2rem;
+      color: var(--grey-200);
     }
-
-    &:after {
-      content: "";
-      width: 1500vw;
-      height: 1px;
-      position: absolute;
-      z-index: 0;
-      top: 50%;
-      left: -50%;
-      transform: translateX(-50%);
-      border: 1px dashed #3c86f4;
-    }
-    .bio-top-left,
-    .bio-bottom-left,
-    .bio-top-right,
-    .bio-bottom-right {
-      opacity: 1;
-    }
-    .bio-inner {
-      border: 1px solid var(--blue);
-    }
-  }
-  .bio {
-    transform-origin: top left;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    // width: 85vw;
-    z-index: 10;
-    transform: translate(5%, -60%);
-    .bio-top-left,
-    .bio-bottom-left,
-    .bio-top-right,
-    .bio-bottom-right {
-      opacity: 0;
-    }
-    .bio-top-left {
-      position: absolute;
-      top: -5px;
-      left: -5px;
-    }
-    .bio-bottom-left {
-      position: absolute;
-      bottom: -5px;
-      left: -5px;
-    }
-    .bio-top-right {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-    }
-    .bio-bottom-right {
-      position: absolute;
-      bottom: -5px;
-      right: -5px;
-    }
-  }
-  .bio-inner {
-    position: relative;
-    z-index: 9;
-    box-sizing: content-box;
-    border-radius: 40px;
-    background: var(--orange);
-    border: none;
-    padding: 4rem;
-    .bio-text {
-      min-width: 70vw;
-      user-select: none;
-      letter-spacing: -0.25rem;
-      text-align: center;
-      border: none;
-    }
-    .bio-text.animating {
-      border: 1px solid #3c86f4;
-    }
-  }
-
-  .bg-green {
-    position: absolute;
-    top: -2.5%;
-    left: -5%;
-    width: 530px;
-    height: 200px;
-    background: var(--green);
-    border-radius: 500px;
-    // transform: translateY(-50px) scale(2);
-    // opacity: 0;
-  }
-
-  .cursor {
-    position: absolute;
-    z-index: 1000;
-    // top: 50%;
-    transform: translate(15vh, 5vw);
-    transition: all ease-in 0.4;
-    // left: 50%;
   }
 </style>
 
@@ -305,154 +147,4 @@
       const areaElement = document.querySelector(".area");
       areaElement.textContent = `${data.name}, QC`;
     });
-
-  // animate green
-  import { animate, spring } from "motion";
-  import Typewriter from "typewriter-effect/dist/core";
-
-  const bio = document.querySelector(".bio");
-  const bioText = document.querySelector(".bio-text");
-  const bgGreen = document.querySelector(".bg-green");
-  const cursor = document.querySelector(".cursor");
-  const cursorSVG = document.querySelector(".cursor-svg");
-
-  animate(bgGreen, { rotate: 180, y: [50, 0] }, { easing: spring() });
-
-  // Cursor setup
-  function animateCursor(cursorX, cursorY, duration) {
-    animate(
-      cursor,
-      {
-        transform: [null, `translate(${cursorX}px, ${cursorY}px)`],
-      },
-      { easing: "linear", duration: duration }
-    );
-  }
-
-  // ->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->
-  //                    BIO BOUNDING BOX
-  // ->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->
-  // update bio bounding box on each frame
-  let bioBoundingBox;
-  let bioPosition;
-  let bioAnimationFrameId;
-  let textAnimationFrameId;
-  let cursorX;
-  let cursorY;
-
-  function updateBioBoundingBox() {
-    bioBoundingBox = bio.getBoundingClientRect();
-    bioPosition = { x: bioBoundingBox.left, y: bioBoundingBox.top };
-
-    // animate cursor to top left of bio box + 50px
-    cursorX = bioPosition.x + 50;
-    cursorY = bioPosition.y + 35;
-    animateCursor(cursorX, cursorY, 0.025);
-
-    bioAnimationFrameId = requestAnimationFrame(updateBioBoundingBox);
-  }
-
-  // ->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->
-  //                    TEXT BOUNDING BOX
-  // ->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->
-
-  let textBoundingBox;
-
-  // <+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+>
-  //                      START BIO ANIMATION
-  // <+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+>
-
-  // call animation of bio box
-  function bioAnimationStart() {
-    bio.classList.add("animating");
-    animateCursor(200, 200, 0.025);
-    // Start the animation loop
-    textAnimationFrameId = requestAnimationFrame(updateBioBoundingBox);
-
-    // move bio into screen
-    animate(
-      bio,
-      {
-        transform: [null, "translate(-52%, -50.5%)"],
-      },
-      {
-        easing: [0.25, 1, 0.5, 1],
-        duration: 1.5,
-        delay: 0.5,
-      }
-    ).finished.then(() => {
-      // move cursor out of view
-      // animateCursor(500, 500);
-
-      bioTextAnimationStart();
-      cancelAnimationFrame(bioAnimationFrameId);
-    });
-  }
-
-  bioAnimationStart();
-
-  function bioTextAnimationStart() {
-    animCursorFromCurrentPos(250, 50, 0.3);
-    animate(
-      cursorSVG,
-      { scale: [null, 0.6, 1, 0.6, 1] },
-      { delay: 0.2, duration: 0.85 }
-    ).finished.then(() => {
-      createTypeWriter();
-      animCursorFromCurrentPos(150, 2350, 1.3);
-    });
-    setTimeout(() => {
-      bioText.classList.add("animating");
-    }, 450);
-  }
-
-  function bioAnimationEnd() {
-    bio.classList.remove("animating");
-    cancelAnimationFrame(textAnimationFrameId);
-  }
-
-  function animCursorFromCurrentPos(x, y, duration) {
-    const cursorTransform = getComputedStyle(cursor).transform;
-    const cursorMatrix = new DOMMatrix(cursorTransform);
-
-    // Extract the current translation values
-    const currentX = cursorMatrix.e;
-    const currentY = cursorMatrix.f;
-
-    // Calculate the new target position
-    const targetX = currentX + x;
-    const targetY = currentY + y;
-
-    // Animate the cursor to the new target position
-    animateCursor(targetX, targetY, duration);
-  }
-
-  function createTypeWriter() {
-    const typewriterEl = document.getElementById("bioText");
-
-    const customNodeCreator = function (character) {
-      return document.createTextNode(character);
-    };
-
-    const typewriter = new Typewriter(typewriterEl, {
-      loop: false,
-      delay: 75,
-      onCreateTextNode: customNodeCreator,
-    });
-
-    typewriter
-      .typeString(`Andrew Nowacki <span class="err showError">desings<span>`)
-      .pauseFor(100)
-      .deleteChars(4)
-      .callFunction(() => {
-        document.querySelector(".err").classList.remove("showError");
-      })
-      .pauseFor(60)
-      .typeString("igns ")
-      .pauseFor(160)
-      .typeString("and develops")
-      .pauseFor(160)
-      .typeString(" digital experiences.")
-      .start();
-  }
 </script>

@@ -37,45 +37,26 @@ const seo = {};
 ---
 
 <Layout seo={seo}>
-  <Landing />
-  <div class="secondary-bio-section">
-    <div class="secondary-bio">
-      <h4>
-        I partner with clients to create websites that <br /> unlock the potential
-        of the projects they service.
-      </h4>
+  <div class="bg-black">
+    <Landing />
+    <div class="bg-white">
+      {
+        projectData.map((project) => {
+          return <ProjectContainer data={project} />;
+        })
+      }
     </div>
   </div>
-  <div>
-    {
-      projectData.map((project) => {
-        return <ProjectContainer data={project} />;
-      })
-    }
-  </div>
 </Layout>
+
 <style lang="scss">
-  .secondary-bio-section {
-    position: relative;
-    z-index: 10;
-    transform: translateY(-100px);
-    padding-top: 100px;
-    width: 100%;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(178.95deg, rgba(0, 0, 0, 0) 1%, #ffffff 25%);
+  .bg-black {
+    background: var(--black);
   }
-  .secondary-bio {
-    display: inline-block;
-    margin: 0 auto;
-    padding: 5rem 7rem;
-    border-radius: 150px;
-    text-align: center;
-    background: var(--blue);
-    color: var(--white);
-    h4 {
-      letter-spacing: -.05rem;
-      font-size: 40px;
-    }
+  .bg-white {
+    background: var(--white);
+    border-radius: var(--border-xl);
+    padding: 3rem;
+    margin: 2rem 0;
   }
 </style>

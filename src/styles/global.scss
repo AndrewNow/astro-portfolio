@@ -3,7 +3,8 @@
 :root {
   --black: rgb(26, 26, 26);
   --white: white;
-  --grey-200: rgba(248, 248, 248, 1);
+  --grey-100: rgba(248, 248, 248, 1);
+  --grey-200: #c4c4c4;
   --grey-300: #8c8c8c;
   --lightgrey: #e5e5e5;
   --green: #91f662;
@@ -11,6 +12,7 @@
   --blue: #3c86f4;
   --orange: #FABB17;
   --project-width: min(90vw, 1680px);
+  --border-xl: 60px;
   --border-l: 30px;
   --border-m: 20px;
   --border-s: 14px;
