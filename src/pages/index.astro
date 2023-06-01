@@ -37,7 +37,7 @@ const seo = {};
 ---
 
 <Layout seo={seo}>
-  <div class="bg-black">
+  <div class="page-backdrop">
     <Landing />
     <div class="bg-white">
       {
@@ -50,13 +50,13 @@ const seo = {};
 </Layout>
 
 <style lang="scss">
-  .bg-black {
-    background: var(--black);
+  .page-backdrop {
+    background: var(--grey-200);
   }
   .bg-white {
     background: var(--white);
     border-radius: var(--border-xl);
     padding: 3rem;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
   }
 </style>

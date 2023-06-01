@@ -1,5 +1,9 @@
+---
+import Marquee from "../../Marquee.astro";
+---
+
 <div class="landing-wrapper">
-  <div class="marquee-wrapper"></div>
+  <div class="marquee-wrapper"><Marquee text="A.Nowacki" /></div>
   <div class="details">
     <small class="detail-text">
       <span class="weather"></span><br />
@@ -42,6 +46,7 @@
 
 <style lang="scss">
   .landing-wrapper {
+    width: min(100%, 2000px);
     border-radius: 60px;
     overflow: hidden;
     background: var(--white);
@@ -49,9 +54,13 @@
   }
   .marquee-wrapper {
     border-radius: 30px;
-    margin: 2.5rem;
-    background: var(--grey-200);
-    height: 500px;
+    margin: 2.5rem auto;
+    // background: var(--grey-200);
+    background: #E7E7E7;
+    // height: 500px;
+    height: auto;
+    position: relative;
+    width: 95%;
   }
   .details {
     width: 90%;
@@ -68,6 +77,10 @@
       color: var(--grey-300);
     }
   }
+  a:hover {
+    transition: var(--hover-transition);
+    color: var(--grey-200);
+  }
   .details-flex {
     display: flex;
     align-items: flex-start;
@@ -81,27 +94,27 @@
 
 <script>
   // get clock
-  function updateClock() {
-    const now = new Date();
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
-    let seconds = now.getSeconds();
+  // function updateClock() {
+  //   const now = new Date();
+  //   let hours = now.getHours();
+  //   let minutes = now.getMinutes();
+  //   let seconds = now.getSeconds();
 
-    // Format the time
-    const timeString = `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  //   // Format the time
+  //   const timeString = `${hours.toString().padStart(2, "0")}:${minutes
+  //     .toString()
+  //     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
-    // Update the clock element
-    const clockElement = document.querySelector(".clock");
-    clockElement.textContent = timeString;
-  }
+  //   // Update the clock element
+  //   const clockElement = document.querySelector(".clock");
+  //   clockElement.textContent = timeString;
+  // }
 
-  // Update the clock immediately
-  updateClock();
+  // // Update the clock immediately
+  // updateClock();
 
-  // Update the clock every second
-  setInterval(updateClock, 1000);
+  // // Update the clock every second
+  // setInterval(updateClock, 1000);
 
   // get weather
   const apiKey = import.meta.env.PUBLIC_WEATHER_API_KEY;

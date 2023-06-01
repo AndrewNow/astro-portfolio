@@ -1,6 +1,7 @@
 @import url("./reset.css");
 
 :root {
+  --hover-transition: 0.2s all cubic-bezier(0.6, 0.6, 0, 1);
   --black: rgb(26, 26, 26);
   --white: white;
   --grey-100: rgba(248, 248, 248, 1);
@@ -10,7 +11,7 @@
   --green: #91f662;
   --yellow: #f6f162;
   --blue: #3c86f4;
-  --orange: #FABB17;
+  --orange: #fabb17;
   --project-width: min(90vw, 1680px);
   --border-xl: 60px;
   --border-l: 30px;
@@ -20,13 +21,13 @@
 }
 
 @font-face {
-  font-family: 'Allnce-regular';
-  src: url('../fonts/allnce-neue-regular.woff2') format('WOFF2');
+  font-family: "Allnce-regular";
+  src: url("../fonts/allnce-neue-regular.woff2") format("WOFF2");
 }
 
 @font-face {
-  font-family: 'Allnce-text-regular';
-  src: url('../fonts/allnce-text-regular.woff2') format('WOFF2');
+  font-family: "Allnce-text-regular";
+  src: url("../fonts/allnce-text-regular.woff2") format("WOFF2");
 }
 
 /* @font-face {
@@ -50,7 +51,6 @@ body {
     font-weight: lighter !important;
   }
 }
-
 
 a {
   color: inherit;
@@ -102,7 +102,6 @@ div[data-scroll-trigger].is-active {
   left: -1px;
   overflow: hidden;
 }
-
 
 .width-wrapper {
   width: 90vw;
@@ -162,40 +161,39 @@ div[data-scroll-trigger].is-active {
   background: #f6f162;
 }
 
-.tab[data-active='true'] {
+.tab[data-active="true"] {
   color: white;
 }
-
 
 h1 {
   font-size: 96px;
   line-height: 150%;
-  letter-spacing: -.35rem;
-  font-family: 'Allnce-regular';
+  letter-spacing: -0.35rem;
+  font-family: "Allnce-regular";
 }
 h2 {
   font-size: 72px;
   line-height: 130%;
-  letter-spacing: -.2rem;
-  font-family: 'Allnce-regular';
+  letter-spacing: -0.2rem;
+  font-family: "Allnce-regular";
 }
 h3 {
   font-size: 56px;
   line-height: 125%;
   letter-spacing: 0.02rem;
-  font-family: 'Allnce-text-regular';
+  font-family: "Allnce-text-regular";
 }
 h4 {
   font-size: 36px;
   line-height: 150%;
   letter-spacing: 0.02rem;
-  font-family: 'Allnce-regular';
+  font-family: "Allnce-regular";
 }
 h6 {
   font-size: 20px;
   letter-spacing: 0.05rem;
   line-height: 130%;
-  font-family: 'Allnce-text-regular';
+  font-family: "Allnce-text-regular";
 }
 p,
 input,
@@ -203,12 +201,12 @@ label {
   font-size: 24px;
   line-height: 150%;
   letter-spacing: 0.05rem;
-  font-family: 'Allnce-text-regular';
+  font-family: "Allnce-text-regular";
 }
 small {
   font-size: 16px;
   line-height: 140%;
-  font-family: 'Allnce-text-regular';
+  font-family: "Allnce-text-regular";
 }
 
 small > p {
@@ -242,7 +240,6 @@ small > p {
 }
 
 @media (max-width: 1280px) {
-
   ::root {
     --border-m: 14px;
   }
@@ -274,7 +271,7 @@ small > p {
     font-size: 65px;
   }
   h2 {
-    letter-spacing: -.1rem;
+    letter-spacing: -0.1rem;
     font-size: 40px;
   }
   h3 {
@@ -324,7 +321,7 @@ small > p {
     // height: 280px;
   }
   .text-container-wrapper {
-    .img-container { 
+    .img-container {
       margin-bottom: 1rem;
     }
   }
@@ -332,8 +329,8 @@ small > p {
 
 @media (max-width: 576px) {
   :root {
-  --project-width: min(95vw, 1680px);
-  --border-m: 14px;
+    --project-width: min(95vw, 1680px);
+    --border-m: 14px;
   }
 
   h1 {
@@ -384,7 +381,6 @@ small > p {
     // height: 160px;
   }
 }
-
 
 // .embla__dot {
 //   cursor: pointer;
