@@ -24,7 +24,7 @@ const { text } = Astro.props;
     overflow: hidden;
     position: relative;
     display: flex;
-    height: calc(100vw / 3.5);
+    height: calc(100vw / 3.4);
     width: 100%;
   }
 
@@ -37,11 +37,44 @@ const { text } = Astro.props;
     top: 58%;
     padding-right: 5rem;
     h1 {
-      color: white;
+      color: var(--grey-200);
       font-size: 33vw;
       line-height: 100%;
       user-select: none;
       letter-spacing: -2rem;
+      margin-top: 3rem;
+    }
+  }
+
+  @media (max-width: 1280px) {
+    .loop-item {
+      h1 {
+        letter-spacing: -1rem;
+        font-size: 30vw;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .wrapper {
+      height: calc(100vw / 2.75);
+    }
+    .loop-item {
+      h1 {
+        letter-spacing: -0.75rem;
+        font-size: 30vw;
+      }
+    }
+  }
+  @media (max-width: 576px) {
+    .wrapper {
+      height: calc(100vw / 2.5);
+    }
+    .loop-item {
+      h1 {
+        letter-spacing: -0.5rem;
+        font-size: 35vw;
+        margin-top: 1rem;
+      }
     }
   }
 </style>
@@ -60,12 +93,12 @@ const { text } = Astro.props;
   }
   requestAnimationFrame(raf);
 
-  // if user is on mobile, disable the scroll direction effects
-  function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-  }
+  // // if user is on mobile, disable the scroll direction effects
+  // function isMobile() {
+  //   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  //     navigator.userAgent
+  //   );
+  // }
 
   class LoopingElement {
     constructor(element, currentTranslation, speed, lenis) {
@@ -139,11 +172,11 @@ const { text } = Astro.props;
     }
 
     animate() {
-      if (!isMobile()) {
-        // Check if user is not on a mobile device
-        this.direction ? this.goForward() : this.goBackward();
-        this.lerpFunc(this.lerp.current, this.lerp.target, this.lerp.factor);
-      }
+      // if (!isMobile()) {
+      // Check if user is not on a mobile device
+      this.direction ? this.goForward() : this.goBackward();
+      this.lerpFunc(this.lerp.current, this.lerp.target, this.lerp.factor);
+      // }
       this.element.style.transform = `translate(${this.lerp.current}%, -50%)`;
     }
 

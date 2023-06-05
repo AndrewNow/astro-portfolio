@@ -39,13 +39,21 @@ const seo = {};
 <Layout seo={seo}>
   <div class="page-backdrop">
     <Landing />
-    <div class="bg-white">
+    <section class="project-section">
+      <div class="project-section-header">
+        <h4>Select Projects</h4>
+        <div>
+          <h4 class="project-length">
+            {projectData.length}
+          </h4>
+        </div>
+      </div>
       {
         projectData.map((project) => {
           return <ProjectContainer data={project} />;
         })
       }
-    </div>
+    </section>
   </div>
 </Layout>
 
@@ -53,10 +61,40 @@ const seo = {};
   .page-backdrop {
     background: var(--grey-200);
   }
-  .bg-white {
+  .project-section  {
     background: var(--white);
     border-radius: var(--border-xl);
     padding: 3rem;
     margin: 1.5rem 0;
+  }
+  .project-section-header {
+    display: flex;
+    justify-content: space-between;
+    width: 92.5%;
+    margin: 0 auto;
+    h4 {
+      letter-spacing: -0.1rem;
+      color: var(--grey-300);
+      font-weight: 100;
+    }
+    .project-length {
+      display: flex;
+      align-items: center;
+    }
+    .project-length:before {
+      content: "";
+      background: var(--blue);
+      aspect-ratio: 1/1;
+      width: 13px;
+      height: 13px;
+      display: block;
+      margin-right: 1rem;
+      transform: translateY(-3px);
+      border-radius: 50px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    
   }
 </style>

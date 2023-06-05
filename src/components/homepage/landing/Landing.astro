@@ -4,10 +4,11 @@ import Marquee from "../../Marquee.astro";
 
 <div class="landing-wrapper">
   <div class="marquee-wrapper"><Marquee text="A.Nowacki" /></div>
-  <div class="details">
+  <div class="details-wrapper-flex">
     <small class="detail-text">
-      <span class="weather"></span><br />
       Montreal, QC
+      <br />
+      <span class="weather"></span>
       <!-- <br /> Working internationally -->
     </small>
     <small class="detail-text"
@@ -45,26 +46,37 @@ import Marquee from "../../Marquee.astro";
 </div>
 
 <style lang="scss">
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.24;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
   .landing-wrapper {
     width: min(100%, 2000px);
-    border-radius: 60px;
+    border-radius: var(--border-xl);
     overflow: hidden;
     background: var(--white);
     position: relative;
   }
   .marquee-wrapper {
-    border-radius: 30px;
+    border-radius: var(--border-l);
     margin: 2.5rem auto;
     // background: var(--grey-200);
-    background: #E7E7E7;
+    background: #e7e7e7;
     // height: 500px;
     height: auto;
     position: relative;
-    width: 95%;
+    width: 96%;
   }
-  .details {
+  .details-wrapper-flex {
     width: 90%;
-    margin: 0 auto;
+    margin: 5rem auto;
     margin-bottom: 4rem;
     display: flex;
     justify-content: space-between;
@@ -78,8 +90,9 @@ import Marquee from "../../Marquee.astro";
     }
   }
   a:hover {
-    transition: var(--hover-transition);
-    color: var(--grey-200);
+    // transition: var(--hover-transition);
+    animation: blink 0.76s infinite ease-in-out;
+    // color: var(--grey-200);
   }
   .details-flex {
     display: flex;
@@ -88,6 +101,38 @@ import Marquee from "../../Marquee.astro";
     .label {
       margin-right: 2rem;
       color: var(--grey-200);
+    }
+  }
+
+  @media (max-width: 992px) {
+    .marquee-wrapper {
+      width: 92.5%;
+      margin: 1.25rem auto;
+    }
+    .details-wrapper-flex {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
+      margin: 4rem auto;
+    }
+    .detail-text {
+      width: 100%;
+    }
+    .details-flex {
+      flex-direction: column;
+      .label {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .details-wrapper-flex {
+      small {
+        font-size: 12px;
+        letter-spacing: 0.03rem;
+      }
     }
   }
 </style>
@@ -123,6 +168,7 @@ import Marquee from "../../Marquee.astro";
   fetch(apiUrl)
     .then((res) => res.json())
     .then((data) => {
+      console.log(data.weather[0].description);
       const weatherID = data.weather[0].id;
 
       function getWeatherEmoji(weatherID) {
@@ -151,7 +197,8 @@ import Marquee from "../../Marquee.astro";
         }
         return "";
       }
-      const weatherDescription = getWeatherEmoji(weatherID);
+      // const weatherDescription = getWeatherEmoji(weatherID);
+      const weatherDescription = data.weather[0].description;
       const temperature = Math.trunc(`${data.main.temp}`);
 
       const weatherElement = document.querySelector(".weather");
