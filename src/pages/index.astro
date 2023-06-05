@@ -7,7 +7,7 @@ const projectData = [
   {
     title: "Revue Moebius",
     description:
-      "Revue Moebius is a literature publication house that needed a website overhaul to refresh their visual identity and accommodate their digital poetry residencies.",
+      "Literature publication house that needed a website overhaul to refresh their visual identity and accommodate their digital poetry residencies.",
     imageUrl: "/assets/rm/thumbnail.png",
     slug: "revue-moebius",
     design: true,
@@ -25,7 +25,7 @@ const projectData = [
   {
     title: "Wonder Works",
     description:
-      "Wonder Works is a Roblox Metaverse gaming development studio based in Austin, Texas. Creating a playful, animated website for a younger (but still tech-savvy!) target demographic.",
+      "Wonder Works is a Roblox Metaverse gaming development studio based in Austin, Texas. Creating a playful, animated website for a younger (yet tech-savvy) demographic.",
     imageUrl: "/assets/ww/thumbnail.png",
     slug: "eight-branches",
     design: true,
@@ -40,14 +40,16 @@ const seo = {};
   <div class="page-backdrop">
     <Landing />
     <section class="project-section">
-      <div class="project-section-header">
-        <h4>Select Projects</h4>
-        <div>
-          <h4 class="project-length">
-            {projectData.length}
-          </h4>
+      <header class="project-section-header">
+        <div class="project-section-inner">
+          <h4>Select Projects</h4>
+          <div>
+            <h4 class="project-length">
+              {projectData.length}
+            </h4>
+          </div>
         </div>
-      </div>
+      </header>
       {
         projectData.map((project) => {
           return <ProjectContainer data={project} />;
@@ -61,17 +63,19 @@ const seo = {};
   .page-backdrop {
     background: var(--grey-200);
   }
-  .project-section  {
-    background: var(--white);
+  .project-section {
     border-radius: var(--border-xl);
-    padding: 3rem;
-    margin: 1.25rem 0;
   }
   .project-section-header {
+    background: var(--white);
+    width: 95%;
+    margin: 1.25rem auto;
+    border-radius: var(--border-xl);
+  }
+  .project-section-inner {
+    padding: 2rem 4rem;
     display: flex;
     justify-content: space-between;
-    width: 92.5%;
-    margin: 0 auto;
     h4 {
       letter-spacing: -0.1rem;
       color: var(--grey-300);
@@ -95,21 +99,29 @@ const seo = {};
   }
 
   @media (max-width: 992px) {
-    .project-section {
-      padding: 0;
-      margin: 1rem auto;
-    }
     .project-section-header {
-      padding: 2rem 1.25rem;
-      padding-bottom: 0;
-      width: var(--project-width);
       h4 {
         letter-spacing: -0.05rem;
       }
 
       .project-length:before {
-        
+        width: 8px;
+        height: 8px;
+        transform: translateY(-2px);
       }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .page-backdrop {
+      padding-top: 1rem;
+    }
+    .project-section-header {
+      border-radius: 50px;
+      margin: 1rem auto;
+    }
+    .project-section-inner {
+      padding: 1.5rem 2rem;
     }
   }
 </style>
