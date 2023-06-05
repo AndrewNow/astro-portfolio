@@ -65,7 +65,7 @@ const seo = {};
     background: var(--white);
     border-radius: var(--border-xl);
     padding: 3rem;
-    margin: 1.5rem 0;
+    margin: 1.25rem 0;
   }
   .project-section-header {
     display: flex;
@@ -95,6 +95,21 @@ const seo = {};
   }
 
   @media (max-width: 992px) {
-    
+    .project-section {
+      padding: 0;
+      margin: 1rem auto;
+    }
+    .project-section-header {
+      padding: 2rem 1.25rem;
+      padding-bottom: 0;
+      width: var(--project-width);
+      h4 {
+        letter-spacing: -0.05rem;
+      }
+
+      .project-length:before {
+        
+      }
+    }
   }
 </style>
