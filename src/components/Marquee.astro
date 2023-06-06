@@ -118,36 +118,36 @@ const { text } = Astro.props;
         factor: 0.2,
       };
 
-      // this.events();
+      this.events();
       this.render();
     }
 
-    // events() {
-    //   let lastScrollTop = 0;
-    //   let scrollDelta = 0;
+    events() {
+      let lastScrollTop = 0;
+      let scrollDelta = 0;
 
-    //   const update = () => {
-    //     // since lenis and this fn don't update at the same rate, track the delta to slow it down
-    //     scrollDelta = this.scrollTop - lastScrollTop;
-    //     lastScrollTop = this.scrollTop;
+      const update = () => {
+        // since lenis and this fn don't update at the same rate, track the delta to slow it down
+        scrollDelta = this.scrollTop - lastScrollTop;
+        lastScrollTop = this.scrollTop;
 
-    //     if (scrollDelta > 0) {
-    //       this.direction = true; // scroll right
-    //       this.lerp.target += this.speed * 2;
-    //     } else if (scrollDelta < 0) {
-    //       this.direction = false; // scroll left
-    //       this.lerp.target -= this.speed * 2;
-    //     }
-    //     requestAnimationFrame(update);
-    //   };
+        if (scrollDelta > 0) {
+          this.direction = true; // scroll right
+          this.lerp.target += this.speed * 2;
+        } else if (scrollDelta < 0) {
+          this.direction = false; // scroll left
+          this.lerp.target -= this.speed * 2;
+        }
+        requestAnimationFrame(update);
+      };
 
-    //   this.lenis.on("scroll", () => {
-    //     this.scrollTop =
-    //       window.pageYOffset || document.documentElement.scrollTop;
-    //   });
+      this.lenis.on("scroll", () => {
+        this.scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+      });
 
-    //   update();
-    // }
+      update();
+    }
 
     lerpFunc(current, target, factor) {
       // lerp.current = how much we want to translate by
@@ -173,10 +173,9 @@ const { text } = Astro.props;
 
     animate() {
       // if (!isMobile()) {
-      // Check if user is not on a mobile device
+      // }
       this.direction ? this.goForward() : this.goBackward();
       this.lerpFunc(this.lerp.current, this.lerp.target, this.lerp.factor);
-      // }
       this.element.style.transform = `translate(${this.lerp.current}%, -50%)`;
     }
 
