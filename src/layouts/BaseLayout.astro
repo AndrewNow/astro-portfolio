@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Navbar from "../components/Navbar.astro";
 // import  { BaseHeadProps } from "../components/BaseHead.astro";
 
 const { seo } = Astro.props;
@@ -12,15 +13,11 @@ const { seo } = Astro.props;
     <!-- <slot name="head-bottom" /> -->
   </head>
   <body>
-    <!-- <slot name="header" /> -->
     <main>
       <slot />
+      <Navbar />
     </main>
-    <!-- <slot name="footer" /> -->
     <script src="../components/utils/BlurUp.js"></script>
+    <script></script>
   </body>
 </html>
-
-<script>
-  
-</script>
