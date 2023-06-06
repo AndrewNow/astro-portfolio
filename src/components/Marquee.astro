@@ -80,114 +80,132 @@ const { text } = Astro.props;
 </style>
 
 <script>
-// init lenis
-import Lenis from "@studio-freight/lenis";
+  // init lenis
+  import Lenis from "@studio-freight/lenis";
 
-const lenis = new Lenis({
-  lerp: 0.075,
-});
+  const lenis = new Lenis({
+    lerp: 0.075,
+  });
 
-function raf(time) {
-  lenis.raf(time);
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
   requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
 
-// // if user is on mobile, disable the scroll direction effects
-// function isMobile() {
-//   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-//     navigator.userAgent
-//   );
-// }
-
-class LoopingElement {
-  constructor(element, currentTranslation, speed, lenis) {
-    this.lenis = lenis;
-
-    this.element = element;
-    this.currentTranslation = currentTranslation;
-
-    this.speed = speed;
-    this.direction = false;
-    this.scrollTop = 0;
-    this.metric = 100; // translate 100% of div
-
-    this.lerp = {
-      current: this.currentTranslation,
-      target: this.currentTranslation,
-      factor: 0.25,
-    };
-
-    this.events();
-    this.render();
+  // if user is on mobile, disable the scroll direction effects
+  function isMobile(): boolean {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
   }
 
-  events() {
-    let lastScrollTop = 0;
-    let scrollDelta = 0;
+  class LoopingElement {
+    lenis: Lenis;
+    element: HTMLElement;
+    currentTranslation: number;
+    speed: number;
+    direction: boolean;
+    scrollTop: number;
+    metric: number;
+    lerp: {
+      current: number;
+      target: number;
+      factor: number;
+    };
 
-    const update = () => {
-      // since lenis and this fn don't update at the same rate, track the delta to slow it down
-      scrollDelta = this.scrollTop - lastScrollTop;
-      lastScrollTop = this.scrollTop;
+    constructor(
+      element: HTMLElement,
+      currentTranslation: number,
+      speed: number,
+      lenis: Lenis
+    ) {
+      this.lenis = lenis;
 
-      if (scrollDelta > 0) {
-        this.direction = false; // scroll right
-        this.lerp.target -= this.speed * 3; // 3 = speed
-      } else if (scrollDelta < 0) {
-        this.direction = true; // scroll left
-        this.lerp.target += this.speed * 3; // 3 = speed
+      this.element = element;
+      this.currentTranslation = currentTranslation;
+
+      this.speed = speed;
+      this.direction = false;
+      this.scrollTop = 0;
+      this.metric = 100; // translate 100% of div
+
+      this.lerp = {
+        current: this.currentTranslation,
+        target: this.currentTranslation,
+        factor: 0.25,
+      };
+
+      this.events();
+      this.render();
+    }
+
+    events() {
+      let lastScrollTop = 0;
+      let scrollDelta = 0;
+
+      const update = () => {
+        // since lenis and this fn don't update at the same rate, track the delta to slow it down
+        scrollDelta = this.scrollTop - lastScrollTop;
+        lastScrollTop = this.scrollTop;
+
+        if (scrollDelta > 0) {
+          this.direction = false; // scroll right
+          this.lerp.target -= this.speed * 3; // 3 = speed
+        } else if (scrollDelta < 0) {
+          this.direction = true; // scroll left
+          this.lerp.target += this.speed * 3; // 3 = speed
+        }
+        requestAnimationFrame(update);
+      };
+
+      this.lenis.on("scroll", () => {
+        this.scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+      });
+
+      update();
+    }
+
+    lerpFunc(current: number, target: number, factor: number) {
+      // lerp.current = how much we want to translate by
+      this.lerp.current = current * (1 - factor) + target * factor;
+    }
+
+    goForward() {
+      this.lerp.target += this.speed;
+      // if lerp target goes off the screen
+      if (this.lerp.target > this.metric) {
+        this.lerp.current -= this.metric * 2;
+        this.lerp.target -= this.metric * 2;
       }
-      requestAnimationFrame(update);
-    };
+    }
 
-    this.lenis.on("scroll", () => {
-      this.scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-    });
+    goBackward() {
+      this.lerp.target -= this.speed;
+      if (this.lerp.target < -this.metric) {
+        this.lerp.current -= -this.metric * 2;
+        this.lerp.target -= -this.metric * 2;
+      }
+    }
 
-    update();
-  }
+    animate() {
+      if (!isMobile()) {
+        this.direction ? this.goForward() : this.goBackward();
+        this.lerpFunc(this.lerp.current, this.lerp.target, this.lerp.factor);
+      }
+      this.element.style.transform = `translate(${this.lerp.current}%, -50%)`;
+    }
 
-  lerpFunc(current, target, factor) {
-    // lerp.current = how much we want to translate by
-    this.lerp.current = current * (1 - factor) + target * factor;
-  }
-
-  goForward() {
-    this.lerp.target += this.speed;
-    // if lerp target goes off the screen
-    if (this.lerp.target > this.metric) {
-      this.lerp.current -= this.metric * 2;
-      this.lerp.target -= this.metric * 2;
+    render() {
+      this.animate();
+      window.requestAnimationFrame(() => this.render());
     }
   }
 
-  goBackward() {
-    this.lerp.target -= this.speed;
-    if (this.lerp.target < -this.metric) {
-      this.lerp.current -= -this.metric * 2;
-      this.lerp.target -= -this.metric * 2;
-    }
-  }
+  // ideally swap w/ something more specific & specify individually
+  let elements = document.querySelectorAll<HTMLElement>(".loop-item");
 
-  animate() {
-    // if (!isMobile()) {
-    this.direction ? this.goForward() : this.goBackward();
-    this.lerpFunc(this.lerp.current, this.lerp.target, this.lerp.factor);
-    // }
-    this.element.style.transform = `translate(${this.lerp.current}%, -50%)`;
-  }
-
-  render() {
-    this.animate();
-    window.requestAnimationFrame(() => this.render());
-  }
-}
-
-// ideally swap w/ something more specific & specify individually
-let elements = document.querySelectorAll(".loop-item");
-
-new LoopingElement(elements[0], 0, 0.015, lenis);
-new LoopingElement(elements[1], -100, 0.015, lenis);
+  new LoopingElement(elements[0], 0, 0.015, lenis);
+  new LoopingElement(elements[1], -100, 0.015, lenis);
 </script>

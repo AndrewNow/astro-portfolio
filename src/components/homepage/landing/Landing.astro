@@ -177,8 +177,7 @@ import Marquee from "../../Marquee.astro";
     .then((data) => {
       // const weatherDescription = getWeatherEmoji(weatherID);
       const weatherDescription = data.weather[0].description;
-      const temperature = Math.trunc(`${data.main.temp}`);
-
+      const temperature = Math.trunc(data.main.temp);
       const weatherElement = document.querySelector(".weather");
       weatherElement.textContent = `${temperature}°C, ${weatherDescription}`;
     });
