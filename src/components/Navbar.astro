@@ -1,0 +1,173 @@
+---
+const currentPath = Astro.url.pathname;
+let initialPos;
+
+if (currentPath.startsWith("/work") || currentPath === "/") {
+  initialPos = `0px`;
+  // document.querySelector('a[data-slug="work"]').classList.add("active");
+} else if (currentPath.startsWith("/play")) {
+  initialPos = `calc((100px + 1rem) * 1)`;
+  // document.querySelector('a[data-slug="play"]').classList.add("active");
+} else if (currentPath.startsWith("/info")) {
+  initialPos = `calc((100px + 1rem) * 2)`;
+  // document.querySelector('a[data-slug="info"]').classList.add("active");
+}
+---
+
+<nav class="nav-wrapper">
+  <div class="nav-inner">
+    <div class="nav-link-wrapper" data-page={currentPath}>
+      <div class="nav-inner-bg"></div>
+      <a
+        class=`nav-link ${currentPath.startsWith("/work") || currentPath === "/" ? "test" : ""}`
+        data-slug="work"
+        href="/">Work</a
+      >
+      <a
+        class=`nav-link ${currentPath.startsWith("/play") ? "test" : ""}`
+        data-slug="play"
+        href="/play">Play</a
+      >
+      <a
+        class=`nav-link ${currentPath.startsWith("/info") ? "test" : ""}`
+        data-slug="info"
+        href="/info">Info</a
+      >
+    </div>
+  </div>
+</nav>
+
+<style lang="scss" define:vars={{ initialPos }}>
+  .nav-wrapper {
+    position: fixed;
+    z-index: 9000;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff90;
+    backdrop-filter: blur(20px) brightness(120%);
+    border: 1px solid #e5e5e570;
+    border-radius: 60px;
+    box-shadow: 0px 5px 37px 9px rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-inner {
+    position: relative;
+    padding: 0.5rem 0.15rem;
+    width: 100%;
+  }
+
+  .nav-link-wrapper {
+    width: 100%;
+    display: flex;
+    position: relative;
+  }
+
+  .nav-inner-bg {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: var(--initialPos);
+    width: 100px;
+    height: 100%;
+    background: var(--black);
+    border-radius: 90px;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    transform: translateX(0);
+    transition: 0.23s all ease;
+  }
+
+  .nav-link {
+    z-index: 2;
+    padding: 0.75rem 0.5rem;
+    margin: 0 0.5rem;
+    width: 100px;
+    text-align: center;
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+    font-family: "Allnce-Regular";
+    line-height: 90%;
+  }
+  .nav-link.active {
+    transition: color 0.23s ease;
+    color: var(--white);
+  }
+</style>
+
+<script>
+  // Get current page
+  const bgElement = document.querySelector(".nav-inner-bg") as HTMLElement;
+  const wrapper = document.querySelector(".nav-link-wrapper");
+  const currentSlug = wrapper.getAttribute("data-page");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  const workLink = document.querySelector('a[data-slug="work"]');
+  const playLink = document.querySelector('a[data-slug="play"]');
+  const infoLink = document.querySelector('a[data-slug="info"]');
+
+  let currentPage;
+
+  if (currentSlug.startsWith("/work") || currentSlug === "/") {
+    currentPage = "work";
+  } else if (currentSlug.startsWith("/play")) {
+    currentPage = "play";
+  } else if (currentSlug.startsWith("/info")) {
+    currentPage = "info";
+  }
+
+  const hoverWork = () => {
+    bgElement.style.left = `0px`;
+    workLink.classList.add("active");
+    playLink.classList.remove("active");
+    infoLink.classList.remove("active");
+  };
+  const hoverPlay = () => {
+    bgElement.style.left = `calc((100px + 1rem) * 1)`;
+    workLink.classList.remove("active");
+    playLink.classList.add("active");
+    infoLink.classList.remove("active");
+  };
+  const hoverInfo = () => {
+    bgElement.style.left = `calc((100px + 1rem) * 2)`;
+    workLink.classList.remove("active");
+    playLink.classList.remove("active");
+    infoLink.classList.add("active");
+  };
+
+  if (currentPage === "work") {
+    hoverWork();
+  } else if (currentPage === "play") {
+    hoverPlay();
+  } else if (currentPage === "info") {
+    hoverInfo();
+  }
+
+  const handleMouseEnter = (e) => {
+    const link = e.target.getAttribute("data-slug");
+    if (link === "work") {
+      hoverWork();
+    } else if (link === "play") {
+      hoverPlay();
+    } else if (link === "info") {
+      hoverInfo();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (currentPage === "work") {
+      hoverWork();
+    } else if (currentPage === "play") {
+      hoverPlay();
+    } else if (currentPage === "info") {
+      hoverInfo();
+    }
+  };
+
+  // Add event listeners for mouseEnter and mouseLeave to each anchor tag
+  navLinks.forEach((link) => {
+    link.addEventListener("mouseenter", handleMouseEnter);
+    link.addEventListener("mouseleave", handleMouseLeave);
+  });
+</script>
