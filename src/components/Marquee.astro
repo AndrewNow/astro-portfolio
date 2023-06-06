@@ -173,9 +173,9 @@ const { text } = Astro.props;
 
     animate() {
       // if (!isMobile()) {
-      // }
       this.direction ? this.goForward() : this.goBackward();
       this.lerpFunc(this.lerp.current, this.lerp.target, this.lerp.factor);
+      // }
       this.element.style.transform = `translate(${this.lerp.current}%, -50%)`;
     }
 
