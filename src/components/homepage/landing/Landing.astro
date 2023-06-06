@@ -175,6 +175,7 @@ import Marquee from "../../Marquee.astro";
   fetch(apiUrl)
     .then((res) => res.json())
     .then((data) => {
+      console.log(data)
       // const weatherDescription = getWeatherEmoji(weatherID);
       const weatherDescription = data.weather[0].description;
       const temperature = Math.trunc(data.main.temp);
