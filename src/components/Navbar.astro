@@ -4,10 +4,13 @@ let initialPos;
 
 if (currentPath.startsWith("/work") || currentPath === "/") {
   initialPos = `0px`;
+  // document.querySelector('a[data-slug="work"]').classList.add("active");
 } else if (currentPath.startsWith("/play")) {
   initialPos = `calc((100px + 1rem) * 1)`;
+  // document.querySelector('a[data-slug="play"]').classList.add("active");
 } else if (currentPath.startsWith("/info")) {
   initialPos = `calc((100px + 1rem) * 2)`;
+  // document.querySelector('a[data-slug="info"]').classList.add("active");
 }
 ---
 
@@ -15,9 +18,21 @@ if (currentPath.startsWith("/work") || currentPath === "/") {
   <div class="nav-inner">
     <div class="nav-link-wrapper" data-page={currentPath}>
       <div class="nav-inner-bg"></div>
-      <a class="nav-link" data-slug="work" href="/">Work</a>
-      <a class="nav-link" data-slug="play" href="/play">Play</a>
-      <a class="nav-link" data-slug="info" href="/info">Info</a>
+      <a
+        class=`nav-link ${currentPath.startsWith("/work") || currentPath === "/" ? "test" : ""}`
+        data-slug="work"
+        href="/">Work</a
+      >
+      <a
+        class=`nav-link ${currentPath.startsWith("/play") ? "test" : ""}`
+        data-slug="play"
+        href="/play">Play</a
+      >
+      <a
+        class=`nav-link ${currentPath.startsWith("/info") ? "test" : ""}`
+        data-slug="info"
+        href="/info">Info</a
+      >
     </div>
   </div>
 </nav>
@@ -72,11 +87,11 @@ if (currentPath.startsWith("/work") || currentPath === "/") {
     border-radius: 100px;
     position: relative;
     cursor: pointer;
-    transition: color 0.2s ease;
     font-family: "Allnce-Regular";
     line-height: 90%;
   }
   .nav-link.active {
+    transition: color 0.23s ease;
     color: var(--white);
   }
 </style>
@@ -87,7 +102,7 @@ if (currentPath.startsWith("/work") || currentPath === "/") {
   const wrapper = document.querySelector(".nav-link-wrapper");
   const currentSlug = wrapper.getAttribute("data-page");
   const navLinks = document.querySelectorAll(".nav-link");
-  
+
   const workLink = document.querySelector('a[data-slug="work"]');
   const playLink = document.querySelector('a[data-slug="play"]');
   const infoLink = document.querySelector('a[data-slug="info"]');
