@@ -82,7 +82,7 @@ const { text } = Astro.props;
 <script>
   // init lenis
   import Lenis from "@studio-freight/lenis";
-
+  console.log("marquee test");
   const lenis = new Lenis({
     lerp: 0.075,
   });
@@ -115,8 +115,9 @@ const { text } = Astro.props;
       this.lerp = {
         current: this.currentTranslation,
         target: this.currentTranslation,
-        factor: 0.2,
+        factor: 0.25,
       };
+      console.log("marquee constructor test");
 
       this.events();
       this.render();
@@ -132,11 +133,11 @@ const { text } = Astro.props;
         lastScrollTop = this.scrollTop;
 
         if (scrollDelta > 0) {
-          this.direction = true; // scroll right
-          this.lerp.target += this.speed * 2;
+          this.direction = false; // scroll right
+          this.lerp.target -= this.speed * 3; // 3 = speed
         } else if (scrollDelta < 0) {
-          this.direction = false; // scroll left
-          this.lerp.target -= this.speed * 2;
+          this.direction = true; // scroll left
+          this.lerp.target += this.speed * 3; // 3 = speed
         }
         requestAnimationFrame(update);
       };
