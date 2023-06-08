@@ -1,0 +1,229 @@
+---
+const testimonialData = [
+  {
+    name: "Valerie Savard",
+    from: "Revue Moebius",
+    message:
+      "Since its launch, the number of site visits has significantly increased, the number of sales made through the website has doubled, and we have given several interviews regarding the unique integration of hypermedia literature works in the site, notably for the Carnet de la Fabrique du numerique, which provides insights into innovations in the world of digital literary and scientific publishing.",
+  },
+  {
+    name: "Valerie Savard",
+    from: "Revue Moebius",
+    message:
+      "Since its launch, the number of site visits has significantly increased, the number of sales made through the website has doubled, and we have given several interviews regarding the unique integration of hypermedia literature works in the site, notably for the Carnet de la Fabrique du numerique, which provides insights into innovations in the world of digital literary and scientific publishing.",
+  },
+  {
+    name: "Valerie Savard",
+    from: "Revue Moebius",
+    message:
+      "Since its launch, the number of site visits has significantly increased, the number of sales made through the website has doubled, and we have given several interviews regarding the unique integration of hypermedia literature works in the site, notably for the Carnet de la Fabrique du numerique, which provides insights into innovations in the world of digital literary and scientific publishing.",
+  },
+  {
+    name: "Valerie Savard",
+    from: "Revue Moebius",
+    message:
+      "Since its launch, the number of site visits has significantly increased, the number of sales made through the website has doubled, and we have given several interviews regarding the unique integration of hypermedia literature works in the site, notably for the Carnet de la Fabrique du numerique, which provides insights into innovations in the world of digital literary and scientific publishing.",
+  },
+  {
+    name: "Valerie Savard",
+    from: "Revue Moebius",
+    message:
+      "Since its launch, the number of site visits has significantly increased, the number of sales made through the website has doubled, and we have given several interviews regarding the unique integration of hypermedia literature works in the site, notably for the Carnet de la Fabrique du numerique, which provides insights into innovations in the world of digital literary and scientific publishing.",
+  },
+];
+
+const length = testimonialData.length;
+---
+
+<div class="testimonial-wrapper">
+  <div class="testimonial-inner">
+    <div class="header">
+      <h3 data-length={length}>Friendly Notes</h3>
+    </div>
+    <div class="notes" data-lenis-prevent>
+      {
+        testimonialData.map((note, index) => {
+          return (
+            <div class="note-wrapper" data-note-index={index}>
+              <div class="note-inner">
+                <div class="icon">
+                  <p>{note.name.slice(0, 1)}</p>
+                </div>
+                <div class="note-text">
+                  <h6>
+                    {note.name} &#8226; {note.from}
+                  </h6>
+                  <small class="note-message" data-note-message={note.message}>
+                    {note.message}
+                  </small>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</div>
+<script>
+  // Get all note wrapper elements
+  const noteWrappers = document.querySelectorAll(".note-wrapper");
+
+  // Add event listener to each note wrapper
+  noteWrappers.forEach((noteWrapper) => {
+    noteWrapper.addEventListener("click", toggleNote);
+  });
+
+  // Toggle the note's visibility
+  function toggleNote() {
+    const noteMessageElement = this.querySelector(".note-message");
+    noteMessageElement.classList.toggle("open");
+
+    // Toggle the background color of note-wrapper
+    this.classList.toggle("open");
+  }
+</script>
+
+<style lang="scss">
+  .testimonial-wrapper {
+    background: var(--white);
+    height: 100%;
+    position: relative;
+  }
+  .testimonial-inner {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 5rem 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .header {
+    width: 90%;
+    margin: 0 auto;
+
+    h3 {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    h3:before {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      content: attr(data-length);
+      color: var(--white);
+      background: #f42152;
+      border-radius: 100%;
+      margin-right: 1.5rem;
+      margin-bottom: 0.25rem;
+      aspect-ratio: 1/1;
+      width: 47px;
+      height: 47px;
+      font-size: 20px;
+    }
+  }
+  .notes {
+    margin: 2rem 0;
+    padding-bottom: 5rem;
+    overflow: auto;
+    height: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    user-select: none;
+  }
+
+  .note-wrapper {
+    // background: var(--grey-100);
+    // border: 1px solid var(--grey-200);
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 10px;
+    transition: var(--hover-transition);
+    outline: 1px solid transparent;
+    &.open {
+      background: var(--grey-100);
+      outline: 1px solid var(--grey-200);
+    }
+  }
+
+  .note-wrapper:hover {
+    background: var(--grey-100);
+    cursor: pointer;
+  }
+
+  .note-inner {
+    display: flex;
+    justify-content: flex-start;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem auto;
+  }
+
+  .icon {
+    border-radius: 5px;
+    background: var(--grey-300);
+    color: var(--white);
+    padding: 1rem;
+    aspect-ratio: 1/1;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+  }
+  .note-text {
+    margin: 0 2rem;
+
+    small {
+      margin-top: 0.5rem;
+      color: var(--grey-300);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 150%;
+      line-height: 150%;
+      transition: var(--hover-transition);
+      &.open {
+        overflow: visible;
+        text-overflow: unset;
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: 1500px) {
+    .testimonial-inner {
+      width: 95%;
+    }
+  }
+  @media (max-width: 576px) {
+    .testimonial-inner {
+      padding: 2rem 0;
+    }
+    .header {
+      h3:before {
+        font-size: 14px;
+        width: 30px;
+        height: 30px;
+        margin-right: 1rem;
+      }
+    }
+    .note-wrapper {
+      width: 100%;
+    }
+    .icon {
+      width: 48px;
+      height: 48px;
+    }
+    .note-inner {
+      padding: 0.75rem 0.5rem;
+    }
+    .note-text {
+      margin: 0 1rem;
+      small {
+        font-size: 12px;
+        line-height: 160%;
+      }
+    }
+  }
+</style>

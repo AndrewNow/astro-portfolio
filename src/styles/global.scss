@@ -34,7 +34,12 @@
   font-family: 'Azeret-Mono';
   src: url('../fonts/azeret-mono-regular.woff2') format('WOFF2');
 } */
-
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
 html,
 body {
   -moz-osx-font-smoothing: grayscale;
@@ -205,6 +210,7 @@ label {
 }
 small {
   font-size: 16px;
+  letter-spacing: 0.05rem;
   line-height: 140%;
   font-family: "Allnce-text-regular";
 }

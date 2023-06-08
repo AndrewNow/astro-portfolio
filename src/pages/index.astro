@@ -2,6 +2,7 @@
 import Layout from "../layouts/BaseLayout.astro";
 import Landing from "../components/homepage/landing/Landing.astro";
 import ProjectContainer from "../components/homepage/ProjectContainer.astro";
+import Testimonials from "../components/homepage/Testimonials.astro";
 
 const projectData = [
   {
@@ -56,12 +57,19 @@ const seo = {};
         })
       }
     </section>
+    <footer class="footer-flex-wrapper">
+      <div class="footer-flex-item">
+        <Testimonials />
+      </div>
+      <div class="footer-flex-item"></div>
+    </footer>
   </div>
 </Layout>
 
 <style lang="scss">
   .page-backdrop {
     background: var(--grey-200);
+    padding: 0.5rem;
   }
   .project-section {
     border-radius: var(--border-xl);
@@ -98,7 +106,27 @@ const seo = {};
     }
   }
 
+  .footer-flex-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer-flex-item {
+    width: 50%;
+    overflow: hidden;
+    border-radius: var(--border-xl);
+    height: 90vh;
+    margin: 0.5rem;
+  }
+
   @media (max-width: 992px) {
+    .footer-flex-wrapper {
+      flex-direction: column;
+    }
+    .footer-flex-item {
+      width: 100%;
+      margin: 0;
+    }
     .project-section-header {
       h4 {
         letter-spacing: -0.05rem;
@@ -115,6 +143,9 @@ const seo = {};
   @media (max-width: 576px) {
     .page-backdrop {
       padding-top: 1rem;
+    }
+    .footer-flex-item {
+      height: 70vh; 
     }
     .project-section-header {
       border-radius: 50px;
