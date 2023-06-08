@@ -1,0 +1,112 @@
+---
+import Layout from "../../layouts/BaseLayout.astro";
+import { Image } from "@astrojs/image/components";
+
+const projectData = [
+  {
+    name: "Album Artwork",
+    slug: "/album-artwork",
+    imageSrc: "assets/play/album-artwork/thumbnail.png",
+  },
+  {
+    name: "Album Artwork",
+    slug: "/album-artwork",
+    imageSrc: "assets/play/album-artwork/thumbnail.png",
+  },
+  {
+    name: "Album Artwork",
+    slug: "/album-artwork",
+    imageSrc: "assets/play/album-artwork/thumbnail.png",
+  },
+  {
+    name: "Album Artwork",
+    slug: "/album-artwork",
+    imageSrc: "assets/play/album-artwork/thumbnail.png",
+  },
+];
+---
+
+<Layout>
+  <div class="page-wrapper">
+    <div class="heading">
+      <h2>
+        This section is reserved for work I've created when not working on web
+        development projects.
+      </h2>
+    </div>
+    <div class="content">
+      {
+        projectData.map((project) => {
+          return (
+            <div class="content-item">
+              <Image
+                src={project.imageSrc}
+                width={806}
+                height={552}
+                alt="test"
+                style={{
+                  objectFit: "cover",
+                  aspectRatio: "806/552",
+                  height: "auto",
+                  width: "100%",
+                }}
+                quality={95}
+                format="webp"
+              />
+              <h4>{project.name}</h4>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss">
+  .page-wrapper {
+    background: var(--grey-100);
+  }
+  .heading {
+    width: var(--project-width);
+    margin: 0 auto;
+    h2 {
+      padding: 3.5rem 0;
+    }
+  }
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2rem;
+    margin: 0 auto;
+    padding-top: 5rem;
+    padding-bottom: 10rem;
+    width: var(--project-width);
+  }
+  .content-item {
+    h4 {
+      margin-top: 0.5rem;
+    }
+    img {
+      border-radius: 10px;
+    }
+  }
+  @media (max-width: 992px) {
+    .content {
+      display: block;
+    }
+    .content-item{ 
+      margin-bottom: 3rem;
+    }
+  }
+  @media (max-width: 576px) {
+    .heading {
+      h2 {
+        padding: 1.5rem 0;
+      }
+    }
+    .content {
+      padding-top: 3rem;
+    }
+  }
+</style>
