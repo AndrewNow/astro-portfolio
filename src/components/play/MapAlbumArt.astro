@@ -70,9 +70,36 @@ import AlbumCarousel from "../play/AlbumCarousel.astro";
   }
   .artwork {
     flex-basis: 50%;
+    position: relative;
+    aspect-ratio: 1/1;
+    width: 50%;
+    height: auto;
   }
   .image {
+    height: auto;
+    aspect-ratio: 1/1;
     border-radius: 10px;
     filter: drop-shadow(0px 4px 25px rgba(186, 186, 186, 0.25));
+  }
+
+  @media (max-width: 768px) {
+    .artwork-wrapper {
+      padding: 2.5rem 0;
+      padding-bottom: 1rem;
+    }
+    .artwork-flex {
+      flex-direction: column;
+    }
+    .artwork-text {
+      flex-basis: 100%;
+      width: 100%;
+      margin-bottom: 2rem;
+      small {
+        width: 100%;
+      }
+    }
+    .artwork {
+      width: 100%;
+    }
   }
 </style>
