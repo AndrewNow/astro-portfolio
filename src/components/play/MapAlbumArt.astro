@@ -1,0 +1,78 @@
+---
+const { data } = Astro.props;
+import { Image } from "@astrojs/image/components";
+import AlbumCarousel from "../play/AlbumCarousel.astro";
+---
+
+<div class="artwork-wrapper">
+  <div class="artwork-flex">
+    <div class="artwork-text">
+      <p>
+        {data.artist}
+      </p>
+      <h2>
+        {data.title}
+      </h2>
+      <small>
+        {data.bio}
+      </small>
+    </div>
+    <div class="artwork">
+      {
+        data.image.length > 1 ? (
+        // if there are more than one image, render a carousel
+          <AlbumCarousel data={data.image} />
+          // else just render the image
+        ) : (
+          data.image.map((img) => {
+            return (
+              <Image
+                src={img.src}
+                alt={`Album cover for ${data.artist} - ${data.title}`}
+                width={812}
+                height={812}
+                quality={100}
+                format="webp"
+                style="height: 100%, aspectRatio: 1/1"
+                class="image"
+              />
+            );
+          })
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .artwork-wrapper {
+    background: var(--white);
+    border-radius: var(--border-xl);
+    padding: 5rem 0;
+    margin: 1.25rem auto;
+  }
+  .artwork-flex {
+    display: flex;
+    margin: 0 auto;
+    width: 90%;
+  }
+  .artwork-text {
+    flex-basis: 50%;
+    align-self: center;
+    p,
+    small {
+      color: var(--grey-300);
+    }
+    small {
+      display: block;
+      width: 75%;
+    }
+  }
+  .artwork {
+    flex-basis: 50%;
+  }
+  .image {
+    border-radius: 10px;
+    filter: drop-shadow(0px 4px 25px rgba(186, 186, 186, 0.25));
+  }
+</style>

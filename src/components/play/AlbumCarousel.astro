@@ -1,0 +1,36 @@
+---
+const { data } = Astro.props;
+import { Image } from "@astrojs/image/components";
+---
+
+<div class="carousel-container">
+  {
+    data.map((img) => {
+      return (
+        <div class="carousel-items">
+          <Image
+            src={img.src}
+            alt={`Album cover for ${data.artist} - ${data.title}`}
+            width={812}
+            height={812}
+            quality={100}
+            format="webp"
+            style="height: 100%, aspectRatio: 1/1"
+            class="image"
+          />
+        </div>
+      );
+    })
+  }
+  <div class="pagination">
+    <!-- Pagination indicators go here -->
+  </div>
+</div>
+
+<style lang="scss"></style>
+
+<script>
+  const carouselContainer = document.querySelector(".carousel-container");
+  const carouselItems = document.querySelector(".carousel-items");
+  const pagination = document.querySelector(".pagination");
+</script>
