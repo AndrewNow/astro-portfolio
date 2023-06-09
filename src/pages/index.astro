@@ -3,6 +3,7 @@ import Layout from "../layouts/BaseLayout.astro";
 import Landing from "../components/homepage/landing/Landing.astro";
 import ProjectContainer from "../components/homepage/ProjectContainer.astro";
 import Testimonials from "../components/homepage/Testimonials.astro";
+import Contact from "../components/homepage/Contact.astro";
 
 const projectData = [
   {
@@ -61,14 +62,16 @@ const seo = {};
       <div class="footer-flex-item">
         <Testimonials />
       </div>
-      <div class="footer-flex-item"></div>
+      <div class="footer-flex-item">
+        <Contact />
+      </div>
     </footer>
   </div>
 </Layout>
 
 <style lang="scss">
   .page-backdrop {
-    background: var(--grey-200);
+    background: #e7e7e7;
     padding: 0.5rem;
   }
   .project-section {
@@ -145,7 +148,7 @@ const seo = {};
       padding-top: 1rem;
     }
     .footer-flex-item {
-      height: 70vh; 
+      height: 70vh;
     }
     .project-section-header {
       border-radius: 50px;

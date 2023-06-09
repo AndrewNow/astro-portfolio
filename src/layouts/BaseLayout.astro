@@ -20,5 +20,21 @@ const { seo } = Astro.props;
     </main>
     <!-- <slot name="footer" /> -->
     <script src="../components/utils/BlurUp.js"></script>
+    <script>
+      import Lenis from "@studio-freight/lenis";
+
+      const lenis = new Lenis({
+        lerp: 0.1,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Assign the Lenis instance to a global variable
+      window.lenis = lenis;
+    </script>
   </body>
 </html>
