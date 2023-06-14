@@ -6,7 +6,12 @@ import {
 } from './arrows-dots-buttons';
 import '../../styles/embla.css';
 
-const OPTIONS = {};
+const OPTIONS = {
+  duration: 15,
+  loop: true,
+  skipSnaps: true,
+  watchSlides: false,
+};
 
 const emblaNodes = document.querySelectorAll('.embla');
 emblaNodes.forEach((emblaNode) => {
