@@ -1,58 +1,153 @@
 ---
 const { data } = Astro.props;
 import { Image } from "@astrojs/image/components";
+// import "../../styles/embla.css";
 ---
 
-<div class="swiper">
-  <div class="swiper-wrapper">
-    {
-      data.map((img) => {
-        return (
-          <div class="swiper-slide">
-            <Image
-              src={img.src}
-              alt={`Album cover for ${data.artist} - ${data.title}`}
-              width={812}
-              height={812}
-              quality={100}
-              format="webp"
-              style="height: 100%, aspectRatio: 1/1"
-              class="image"
-            />
-          </div>
-        );
-      })
-    }
+<div class="carousel__wrapper">
+  <div class="embla">
+    <div class="embla__viewport">
+      <div class="embla__container">
+        {
+          data.map((img) => {
+            return (
+              <div class="embla_slide">
+                <Image
+                  src={img.src}
+                  alt={`Album cover for ${data.artist} - ${data.title}`}
+                  width={812}
+                  height={812}
+                  quality={100}
+                  format="webp"
+                  style="height: 100%, aspectRatio: 1/1"
+                  class="carousel__image"
+                />
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+    <button class="embla__button embla__button--prev" disabled="">
+      <svg class="embla__button__svg" viewBox="137.718 -1.001 366.563 644">
+        <path
+          fill="currentColor"
+          d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+        ></path>
+      </svg></button
+    ><button class="embla__button embla__button--next" disabled="">
+      <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+        <path
+          fill="currentColor"
+          d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+        ></path>
+      </svg>
+    </button>
   </div>
-  <div class="swiper-pagination"></div>
+  <div class="embla__dots"></div>
 </div>
 
 <style lang="scss">
-  .swiper {
-    width: 100%;
-    height: 100%;
+  .carousel__wrapper {
+    position: relative;
+    margin: 0 auto;
     border-radius: 10px;
+    overflow: hidden;
     background: var(--white);
+    filter: drop-shadow(0px 4px 25px rgba(186, 186, 186, 0.25));
   }
-
-  .image {
-    height: auto;
+  .embla__viewport {
+    width: 100%;
+    overflow: hidden;
+  }
+  .embla__container {
+    display: flex;
+    user-select: none;
+  }
+  .embla_slide {
+    position: relative;
+    min-width: 100%;
+    padding-left: 1rem;
+  }
+  .carousel__image {
     aspect-ratio: 1/1;
+    height: auto;
+    width: 100%;
     border-radius: 10px;
     filter: drop-shadow(0px 4px 25px rgba(186, 186, 186, 0.25));
   }
+
+  .embla__dot,
+  .embla__button {
+    -webkit-appearance: none;
+    background-color: transparent;
+    touch-action: manipulation;
+    display: inline-flex;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .embla__dots {
+    z-index: 10;
+    bottom: -1rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .embla__dot {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+  .embla__dot:after {
+    background: var(--background-site);
+    border-radius: 0.2rem;
+    width: 100%;
+    height: 0.3rem;
+    content: "";
+  }
+  .embla__dot--selected:after {
+    background: linear-gradient(
+      45deg,
+      var(--brand-primary),
+      var(--brand-secondary)
+    );
+  }
+  .embla__button {
+    z-index: 1;
+    color: var(--background-site);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 4rem;
+    height: 4rem;
+  }
+  .embla__button--prev {
+    left: 1.6rem;
+  }
+  .embla__button--next {
+    right: 1.6rem;
+  }
+  .embla__button:disabled {
+    opacity: 0.3;
+  }
+  .embla__button__svg {
+    width: 65%;
+    height: 65%;
+  }
 </style>
 
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
-/>
-<script
-  is:inline
-  src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-
-<script is:inline>
-new Swiper(".swiper", {
-  spaceBetween: 16,
-});
-</script>
+<script src="../utils/embla.js"></script>

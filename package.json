@@ -13,9 +13,9 @@
     "@astrojs/image": "^0.16.9",
     "@studio-freight/lenis": "^1.0.13",
     "astro": "^2.5.1",
+    "embla-carousel": "^8.0.0-rc07",
     "motion": "^10.16.2",
     "sass": "^1.62.1",
-    "sharp": "^0.32.1",
-    "swiper": "^9.3.2"
+    "sharp": "^0.32.1"
   }
 }
