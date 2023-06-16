@@ -39,7 +39,6 @@ export const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
       .scrollSnapList()
       .map(() => '<button class="embla__dot" type="button"></button>')
       .join('')
-    console.log('dotsnode', dotsNode)
     dotNodes = Array.from(dotsNode.querySelectorAll('.embla__dot'))
     dotNodes.forEach((dotNode, index) => {
       dotNode.addEventListener('click', () => emblaApi.scrollTo(index), false)

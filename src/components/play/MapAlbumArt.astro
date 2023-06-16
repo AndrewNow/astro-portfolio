@@ -13,9 +13,20 @@ import AlbumCarousel from "../play/AlbumCarousel.astro";
       <h3>
         {data.title}
       </h3>
-      <small>
-        {data.bio}
-      </small>
+      {
+        data.bio.length > 140 ? (
+          <div id="expand">
+            <div class="small-desc">
+              <small>{data.bio}</small>
+            </div>
+            <button class="read-more">
+              <small>Read More</small>
+            </button>
+          </div>
+        ) : (
+          <small>{data.bio}</small>
+        )
+      }
     </div>
     <div class="artwork">
       {
@@ -86,6 +97,48 @@ import AlbumCarousel from "../play/AlbumCarousel.astro";
     filter: drop-shadow(0px 4px 25px rgba(186, 186, 186, 0.25));
   }
 
+  #expand {
+    // position: relative;
+    // .read-more {
+    //   position: absolute;
+    //   bottom: 0;
+    //   left: 0;
+    // }
+  }
+  .read-more {
+    background: unset;
+    border: unset;
+  }
+  .small-desc {
+    max-height: 5rem;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+
+    &:after {
+      transition: all 0.3s ease-in-out;
+      content: "";
+      opacity: 1;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: red;
+      height: 3rem;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        #ffffff 75%
+      );
+    }
+  }
+
+  .small-desc.expand {
+    max-height: 250px;
+    &:after {
+      opacity: 0;
+    }
+  }
+
   @media (max-width: 768px) {
     .artwork-wrapper {
       padding: 2.5rem 0;
@@ -108,3 +161,12 @@ import AlbumCarousel from "../play/AlbumCarousel.astro";
     }
   }
 </style>
+
+<script>
+  const expands = document.querySelectorAll("#expand");
+  expands.forEach((expand) => {
+    expand.querySelector("button").addEventListener("click", function () {
+      expand.querySelector(".small-desc").classList.toggle("expand");
+    });
+  });
+</script>
