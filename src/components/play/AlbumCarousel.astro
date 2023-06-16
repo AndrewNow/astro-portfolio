@@ -27,13 +27,13 @@ import { Image } from "@astrojs/image/components";
         }
       </div>
     </div>
-    <button class="embla__button embla__button--prev" disabled="" />
-    <button class="embla__button embla__button--next" disabled="" />
+    <button class="embla__button embla__button--prev" disabled=""></button>
+    <button class="embla__button embla__button--next" disabled=""></button>
+    <div class="embla__dots"></div>
   </div>
-  <div class="embla__dots"></div>
 </div>
 
-<style lang="scss">
+<style lang="scss" is:global>
   .carousel__wrapper {
     position: relative;
     margin: 0 auto;
@@ -79,40 +79,35 @@ import { Image } from "@astrojs/image/components";
   }
   .embla__dots {
     z-index: 10;
-    bottom: -1rem;
+    bottom: -3.25rem;
     position: absolute;
     left: 0;
     right: 0;
-    height: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .embla__dot {
-    width: 3rem;
+    width: 2.5rem;
     height: 3rem;
     display: flex;
     align-items: center;
-    margin-right: 0.75rem;
-    margin-left: 0.75rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
   }
   .embla__dot:after {
-    background: var(--background-site);
+    background: var(--grey-200);
     border-radius: 0.2rem;
     width: 100%;
-    height: 0.3rem;
+    height: 2px;
     content: "";
   }
   .embla__dot--selected:after {
-    background: linear-gradient(
-      45deg,
-      var(--brand-primary),
-      var(--brand-secondary)
-    );
+    background: var(--grey-300);
   }
   .embla__button {
     z-index: 1;
-    color: var(--background-site);
+    color: var(--grey-300);
     position: absolute;
     display: flex;
     align-items: center;
@@ -127,7 +122,7 @@ import { Image } from "@astrojs/image/components";
     left: 0;
     width: 50%;
     height: 100%;
-    
+
     &::after {
       opacity: 0;
       transition: all 0.5s ease 0s;
@@ -153,7 +148,7 @@ import { Image } from "@astrojs/image/components";
     right: 0;
     width: 50%;
     height: 100%;
-    
+
     &::after {
       opacity: 0;
       transition: all 0.5s ease 0s;
@@ -181,6 +176,14 @@ import { Image } from "@astrojs/image/components";
   .embla__button__svg {
     width: 65%;
     height: 65%;
+  }
+  @media (max-width: 768px) {
+    .embla__dots {
+      bottom: -2.5rem;
+    }
+    .embla__button {
+      display: none;
+    }
   }
 </style>
 
