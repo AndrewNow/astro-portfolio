@@ -1,10 +1,16 @@
 ---
-const { url } = Astro.props;
+const { url, type } = Astro.props;
 ---
 
 <div class="magnetic-button">
-  <a href={url} target="_blank" rel="noreferrer" class="magnetic-button-inner">
-    <p>View Live Site</p>
+  <a
+    href={url}
+    target="_blank"
+    rel="noreferrer"
+    class="magnetic-button-inner"
+    data-type={type}
+  >
+    {type === "album" ? <small>Listen Here</small> : <p>View Live Site</p>}
   </a>
 </div>
 
@@ -23,9 +29,16 @@ const { url } = Astro.props;
     border-radius: 50px;
     border: none;
     transition: 0.2s all ease;
+    &[data-type="album"] {
+      padding: 0.5rem 1.75rem;
+    }
   }
   .magnetic-button-inner:hover {
     scale: 1.3;
+
+    &[data-type="album"] {
+      scale: 1.1;
+    }
   }
   @media (max-width: 768px) {
     .magnetic-button-inner {
@@ -122,8 +135,11 @@ const { url } = Astro.props;
     }
   }
 
-  const button = document.querySelector(".magnetic-button");
-  if (window.innerWidth > 576) {
-    new MagneticObject(button);
-  }
+  const buttons = document.querySelectorAll(".magnetic-button");
+
+  buttons.forEach((btn) => {
+    if (window.innerWidth > 576) {
+      new MagneticObject(btn);
+    }
+  });
 </script>

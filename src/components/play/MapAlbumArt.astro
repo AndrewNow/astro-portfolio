@@ -2,6 +2,7 @@
 const { data } = Astro.props;
 import { Image } from "@astrojs/image/components";
 import AlbumCarousel from "../play/AlbumCarousel.astro";
+import MagneticButton from "../work/MagneticButton.astro";
 ---
 
 <div class="artwork-wrapper">
@@ -13,20 +14,10 @@ import AlbumCarousel from "../play/AlbumCarousel.astro";
       <h3>
         {data.title}
       </h3>
-      {
-        data.bio.length > 140 ? (
-          <div id="expand">
-            <div class="small-desc">
-              <small>{data.bio}</small>
-            </div>
-            <button class="read-more">
-              <small>Read More</small>
-            </button>
-          </div>
-        ) : (
-          <small>{data.bio}</small>
-        )
-      }
+      <small class="artwork-bio">{data.bio}</small>
+      <div class="button-wrapper">
+        {data.link && <MagneticButton url={data.link} type="album" />}
+      </div>
     </div>
     <div class="artwork">
       {
@@ -70,6 +61,7 @@ import AlbumCarousel from "../play/AlbumCarousel.astro";
   .artwork-text {
     flex-basis: 50%;
     align-self: center;
+    padding-right: 10%;
     p,
     small {
       color: var(--grey-300);
@@ -80,7 +72,6 @@ import AlbumCarousel from "../play/AlbumCarousel.astro";
     }
     small {
       display: block;
-      width: 75%;
     }
   }
   .artwork {
@@ -97,46 +88,24 @@ import AlbumCarousel from "../play/AlbumCarousel.astro";
     filter: drop-shadow(0px 4px 25px rgba(186, 186, 186, 0.25));
   }
 
-  #expand {
-    // position: relative;
-    // .read-more {
-    //   position: absolute;
-    //   bottom: 0;
-    //   left: 0;
-    // }
-  }
-  .read-more {
-    background: unset;
-    border: unset;
-  }
-  .small-desc {
-    max-height: 5rem;
+  .artwork-bio {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-
-    &:after {
-      transition: all 0.3s ease-in-out;
-      content: "";
-      opacity: 1;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      background: red;
-      height: 3rem;
-      background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0) 0%,
-        #ffffff 75%
-      );
+    text-overflow: ellipsis;
+    max-height: 150%;
+    line-height: 150%;
+    transition: var(--hover-transition);
+    &.open {
+      overflow: visible;
+      text-overflow: unset;
+      display: block;
     }
   }
-
-  .small-desc.expand {
-    max-height: 250px;
-    &:after {
-      opacity: 0;
-    }
+  .button-wrapper {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   @media (max-width: 768px) {
@@ -151,6 +120,7 @@ import AlbumCarousel from "../play/AlbumCarousel.astro";
     .artwork-text {
       flex-basis: 100%;
       width: 100%;
+      padding-right: 0;
       margin-bottom: 2rem;
       small {
         width: 100%;
