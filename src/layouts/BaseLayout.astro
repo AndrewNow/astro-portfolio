@@ -23,18 +23,39 @@ const { seo } = Astro.props;
     <script>
       import Lenis from "@studio-freight/lenis";
 
-      const lenis = new Lenis({
-        lerp: 0.1,
-      });
+      // Check if user is on macOS
+      const isMacOS = navigator.userAgent.indexOf('Mac OS X') !== -1;
 
-      function raf(time) {
-        lenis.raf(time);
+      if (!isMacOS) {
+        const lenis = new Lenis({
+          lerp: 0.1,
+        });
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+
         requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
 
-      // Assign the Lenis instance to a global variable
-      window.lenis = lenis;
+        // Assign the Lenis instance to a global variable
+        window.lenis = lenis;
+      }
+      else {
+          const lenis = new Lenis({
+          lerp: 0.4,
+        });
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Assign the Lenis instance to a global variable
+        window.lenis = lenis;
+      }
     </script>
   </body>
 </html>
