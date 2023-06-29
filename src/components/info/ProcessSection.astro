@@ -1,0 +1,278 @@
+---
+const processData = [
+  {
+    title: "Discovery 🔎",
+    description:
+      "Let’s get to know each other! In a video meeting, share your project details, ambitions, and challenges. This initial discussion will help us establish mutual understanding and pave the way for an agreement and contract that aligns with your vision.",
+  },
+  {
+    title: "Research & Planning 🗺",
+    description:
+      "To make your website or branding stand out, I'll conduct a thorough competitive analysis and research your target audience. This is typically then followed with a moodboarding stage where I present a few options for visual direction.",
+  },
+  {
+    title: "Prototyping ✨ ",
+    description:
+      "Based on the agreed visual direction, I'll start creating prototypes, sharing the progress with you along the way. We'll have focused meetings to review and discuss the chosen solutions, incorporating your valuable feedback to refine and enhance the user experience.",
+  },
+  {
+    title: "Development 👨‍💻",
+    description:
+      "It's time to bring your website to life! I'll code, animate, and integrate it with other services. Rigorous testing and optimization for performance and quick load times are prioritized. With your input, we'll ensure every detail aligns with your goals and delivers a seamless user experience.",
+  },
+  {
+    title: "Launch & follow-up! 🚀",
+    description:
+      "Get ready to launch! After thorough testing, your website will go live,  optimized for various devices and browsers. I'll be there to support you post-launch, handling updates, implementing new features, and providing ongoing maintenance to keep your website running smoothly.",
+  },
+];
+---
+
+<section class="process-section-wrapper">
+  <div class="process-scroll-container" id="scroll-container">
+    <div class="process-text">
+      <h1>The Process</h1>
+      <p class="process-subtitle">
+        Though every project is different, these are the steps we can expect to
+        walk through together.
+      </p>
+    </div>
+    <div class="sticky-card-container perspective">
+      {
+        processData.map((process, i) => (
+          <div class={`process-card card${i}`}>
+            <span class="card-title-flex">
+              <p>{i + 1}</p>
+              <h4>{process.title}</h4>
+            </span>
+            <h6>{process.description}</h6>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { scroll, timeline } from "motion";
+
+  const scrollContainer = document.getElementById("scroll-container");
+  const card1 = document.querySelector(".card0");
+  const card2 = document.querySelector(".card1");
+  const card3 = document.querySelector(".card2");
+  const card4 = document.querySelector(".card3");
+  const card5 = document.querySelector(".card4");
+
+  const fadeIn = {
+    opacity: [0, 1, 1],
+    transform: [
+      `translate3d(-50%, -50%, 20px)`,
+      `translate3d(-50%, -50%, 0px)`,
+      `translate3d(-50%, -50%, 0px)`,
+    ],
+  };
+
+  const fadeOut = {
+    opacity: [null, 0.75],
+    transform: [null, `translate3d(-50%, -50%, -20px)`],
+  };
+  const fadeOutMore = {
+    opacity: [null, 0.5],
+    transform: [null, `translate3d(-50%, -50%, -40px)`],
+  };
+  const fadeOutFinal = {
+    opacity: [null, 0],
+    transform: [null, `translate3d(-50%, -50%, -60px)`],
+  };
+
+  const sequence: any[] = [
+    [
+      card1, // FIRST CARD ANIMATES IN
+      {
+        opacity: [0, 1],
+        transform: [
+          `translate3d(-50%, -50%, 0px)`,
+          `translate3d(-50%, -50%, 0px)`,
+        ],
+      },
+    ],
+    [
+      card2, // SECOND CARD ANIMATES IN
+      fadeIn,
+      { at: ".25" },
+    ],
+    [
+      card1, // FIRST CARD FADES OUT
+      fadeOut,
+      { at: "<" },
+    ],
+    [
+      card3, // THIRD CARD FADES IN
+      fadeIn,
+      {
+        at: ".25",
+      },
+    ],
+    [
+      card2, // SECOND CARD FADES OUT
+      fadeOut,
+      { at: "<" },
+    ],
+    [
+      card1, // FIRST CARD FADES OUT *MORE*
+      fadeOutMore,
+      { at: "<" },
+    ],
+    [
+      card4, // FOURTH CARD FADES IN
+      fadeIn,
+      { at: ".25" },
+    ],
+    [
+      card2, // SECOND CARD FADES OUT MORE
+      fadeOutMore,
+      {
+        at: "<",
+      },
+    ],
+    [
+      card1, // CARD ONE REMOVED
+      fadeOutFinal,
+      { at: "<" },
+    ],
+    [
+      card3, // THIRD CARD FADES OUT
+      fadeOut,
+      { at: "<" },
+    ],
+    [
+      card5, // FIFTH CARD ADDED
+      fadeIn,
+      {
+        at: ".25",
+      },
+    ],
+    [
+      card2, // SECOND CARD REMOVED
+      fadeOutFinal,
+      { at: "<" },
+    ],
+    [
+      card3, // THIRD CARD FADES OUT MORE
+      fadeOutMore,
+      {
+        at: "<",
+      },
+    ],
+    [
+      card4, // FOURTH CARD FADES OUT
+      fadeOut,
+      { at: "<" },
+    ],
+  ];
+
+  scroll(timeline(sequence), {
+    target: scrollContainer,
+  });
+</script>
+
+<style lang="scss">
+  .process-section-wrapper {
+    width: 95%;
+    margin: 10rem auto;
+    text-align: center;
+    .process-text {
+      position: sticky;
+      top: 5%;
+      margin: 5rem 0;
+    }
+    .process-subtitle {
+      margin: 0 auto;
+      max-width: 650px;
+      color: var(--grey-300);
+    }
+  }
+
+  .process-scroll-container {
+    position: relative;
+    height: 500vh;
+    width: 100%;
+    margin-top: 30vh;
+  }
+
+  .sticky-card-container {
+    position: relative;
+    position: sticky;
+    top: 62%;
+    transform: translateY(-50%);
+    border-radius: var(--border-xl);
+    background: var(--orange-300);
+    margin: 0 auto;
+    width: min(1300px, 98.5%);
+    height: min(62vh, 90%);
+  }
+  .perspective {
+    perspective: 100px;
+    perspective-origin: 50% 100%;
+  }
+  .process-card {
+    position: absolute;
+    height: max(400px, 250px);
+    width: min(750px, 95%);
+    margin: 5rem auto;
+    top: 35%;
+    left: 50%;
+    border-radius: 20px;
+    border: 1px solid var(--grey-200);
+    background-color: rgba(248, 248, 248, 0.9);
+    backdrop-filter: blur(17px) saturate(120%) brightness(1.1);
+    text-align: left;
+    opacity: 1;
+    h6 {
+      max-width: 90%;
+      color: var(--grey-300);
+      padding: 2rem 3rem;
+    }
+
+    .card-title-flex {
+      padding: 2rem 3rem;
+      text-align: left;
+      width: 100%;
+      border-bottom: 1px solid var(--grey-200);
+      display: flex;
+      align-items: center;
+
+      p {
+        font-size: 18px;
+        color: var(--white);
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1.5rem;
+        padding-top: 3px;
+        background: var(--blue);
+        border-radius: 50px;
+        aspect-ratio: 1/1;
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .sticky-card-container {
+      overflow: hidden;
+    }
+    .process-card {
+      margin: 3rem auto;
+      h6 {
+        padding: 1rem 1.5rem;
+        font-size: 16px;
+      }
+      .card-title-flex {
+        padding: 1rem 2rem;
+        margin-right: 0;
+      }
+    }
+  }
+</style>
