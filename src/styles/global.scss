@@ -9,6 +9,7 @@
   --lightgrey: #e5e5e5;
   --green: #91f662;
   --yellow: #f6f162;
+  --orange-300: #FB9216;
   --blue: #3c86f4;
   --orange: #fabb17;
   --project-width: min(90vw, 1680px);
@@ -192,7 +193,7 @@ h3 {
 h4 {
   font-size: 36px;
   line-height: 150%;
-  letter-spacing: 0.02rem;
+  letter-spacing: -0.1rem;
   font-family: "Allnce-regular";
 }
 h6 {
