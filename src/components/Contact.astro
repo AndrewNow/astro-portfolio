@@ -1,5 +1,16 @@
 <div class="wrapper">
-  <form class="carousel" id="carousel" method="POST" name="contact" netlify>
+  <form
+    class="carousel"
+    id="carousel"
+    method="POST"
+    name="contact"
+    data-netlify={true}
+  >
+    <input
+      type="hidden"
+      name="subject"
+      value="New %{subject} lead by %{name}"
+    />
     <div class="slide" id="slide1">
       <h3>Want to work together?</h3>
       <button class="carousel-next">Get started! <span>(2 min)</span></button>
@@ -11,10 +22,10 @@
     <div class="slide" id="slide3">
       <h3><label>Subject</label></h3>
       <select name="subject" id="subject">
-        <option value="graphic_design">Graphic Design</option>
-        <option value="web_dev">Web Development</option>
-        <option value="strategy">Strategy</option>
-        <option value="all_services">All Services</option>
+        <option value="Graphic Design">Graphic Design</option>
+        <option value="Web Dev">Web Development</option>
+        <option value="Strategy">Strategy</option>
+        <option value="All Services">All Services</option>
       </select>
     </div>
     <div class="slide" id="slide4">
@@ -89,7 +100,7 @@
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      
+
       const myForm = event.target;
       const formData = new FormData(myForm);
 
@@ -98,7 +109,7 @@
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData).toString(),
       })
-        .then(() => console.log("Form successfully submitted"))
+        .then(() => alert("Thank you for your submission"))
         .catch((error) => alert(error));
     };
 
