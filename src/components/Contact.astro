@@ -1,0 +1,143 @@
+<div class="wrapper">
+  <form class="carousel" id="carousel" method="POST" name="contact" netlify>
+    <div class="slide" id="slide1">
+      <h3>Want to work together?</h3>
+      <button class="carousel-next">Get started! <span>(2 min)</span></button>
+    </div>
+    <div class="slide" id="slide2">
+      <h3><label>Hey there! <br /> What's your name?</label></h3>
+      <input type="text" name="name" id="name" />
+    </div>
+    <div class="slide" id="slide3">
+      <h3><label>Subject</label></h3>
+      <select name="subject" id="subject">
+        <option value="graphic_design">Graphic Design</option>
+        <option value="web_dev">Web Development</option>
+        <option value="strategy">Strategy</option>
+        <option value="all_services">All Services</option>
+      </select>
+    </div>
+    <div class="slide" id="slide4">
+      <h3>
+        <label>
+          Could you tell me a bit more about your needs and ambitions for this
+          project?
+        </label>
+      </h3>
+      <textarea name="message" id="message"></textarea>
+    </div>
+    <div class="slide" id="slide5">
+      <h3><label>Great! Now I'll just need your email.</label></h3>
+      <input type="text" name="email" />
+      <button type="submit">Send</button>
+    </div>
+    <div class="slide" id="slide6">
+      <h3>Thank You!</h3>
+      <p>Your form has been submitted successfully.</p>
+    </div>
+  </form>
+  <div class="button-group">
+    <button class="carousel-prev">Previous</button>
+    <button class="carousel-next">Next</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.querySelector(".carousel");
+    const carouselItems = document.querySelectorAll(".slide");
+    const prevButton = document.querySelectorAll(".carousel-prev");
+    const nextButton = document.querySelectorAll(".carousel-next");
+    const itemWidth = carouselItems[0].offsetWidth;
+    let currentPosition = 0;
+
+    // Update buttons based on initial slide position
+    updateButtonState();
+
+    // Event listener for the next button
+    nextButton.forEach((button) =>
+      button.addEventListener("click", function () {
+        currentPosition -= itemWidth;
+        carousel.style.transform = `translateX(${currentPosition}px)`;
+        updateButtonState();
+      })
+    );
+
+    // Event listener for the previous button
+    prevButton.forEach((button) =>
+      button.addEventListener("click", function () {
+        currentPosition += itemWidth;
+        carousel.style.transform = `translateX(${currentPosition}px)`;
+        updateButtonState();
+      })
+    );
+
+    // Helper function to update button state
+    function updateButtonState() {
+      if (currentPosition === 0) {
+        prevButton.forEach((button) => (button.disabled = true));
+      } else {
+        prevButton.forEach((button) => (button.disabled = false));
+      }
+
+      if (currentPosition === -((carouselItems.length - 1) * itemWidth)) {
+        nextButton.forEach((button) => (button.disabled = true));
+      } else {
+        nextButton.forEach((button) => (button.disabled = false));
+      }
+    }
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      
+      const myForm = event.target;
+      const formData = new FormData(myForm);
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      })
+        .then(() => console.log("Form successfully submitted"))
+        .catch((error) => alert(error));
+    };
+
+    document.querySelector("form").addEventListener("submit", handleSubmit);
+  });
+</script>
+
+<style lang="scss">
+  .wrapper {
+    border: 1px solid #ffffff40;
+    width: 700px;
+    height: 700px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 1px solid red;
+  }
+  .slide {
+    flex: 0 0 100%;
+    border: 1px solid #ffffff90;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    h3 {
+      color: var(--white);
+      text-align: center;
+    }
+  }
+  .button-group {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+</style>
