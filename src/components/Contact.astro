@@ -8,33 +8,96 @@
   >
     <div class="slide" id="slide1">
       <h3>Want to work together?</h3>
-      <button class="carousel-next">Get started! <span>(2 min)</span></button>
+      <button type="button" class="carousel-next button get-started">
+        <p>
+          Get started! <span>(2 min)</span>
+        </p>
+      </button>
     </div>
     <div class="slide" id="slide2">
-      <h3><label>Hey there! <br /> What's your name?</label></h3>
-      <input type="text" name="name" id="name" />
+      <label>
+        <h3>
+          Awesome! <br /> What's your name?
+        </h3>
+      </label>
+      <input
+        required
+        type="text"
+        name="name"
+        id="name"
+        class="form-input"
+        placeholder="Your name..."
+      />
     </div>
     <div class="slide" id="slide3">
-      <h3><label>Subject</label></h3>
-      <select name="Lead type" id="leadtype">
+      <label>
+        <h3>Hi, what services are you looking for?</h3>
+      </label>
+      <!-- <select required name="Lead type" id="leadtype" class="form-input">
+        <option value="" selected disabled>Select an option</option>
         <option value="Graphic Design">Graphic Design</option>
         <option value="Web Dev">Web Development</option>
         <option value="Strategy">Strategy</option>
         <option value="All Services">All Services</option>
-      </select>
+      </select> -->
+      <div class="select-buttons">
+        <input
+          required
+          type="hidden"
+          name="leadType[]"
+          id="leadType"
+          placeholder="Select an option"
+          readonly
+        />
+        <div class="button-options">
+          <button
+            type="button"
+            class="button-option"
+            value="Design or visual identity"
+          >
+            <p>Design or visual identity</p>
+          </button>
+          <button
+            type="button"
+            class="button-option"
+            value="Website Development"
+          >
+            <p>Website development</p>
+          </button>
+          <button
+            type="button"
+            class="button-option"
+            value="Consultation / Strategy"
+          >
+            <p>Consultation / Strategy</p>
+          </button>
+          <button
+            type="button"
+            class="button-option"
+            id="allServices"
+            value="All of your services"
+          >
+            <p>All of your services</p>
+          </button>
+          <button type="button" class="carousel-next" id="select-apply">Apply</button>
+        </div>
+      </div>
     </div>
     <div class="slide" id="slide4">
-      <h3>
-        <label>
+      <label>
+        <h3>
           Could you tell me a bit more about your needs and ambitions for this
           project?
-        </label>
-      </h3>
-      <textarea name="message" id="message"></textarea>
+        </h3>
+      </label>
+      <textarea required name="message" id="message" class="form-input"
+      ></textarea>
     </div>
     <div class="slide" id="slide5">
-      <h3><label>Great! Now I'll just need your email.</label></h3>
-      <input type="text" name="email" />
+      <label>
+        <h3>Great! Now I'll just need your email.</h3>
+      </label>
+      <input required type="text" name="email" class="form-input" />
       <button type="submit">Send</button>
     </div>
     <div class="slide" id="slide6">
@@ -45,71 +108,184 @@
   <div class="button-group">
     <button class="carousel-prev">Previous</button>
     <button class="carousel-next">Next</button>
+    <button id="resetButton">Reset</button>
   </div>
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const carousel = document.querySelector(".carousel");
-    const carouselItems = document.querySelectorAll(".slide");
-    const prevButton = document.querySelectorAll(".carousel-prev");
-    const nextButton = document.querySelectorAll(".carousel-next");
-    const itemWidth = carouselItems[0].offsetWidth;
-    let currentPosition = 0;
+  const carousel = document.querySelector(".carousel");
+  const carouselItems = document.querySelectorAll(".slide");
+  const prevButton = document.querySelectorAll(".carousel-prev");
+  const nextButton = document.querySelectorAll(".carousel-next");
+  const itemWidth = carouselItems[0].offsetWidth;
+  let currentPosition = 0;
 
-    // Update buttons based on initial slide position
-    updateButtonState();
+  // Update buttons based on initial slide position
+  updateButtonEnabledState();
 
-    // Event listener for the next button
-    nextButton.forEach((button) =>
-      button.addEventListener("click", function () {
-        currentPosition -= itemWidth;
-        carousel.style.transform = `translateX(${currentPosition}px)`;
-        updateButtonState();
-      })
+  // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+  //                        VALIDATION
+  // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+
+  // Function to check if the current slide has a required field filled
+  function isCurrentSlideValid() {
+    const currentSlide = carouselItems[Math.abs(currentPosition / itemWidth)];
+    const requiredFields = currentSlide.querySelectorAll(
+      "input[required], textarea[required], .button-option.selected"
     );
-
-    // Event listener for the previous button
-    prevButton.forEach((button) =>
-      button.addEventListener("click", function () {
-        currentPosition += itemWidth;
-        carousel.style.transform = `translateX(${currentPosition}px)`;
-        updateButtonState();
-      })
-    );
-
-    // Helper function to update button state
-    function updateButtonState() {
-      if (currentPosition === 0) {
-        prevButton.forEach((button) => (button.disabled = true));
-      } else {
-        prevButton.forEach((button) => (button.disabled = false));
-      }
-
-      if (currentPosition === -((carouselItems.length - 1) * itemWidth)) {
-        nextButton.forEach((button) => (button.disabled = true));
-      } else {
-        nextButton.forEach((button) => (button.disabled = false));
+    for (let i = 0; i < requiredFields.length; i++) {
+      if (!requiredFields[i].value) {
+        return false;
       }
     }
+    return true;
+  }
 
-    const handleSubmit = (event) => {
+  // Function to highlight invalid fields
+  function highlightInvalidFields() {
+    const currentSlide = carouselItems[Math.abs(currentPosition / itemWidth)];
+    const invalidFields = currentSlide.querySelectorAll(
+      "input:invalid, textarea:invalid, .button-option.selected:empty"
+    );
+    invalidFields.forEach((field) => {
+      field.classList.add("invalid");
+      field.addEventListener("input", function () {
+        field.classList.remove("invalid");
+      });
+    });
+  }
+
+  // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+  //                  BUTTON EVENT HANDLERS
+  // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+
+  // Event listener for ENTER keydown event
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      // Prevent default form submission behavior
       event.preventDefault();
-
-      const myForm = event.target;
-      const formData = new FormData(myForm);
-
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
-      })
-        .then(() => alert("Thank you for your submission"))
-        .catch((error) => alert(error));
-    };
-
-    document.querySelector("form").addEventListener("submit", handleSubmit);
+      // Check if the current slide is valid and not the last slide
+      if (currentPosition !== -((carouselItems.length - 1) * itemWidth)) {
+        handleNextSlide();
+      }
+    }
   });
+
+  // Event listener for the next button
+  function handleNextSlide() {
+    if (isCurrentSlideValid()) {
+      currentPosition -= itemWidth;
+      carousel.style.transform = `translateX(${currentPosition}px)`;
+      updateButtonEnabledState();
+      updateNameOnSlide3();
+    } else {
+      highlightInvalidFields();
+    }
+  }
+
+  // NEXT SLIDE BUTTON
+  nextButton.forEach((button) =>
+    button.addEventListener("click", function () {
+      handleNextSlide();
+    })
+  );
+
+  // PREVIOUS SLIDE BUTTON
+  prevButton.forEach((button) =>
+    button.addEventListener("click", function () {
+      currentPosition += itemWidth;
+      carousel.style.transform = `translateX(${currentPosition}px)`;
+      updateButtonEnabledState();
+      updateNameOnSlide3();
+    })
+  );
+
+  // Function to update the name on Slide 3
+  function updateNameOnSlide3() {
+    const fullName = document.getElementById("name").value;
+    const firstName = fullName.split(" ")[0];
+    const capitalizedFirstName =
+      firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    const label = document.querySelector("#slide3 label > h3");
+    label.textContent = `Hi ${capitalizedFirstName}, what services are you looking for?`;
+  }
+
+  // Helper function to update button state
+  function updateButtonEnabledState() {
+    if (currentPosition === 0) {
+      prevButton.forEach((button) => (button.disabled = true));
+    } else {
+      prevButton.forEach((button) => (button.disabled = false));
+    }
+
+    if (currentPosition === -((carouselItems.length - 1) * itemWidth)) {
+      nextButton.forEach((button) => (button.disabled = true));
+    } else {
+      nextButton.forEach((button) => (button.disabled = false));
+    }
+  }
+
+  // DROPDOWN OPTIONS
+  const buttonOptions = document.querySelectorAll(".button-option");
+  const inputField = document.getElementById("leadType");
+  const allServicesButton = document.getElementById("allServices");
+
+  buttonOptions.forEach((button) => {
+    button.addEventListener("click", function () {
+      // check if "All services" is selected
+      const isAllServicesSelected = button === allServicesButton;
+
+      if (isAllServicesSelected) {
+        // if so, UNSELECT all other options
+        buttonOptions.forEach((option) => {
+          option.classList.toggle("selected", option === button);
+        });
+        // Set the input field to "All Services" and style it as selected
+        inputField.value = allServicesButton.value;
+      } else {
+        // Toggle selection for individual services
+        button.classList.toggle("selected");
+        // Remove "All Services" selection if present
+        allServicesButton.classList.remove("selected");
+        // Update input field value based on selected options
+        const selectedOptions = Array.from(buttonOptions)
+          .filter((option) => option.classList.contains("selected"))
+          .map((option) => option.value);
+        inputField.value = selectedOptions.join(", ");
+      }
+    });
+  });
+
+  // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+  //                        SUBMIT FORM
+  // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const myForm = event.target;
+    const formData = new FormData(myForm);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString(),
+    })
+      .then(() => alert("Thank you for your submission"))
+      .catch((error) => alert(error));
+  };
+
+  document.querySelector("form").addEventListener("submit", handleSubmit);
+
+  // reset form
+  function resetForm() {
+    console.log("form reset");
+    document.querySelector("form").reset();
+  }
+
+  console.log(document.querySelector("#resetButton"));
+
+  // Reset the form when a reset button is clicked
+  document.getElementById("resetButton").addEventListener("click", resetForm);
 </script>
 
 <style lang="scss">
@@ -145,5 +321,55 @@
     position: absolute;
     bottom: 0;
     left: 0;
+  }
+
+  .form-input,
+  .button {
+    cursor: pointer;
+    border: unset;
+    background: var(--white);
+    padding: 2rem 6rem;
+    border-radius: var(--border-xl);
+    font-family: "Allnce-regular";
+    transition: var(--hover-transition);
+
+    span {
+      color: var(--grey-300);
+    }
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+  .invalid {
+    border: 2px solid red;
+  }
+
+  .select-buttons {
+  }
+  .button-options {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    // position: absolute;
+    // top: 100%;
+    // left: 0;
+    z-index: 1;
+  }
+
+  .button-option {
+    border: unset;
+    background-color: black;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .button-option.selected {
+    background-color: white;
+    color: black;
   }
 </style>
