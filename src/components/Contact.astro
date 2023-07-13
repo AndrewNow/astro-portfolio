@@ -1,4 +1,20 @@
+---
+const NUM_SLIDES = 5;
+---
+
 <div class="wrapper">
+  <div class="pagination">
+    <div class="indicator">
+      <button class="carousel-prev">Previous</button>
+      <div class="page-number"><span id="page-number"></span>/{NUM_SLIDES}</div>
+    </div>
+    <div class="dots-wrapper">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
   <form
     class="carousel"
     id="carousel"
@@ -6,40 +22,48 @@
     name="contact"
     data-netlify={true}
   >
-    <div class="slide" id="slide1">
+    <div class="slide form-slide" id="slide1">
       <h3>Want to work together?</h3>
-      <button type="button" class="carousel-next button get-started">
-        <p>
+      <button type="button" class="carousel-next get-started-button">
+        <p class="get-started-inner">
           Get started! <span>(2 min)</span>
         </p>
       </button>
     </div>
-    <div class="slide" id="slide2">
+    <div class="slide form-slide" id="slide2">
       <label>
         <h3>
           Awesome! <br /> What's your name?
         </h3>
       </label>
-      <input
-        required
-        type="text"
-        name="name"
-        id="name"
-        class="form-input"
-        placeholder="Your name..."
-      />
+      <div class="input-wrapper text">
+        <input
+          required
+          type="text"
+          name="name"
+          id="name"
+          class="form-input"
+          placeholder="Your name..."
+        />
+        <button type="button" class="carousel-next input-confirm-btn disabled">
+          <svg
+            width="26"
+            height="24"
+            viewBox="0 0 26 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M25.0607 13.0607C25.6464 12.4749 25.6464 11.5251 25.0607 10.9393L15.5147 1.3934C14.9289 0.807613 13.9792 0.807613 13.3934 1.3934C12.8076 1.97919 12.8076 2.92893 13.3934 3.51472L21.8787 12L13.3934 20.4853C12.8076 21.0711 12.8076 22.0208 13.3934 22.6066C13.9792 23.1924 14.9289 23.1924 15.5147 22.6066L25.0607 13.0607ZM-1.31134e-07 13.5L24 13.5L24 10.5L1.31134e-07 10.5L-1.31134e-07 13.5Z"
+              fill="white"></path>
+          </svg>
+        </button>
+      </div>
     </div>
-    <div class="slide" id="slide3">
+    <div class="slide form-slide" id="slide3">
       <label>
         <h3>Hi, what services are you looking for?</h3>
       </label>
-      <!-- <select required name="Lead type" id="leadtype" class="form-input">
-        <option value="" selected disabled>Select an option</option>
-        <option value="Graphic Design">Graphic Design</option>
-        <option value="Web Dev">Web Development</option>
-        <option value="Strategy">Strategy</option>
-        <option value="All Services">All Services</option>
-      </select> -->
       <div class="select-buttons">
         <input
           required
@@ -55,21 +79,21 @@
             class="button-option"
             value="Design or visual identity"
           >
-            <p>Design or visual identity</p>
+            <h6>Design / visual identity</h6>
           </button>
           <button
             type="button"
             class="button-option"
             value="Website Development"
           >
-            <p>Website development</p>
+            <h6>Website development</h6>
           </button>
           <button
             type="button"
             class="button-option"
             value="Consultation / Strategy"
           >
-            <p>Consultation / Strategy</p>
+            <h6>Consultation / Strategy</h6>
           </button>
           <button
             type="button"
@@ -77,27 +101,76 @@
             id="allServices"
             value="All of your services"
           >
-            <p>All of your services</p>
+            <h6>All of your services</h6>
           </button>
-          <button type="button" class="carousel-next" id="select-apply">Apply</button>
+        </div>
+        <div class="select-apply-btn-wrapper">
+          <button type="button" class="carousel-next" id="select-apply">
+            <h6>Apply selections</h6>
+            <svg
+              width="22"
+              height="16"
+              viewBox="0 0 22 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.7071 8.70711C22.0976 8.31658 22.0976 7.68342 21.7071 7.29289L15.3431 0.928932C14.9526 0.538408 14.3195 0.538408 13.9289 0.928932C13.5384 1.31946 13.5384 1.95262 13.9289 2.34315L19.5858 8L13.9289 13.6569C13.5384 14.0474 13.5384 14.6805 13.9289 15.0711C14.3195 15.4616 14.9526 15.4616 15.3431 15.0711L21.7071 8.70711ZM0 9H21V7H0V9Z"
+                fill="white"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
-    <div class="slide" id="slide4">
+    <div class="slide form-slide" id="slide4">
       <label>
-        <h3>
-          Could you tell me a bit more about your needs and ambitions for this
-          project?
-        </h3>
+        <h3>Tell me about your ambitions for this project!</h3>
       </label>
-      <textarea required name="message" id="message" class="form-input"
-      ></textarea>
+      <textarea
+        required
+        name="message"
+        id="message"
+        class="form-input-textarea"
+        placeholder="Hey what's up! I'm looking to..."
+      >
+      </textarea>
+      <div class="textarea-apply-btn-wrapper">
+        <button type="button" class="carousel-next" id="textarea-apply">
+          <h6>Done</h6>
+          <svg
+            width="22"
+            height="16"
+            viewBox="0 0 22 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21.7071 8.70711C22.0976 8.31658 22.0976 7.68342 21.7071 7.29289L15.3431 0.928932C14.9526 0.538408 14.3195 0.538408 13.9289 0.928932C13.5384 1.31946 13.5384 1.95262 13.9289 2.34315L19.5858 8L13.9289 13.6569C13.5384 14.0474 13.5384 14.6805 13.9289 15.0711C14.3195 15.4616 14.9526 15.4616 15.3431 15.0711L21.7071 8.70711ZM0 9H21V7H0V9Z"
+              fill="white"></path>
+          </svg>
+        </button>
+      </div>
     </div>
-    <div class="slide" id="slide5">
+    <div class="slide form-slide" id="slide5">
       <label>
         <h3>Great! Now I'll just need your email.</h3>
       </label>
-      <input required type="text" name="email" class="form-input" />
+      <div class="input-wrapper text">
+        <input required type="text" name="email" class="form-input" />
+        <button type="button" class="carousel-next input-confirm-btn disabled">
+          <svg
+            width="26"
+            height="24"
+            viewBox="0 0 26 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M25.0607 13.0607C25.6464 12.4749 25.6464 11.5251 25.0607 10.9393L15.5147 1.3934C14.9289 0.807613 13.9792 0.807613 13.3934 1.3934C12.8076 1.97919 12.8076 2.92893 13.3934 3.51472L21.8787 12L13.3934 20.4853C12.8076 21.0711 12.8076 22.0208 13.3934 22.6066C13.9792 23.1924 14.9289 23.1924 15.5147 22.6066L25.0607 13.0607ZM-1.31134e-07 13.5L24 13.5L24 10.5L1.31134e-07 10.5L-1.31134e-07 13.5Z"
+              fill="white"></path>
+          </svg>
+        </button>
+      </div>
       <button type="submit">Send</button>
     </div>
     <div class="slide" id="slide6">
@@ -114,17 +187,38 @@
 
 <script>
   const carousel = document.querySelector(".carousel");
-  const carouselItems = document.querySelectorAll(".slide");
+  const carouselItems = document.querySelectorAll(".form-slide");
   const prevButton = document.querySelectorAll(".carousel-prev");
   const nextButton = document.querySelectorAll(".carousel-next");
+  const slideNumber = document.getElementById("page-number");
+  const paginationDots = document.querySelectorAll(".dot");
+  const nameInput = document.getElementById("name");
+  const inputConfirmButton = document.querySelector(".input-confirm-btn");
+  const selectApplyButton = document.getElementById("select-apply");
+  const textareaButton = document.getElementById("textarea-apply");
+  const textArea = document.getElementById("message");
+
   const itemWidth = carouselItems[0].offsetWidth;
   let currentPosition = 0;
+  let activeSlideNumber = 1;
 
   // Update buttons based on initial slide position
   updateButtonEnabledState();
 
+  function updateSlideNumber() {
+    slideNumber.innerHTML = activeSlideNumber;
+    paginationDots.forEach((dot, i) => {
+      // if active slide number is equal to index, add active class, else remove it
+      if (activeSlideNumber === i + 1) {
+        dot.classList.add("active");
+      } else {
+        dot.classList.remove("active");
+      }
+    });
+  }
+
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
-  //                        VALIDATION
+  //                      FORM VALIDATION
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
 
   // Function to check if the current slide has a required field filled
@@ -155,32 +249,42 @@
     });
   }
 
+  // check if name input has a value, if so, remove the "disabled" styling
+  if (nameInput.value) {
+    inputConfirmButton.classList.remove("disabled");
+  }
+
+  nameInput.addEventListener("input", function () {
+    if (nameInput.value) {
+      inputConfirmButton.classList.remove("disabled");
+    } else {
+      inputConfirmButton.classList.toggle("disabled");
+    }
+  });
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
   //                  BUTTON EVENT HANDLERS
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
-
-  // Event listener for ENTER keydown event
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      // Prevent default form submission behavior
-      event.preventDefault();
-      // Check if the current slide is valid and not the last slide
-      if (currentPosition !== -((carouselItems.length - 1) * itemWidth)) {
-        handleNextSlide();
-      }
-    }
-  });
 
   // Event listener for the next button
   function handleNextSlide() {
     if (isCurrentSlideValid()) {
       currentPosition -= itemWidth;
       carousel.style.transform = `translateX(${currentPosition}px)`;
+      activeSlideNumber++; // Increment activeSlideNumber
       updateButtonEnabledState();
       updateNameOnSlide3();
     } else {
       highlightInvalidFields();
     }
+  }
+
+  // Event listener for the previous slide button
+  function handlePreviousSlide() {
+    currentPosition += itemWidth;
+    carousel.style.transform = `translateX(${currentPosition}px)`;
+    activeSlideNumber--; // Decrement activeSlideNumber
+    updateButtonEnabledState();
+    updateNameOnSlide3();
   }
 
   // NEXT SLIDE BUTTON
@@ -193,12 +297,23 @@
   // PREVIOUS SLIDE BUTTON
   prevButton.forEach((button) =>
     button.addEventListener("click", function () {
-      currentPosition += itemWidth;
-      carousel.style.transform = `translateX(${currentPosition}px)`;
-      updateButtonEnabledState();
-      updateNameOnSlide3();
+      handlePreviousSlide();
     })
   );
+
+  // ENTER KEYPRESS FUNCTIONALITY
+  document.addEventListener("keydown", function (event) {
+    const isTextAreaFocused = document.activeElement.id === "message";
+
+    if (event.key === "Enter" && !isTextAreaFocused) {
+      // Prevent default form submission behavior
+      event.preventDefault();
+      // Check if the current slide is valid and not the last slide
+      if (currentPosition !== -((carouselItems.length - 1) * itemWidth)) {
+        handleNextSlide();
+      }
+    }
+  });
 
   // Function to update the name on Slide 3
   function updateNameOnSlide3() {
@@ -212,6 +327,7 @@
 
   // Helper function to update button state
   function updateButtonEnabledState() {
+    updateSlideNumber();
     if (currentPosition === 0) {
       prevButton.forEach((button) => (button.disabled = true));
     } else {
@@ -232,29 +348,53 @@
 
   buttonOptions.forEach((button) => {
     button.addEventListener("click", function () {
-      // check if "All services" is selected
       const isAllServicesSelected = button === allServicesButton;
 
       if (isAllServicesSelected) {
-        // if so, UNSELECT all other options
+        // Toggle selection for the allServicesButton
+        allServicesButton.classList.toggle("selected");
+        // Remove "selected" class from other options
         buttonOptions.forEach((option) => {
-          option.classList.toggle("selected", option === button);
+          if (option !== allServicesButton) {
+            option.classList.remove("selected");
+          }
         });
-        // Set the input field to "All Services" and style it as selected
-        inputField.value = allServicesButton.value;
       } else {
         // Toggle selection for individual services
         button.classList.toggle("selected");
-        // Remove "All Services" selection if present
+        // Remove "selected" class from the allServicesButton
         allServicesButton.classList.remove("selected");
-        // Update input field value based on selected options
-        const selectedOptions = Array.from(buttonOptions)
-          .filter((option) => option.classList.contains("selected"))
-          .map((option) => option.value);
-        inputField.value = selectedOptions.join(", ");
+      }
+
+      // Update input field value based on selected options
+      const selectedOptions = Array.from(buttonOptions)
+        .filter((option) => option.classList.contains("selected"))
+        .map((option) => option.value);
+      inputField.value = selectedOptions.join(", ");
+
+      // Check if at least one option is selected
+      const isOptionSelected = Array.from(buttonOptions).some((option) =>
+        option.classList.contains("selected")
+      );
+
+      if (isOptionSelected) {
+        selectApplyButton.classList.add("show-apply");
+      } else {
+        selectApplyButton.classList.remove("show-apply");
       }
     });
   });
+
+  // check if form-input-textarea has a value
+  function checkTextareaValue() {
+    if (textArea.value) {
+      textareaButton.classList.add("show-apply");
+    } else {
+      textareaButton.classList.remove("show-apply");
+    }
+  }
+
+  textArea.addEventListener("input", checkTextareaValue);
 
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
   //                        SUBMIT FORM
@@ -297,6 +437,38 @@
     position: relative;
     overflow: hidden;
   }
+  .pagination {
+    z-index: 10;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: calc(
+      100% - 2rem * 2
+    ); // remove 2rem (x2 because L + R sides) to center
+
+    .dots-wrapper {
+      width: 100%;
+      height: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+      transition: var(--hover-transition);
+    }
+    .dot {
+      background: var(--blue-200);
+      border-radius: 4px;
+      height: 4px;
+      width: calc(100% / 4);
+      transition: var(--hover-transition);
+    }
+    .dot.active {
+      height: 6px;
+      background: var(--white);
+      width: calc(100% / 3);
+    }
+  }
+
   .carousel {
     display: flex;
     transition: transform 0.5s ease;
@@ -305,51 +477,97 @@
     height: 100%;
     border: 1px solid red;
   }
+
+  .indicator {
+    display: flex;
+    justify-content: space-between;
+    .page-number {
+      color: var(--white);
+    }
+  }
+
   .slide {
+    position: relative;
+    padding: 2rem;
     flex: 0 0 100%;
     border: 1px solid #ffffff90;
-    display: grid;
-    place-items: center;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     h3 {
+      margin-top: 2rem;
+      margin-bottom: 3rem;
       color: var(--white);
       text-align: center;
     }
   }
+
   .button-group {
     position: absolute;
     bottom: 0;
     left: 0;
   }
 
-  .form-input,
-  .button {
+  .input-wrapper,
+  .get-started-button {
+    position: relative;
     cursor: pointer;
-    border: unset;
     background: var(--white);
-    padding: 2rem 6rem;
-    border-radius: var(--border-xl);
     font-family: "Allnce-regular";
     transition: var(--hover-transition);
-
-    span {
-      color: var(--grey-300);
-    }
+    border: unset;
+    border-radius: var(--border-xl);
 
     &:hover {
       filter: brightness(0.9);
     }
   }
-  .invalid {
+  .form-input,
+  .get-started-inner {
+    border-radius: var(--border-xl);
+    padding: 2rem 4rem;
+    padding-right: 6rem;
+    border: unset;
+    span {
+      color: var(--grey-300);
+    }
+  }
+
+  .input-confirm-btn {
+    border: unset;
+    background: var(--black);
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 70px;
+    height: 70px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+  }
+
+  .input-confirm-btn.disabled {
+    background: var(--grey-200);
+    cursor: not-allowed;
+  }
+
+  input.invalid {
     border: 2px solid red;
   }
 
   .select-buttons {
+    position: relative;
+    width: 100%;
   }
   .button-options {
     margin-top: 2rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
@@ -357,19 +575,104 @@
     // top: 100%;
     // left: 0;
     z-index: 1;
+    position: relative;
+    min-width: 100%;
+    width: 100%;
   }
 
   .button-option {
+    position: relative;
     border: unset;
-    background-color: black;
-    color: white;
-    padding: 1rem 2rem;
+    background-color: var(--white);
+    color: var(--black);
+    padding: 1rem;
     border-radius: 999px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    min-height: 60px;
+
+    h6 {
+      transition: 0.25s ease transform;
+      transform: translate(-7px, 0px);
+    }
+    &::before {
+      transition: 0.25s ease all;
+      opacity: 0;
+      display: block;
+      scale: 0;
+      transform: translateY(7px);
+      padding-right: 0.25rem;
+      content: url("src/assets/check.svg");
+    }
   }
 
   .button-option.selected {
-    background-color: white;
-    color: black;
+    background-color: var(--black);
+    color: var(--white);
+    h6 {
+      transform: translate(4px, 0px);
+    }
+    &::before {
+      opacity: 1;
+      scale: 1;
+      transform: translateY(0);
+      display: block;
+      padding-right: 0.25rem;
+      content: url("src/assets/check.svg");
+      width: 28px;
+      height: 28px;
+    }
+  }
+  .select-apply-btn-wrapper,
+  .textarea-apply-btn-wrapper {
+    width: 100%;
+    margin: 2rem 0;
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+  #select-apply,
+  #textarea-apply {
+    border: unset;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    background: var(--black);
+    color: var(--white);
+    border-radius: var(--border-xl);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--hover-transition);
+
+    svg {
+      margin-left: 0.5rem;
+    }
+  }
+
+  #textarea-apply.show-apply,
+  #select-apply.show-apply {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .form-input-textarea {
+    width: 100%;
+    resize: none;
+    height: 250px;
+    border-radius: var(--border-m);
+    border: unset;
+    font-family: "Allnce-regular";
+    padding: 1rem;
+  }
+
+  .carousel-next {
+    cursor: pointer;
   }
 </style>
