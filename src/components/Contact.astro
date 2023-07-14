@@ -176,8 +176,19 @@ const NUM_SLIDES = 5;
         <h3>Great! Now I'll just need your email.</h3>
       </label>
       <div class="input-wrapper text">
-        <input required type="text" name="email" class="form-input" />
-        <button type="submit" class="carousel-next input-confirm-btn disabled">
+        <input
+          required
+          type="email"
+          name="email"
+          class="form-input"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          placeholder="yourname@email.com"
+        />
+        <button
+          type="submit"
+          id="carousel-submit"
+          class="email-input-confirm-btn disabled"
+        >
           <svg
             width="26"
             height="24"
@@ -191,9 +202,8 @@ const NUM_SLIDES = 5;
           </svg>
         </button>
       </div>
-      <!-- <button type="submit">Send</button> -->
     </div>
-    <div class="slide" id="slide6">
+    <div class="slide form-slide" id="slide6">
       <h3>Thank You!</h3>
       <p>Your form has been submitted successfully.</p>
     </div>
@@ -217,6 +227,11 @@ const NUM_SLIDES = 5;
   const selectApplyButton = document.getElementById("select-apply");
   const textareaButton = document.getElementById("textarea-apply");
   const textArea = document.getElementById("message");
+  const emailInput = document.querySelector('input[name="email"]');
+  const emailInputConfirmButton = document.querySelector(
+    ".email-input-confirm-btn"
+  );
+  const carouselSubmit = document.getElementById("carousel-submit");
 
   const itemWidth = carouselItems[0].offsetWidth;
   let currentPosition = 0;
@@ -281,6 +296,26 @@ const NUM_SLIDES = 5;
       inputConfirmButton.classList.toggle("disabled");
     }
   });
+
+  // check if email is valid before allowing submit
+  let emailTimeout;
+
+  emailInput.addEventListener("input", function () {
+    clearTimeout(emailTimeout);
+
+    emailTimeout = setTimeout(function () {
+      const isValidEmail = emailInput.checkValidity();
+
+      if (isValidEmail) {
+        emailInputConfirmButton.classList.remove('disabled')
+        emailConfirmButton.disabled = false;
+      } else {
+        emailInputConfirmButton.classList.add('disabled')
+        emailConfirmButton.disabled = true;
+      }
+    }, 500); // Delay for 500 milliseconds
+  });
+
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
   //                  BUTTON EVENT HANDLERS
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
@@ -430,7 +465,7 @@ const NUM_SLIDES = 5;
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData).toString(),
     })
-      .then(() => alert("Thank you for your submission"))
+      .then(() => handleNextSlide())
       .catch((error) => alert(error));
   };
 
@@ -441,8 +476,6 @@ const NUM_SLIDES = 5;
     console.log("form reset");
     document.querySelector("form").reset();
   }
-
-  console.log(document.querySelector("#resetButton"));
 
   // Reset the form when a reset button is clicked
   document.getElementById("resetButton").addEventListener("click", resetForm);
@@ -578,7 +611,8 @@ const NUM_SLIDES = 5;
     }
   }
 
-  .input-confirm-btn {
+  .input-confirm-btn,
+  .email-input-confirm-btn {
     border: unset;
     background: var(--black);
     position: absolute;
@@ -593,7 +627,8 @@ const NUM_SLIDES = 5;
     border-radius: 100%;
   }
 
-  .input-confirm-btn.disabled {
+  .input-confirm-btn.disabled,
+  .email-input-confirm-btn.disabled {
     background: var(--grey-200);
     cursor: not-allowed;
   }
