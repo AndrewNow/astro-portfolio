@@ -41,6 +41,7 @@ const NUM_SLIDES = 5;
     method="POST"
     name="contact"
     data-netlify={true}
+    netlify-honeypot="bot-field"
   >
     <div class="slide form-slide" id="slide1">
       <h3>Want to work together?</h3>
@@ -49,6 +50,9 @@ const NUM_SLIDES = 5;
           Get started! <span>(2 min)</span>
         </p>
       </button>
+      <label class='hidden-honeypot'>
+        Don’t fill this out if you’re human: <input name="bot-field" />
+      </label>
     </div>
     <div class="slide form-slide" id="slide2">
       <label>
@@ -231,7 +235,6 @@ const NUM_SLIDES = 5;
   const emailInputConfirmButton = document.querySelector(
     ".email-input-confirm-btn"
   );
-  const carouselSubmit = document.getElementById("carousel-submit");
 
   const itemWidth = carouselItems[0].offsetWidth;
   let currentPosition = 0;
@@ -253,7 +256,11 @@ const NUM_SLIDES = 5;
   }
 
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+  //
+  //
   //                      FORM VALIDATION
+  //
+  //
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
 
   // Function to check if the current slide has a required field filled
@@ -307,17 +314,21 @@ const NUM_SLIDES = 5;
       const isValidEmail = emailInput.checkValidity();
 
       if (isValidEmail) {
-        emailInputConfirmButton.classList.remove('disabled')
+        emailInputConfirmButton.classList.remove("disabled");
         emailConfirmButton.disabled = false;
       } else {
-        emailInputConfirmButton.classList.add('disabled')
+        emailInputConfirmButton.classList.add("disabled");
         emailConfirmButton.disabled = true;
       }
     }, 500); // Delay for 500 milliseconds
   });
 
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+  //
+  //
   //                  BUTTON EVENT HANDLERS
+  //
+  //
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
 
   // Event listener for the next button
@@ -452,7 +463,11 @@ const NUM_SLIDES = 5;
   textArea.addEventListener("input", checkTextareaValue);
 
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+  //
+  //
   //                        SUBMIT FORM
+  //
+  //
   // .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -465,8 +480,8 @@ const NUM_SLIDES = 5;
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData).toString(),
     })
-      .then(() => handleNextSlide())
-      .catch((error) => alert(error));
+      .then(() => handleNextSlide)
+      .catch((error) => console.log(error));
   };
 
   document.querySelector("form").addEventListener("submit", handleSubmit);
@@ -483,7 +498,6 @@ const NUM_SLIDES = 5;
 
 <style lang="scss">
   .wrapper {
-    border: 1px solid #ffffff40;
     width: 700px;
     height: 700px;
     margin: 0 auto;
@@ -550,10 +564,10 @@ const NUM_SLIDES = 5;
     position: relative;
     width: 100%;
     height: 100%;
-    border: 1px solid red;
   }
 
   .indicator {
+    margin-bottom: 0.25rem;
     display: flex;
     justify-content: space-between;
     .page-number {
@@ -565,7 +579,6 @@ const NUM_SLIDES = 5;
     position: relative;
     padding: 2rem;
     flex: 0 0 100%;
-    border: 1px solid #ffffff90;
     width: 100%;
     height: 100%;
     display: flex;
@@ -751,5 +764,11 @@ const NUM_SLIDES = 5;
 
   .carousel-next {
     cursor: pointer;
+  }
+
+  .hidden-honeypot {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
   }
 </style>
