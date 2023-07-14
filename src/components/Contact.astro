@@ -50,7 +50,7 @@ const NUM_SLIDES = 5;
           Get started! <span>(2 min)</span>
         </p>
       </button>
-      <label class='hidden-honeypot'>
+      <label class="hidden-honeypot">
         Don’t fill this out if you’re human: <input name="bot-field" />
       </label>
     </div>
@@ -207,9 +207,12 @@ const NUM_SLIDES = 5;
         </button>
       </div>
     </div>
-    <div class="slide form-slide" id="slide6">
+    <div class="slide form-slide slide-success" id="slide6">
       <h3>Thank You!</h3>
-      <p>Your form has been submitted successfully.</p>
+      <p>
+        Your message has been submitted. I will get back to you via email as
+        soon as possible!
+      </p>
     </div>
   </form>
   <div class="button-group">
@@ -593,6 +596,11 @@ const NUM_SLIDES = 5;
     }
   }
 
+  .slide-success {
+    color: var(--white);
+    text-align: center;
+  }
+
   .button-group {
     position: absolute;
     bottom: 0;
@@ -638,6 +646,7 @@ const NUM_SLIDES = 5;
     height: 70px;
     aspect-ratio: 1/1;
     border-radius: 100%;
+    cursor: pointer;
   }
 
   .input-confirm-btn.disabled,
@@ -760,6 +769,8 @@ const NUM_SLIDES = 5;
     border: unset;
     font-family: "Allnce-regular";
     padding: 1rem;
+    letter-spacing: 0.05rem;
+    font-size: 18px;
   }
 
   .carousel-next {
