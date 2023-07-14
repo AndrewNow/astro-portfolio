@@ -1,5 +1,5 @@
 ---
-const NUM_SLIDES = 5;
+const NUM_SLIDES = 4;
 ---
 
 <div class="wrapper">
@@ -86,7 +86,7 @@ const NUM_SLIDES = 5;
     </div>
     <div class="slide form-slide" id="slide3">
       <label>
-        <h3>Hi, what services are you looking for?</h3>
+        <h3 class="margin-top">Hi, what services are you looking for?</h3>
       </label>
       <div class="select-buttons">
         <input
@@ -148,7 +148,7 @@ const NUM_SLIDES = 5;
     </div>
     <div class="slide form-slide" id="slide4">
       <label>
-        <h3>Tell me about your ambitions for this project!</h3>
+        <h3 class="more-margin-top">Tell me about your ambitions for this project!</h3>
       </label>
       <textarea
         required
@@ -215,16 +215,12 @@ const NUM_SLIDES = 5;
       </p>
     </div>
   </form>
-  <div class="button-group">
-    <button class="carousel-prev">Previous</button>
-    <button class="carousel-next">Next</button>
-    <button id="resetButton">Reset</button>
-  </div>
 </div>
 
 <script>
   const carousel = document.querySelector(".carousel");
   const carouselItems = document.querySelectorAll(".form-slide");
+  const pagination = document.querySelector(".pagination");
   const prevButton = document.querySelectorAll(".carousel-prev");
   const nextButton = document.querySelectorAll(".carousel-next");
   const slideNumber = document.getElementById("page-number");
@@ -241,7 +237,16 @@ const NUM_SLIDES = 5;
 
   const itemWidth = carouselItems[0].offsetWidth;
   let currentPosition = 0;
-  let activeSlideNumber = 1;
+  let activeSlideNumber = 0;
+
+  // Update pagination visibility based on active slide
+  function updatePaginationVisibility() {
+    if (activeSlideNumber >= 1 && activeSlideNumber <= 4) {
+      pagination.classList.remove("pagination-disabled");
+    } else {
+      pagination.classList.add("pagination-disabled");
+    }
+  }
 
   // Update buttons based on initial slide position
   updateButtonEnabledState();
@@ -408,6 +413,8 @@ const NUM_SLIDES = 5;
     } else {
       nextButton.forEach((button) => (button.disabled = false));
     }
+
+    updatePaginationVisibility();
   }
 
   // DROPDOWN OPTIONS
@@ -508,6 +515,9 @@ const NUM_SLIDES = 5;
     overflow: hidden;
   }
   .pagination {
+    transform: translateY(0px);
+    opacity: 1;
+
     z-index: 10;
     position: absolute;
     top: 2rem;
@@ -561,6 +571,11 @@ const NUM_SLIDES = 5;
     }
   }
 
+  .pagination.pagination-disabled {
+    transition: var(--hover-transition-slow);
+    opacity: 0;
+    transform: translateY(-30px);
+  }
   .carousel {
     display: flex;
     transition: transform 0.5s ease;
@@ -588,8 +603,13 @@ const NUM_SLIDES = 5;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    h3.more-margin-top {
+      margin-top: 5rem;
+    }
+    h3.margin-top {
+      margin-top: 4rem;
+    }
     h3 {
-      margin-top: 2rem;
       margin-bottom: 3rem;
       color: var(--white);
       text-align: center;
@@ -599,12 +619,6 @@ const NUM_SLIDES = 5;
   .slide-success {
     color: var(--white);
     text-align: center;
-  }
-
-  .button-group {
-    position: absolute;
-    bottom: 0;
-    left: 0;
   }
 
   .input-wrapper,
@@ -621,13 +635,21 @@ const NUM_SLIDES = 5;
       filter: brightness(0.9);
     }
   }
-  .form-input,
-  .get-started-inner {
+  .form-input {
     border-radius: var(--border-xl);
     padding: 2rem 4rem;
     padding-right: 6rem;
     border: unset;
     span {
+      color: var(--grey-300);
+    }
+  }
+  .get-started-inner {
+    border-radius: var(--border-xl);
+    padding: 2rem 8rem;
+    border: unset;
+    span {
+      font-family: "Allnce-regular";
       color: var(--grey-300);
     }
   }

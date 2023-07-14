@@ -62,7 +62,7 @@ const seo = {};
       <div class="footer-flex-item">
         <Testimonials />
       </div>
-      <div class="footer-flex-item">
+      <div class="footer-flex-item contact">
         <Contact />
       </div>
     </footer>
@@ -121,6 +121,11 @@ const seo = {};
     border-radius: var(--border-xl);
     height: 90vh;
     margin: 0.5rem;
+  }
+  .footer-flex-item.contact {
+    display: grid;
+    place-items: center;
+    background: linear-gradient(139deg, #75a9f8 0%, #2997ff 100%), #3c86f4;
   }
 
   @media (max-width: 992px) {
