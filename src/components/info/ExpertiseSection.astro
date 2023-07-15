@@ -1,0 +1,161 @@
+<div class="expertise-wrapper">
+  <h1>Expertise</h1>
+  <p>Here's how I can help.</p>
+  <div class="card-flex">
+    <div class="card card-wd">
+      <div class="card-icon"><h3>WD</h3></div>
+      <div>
+        <h4>Web development</h4>
+        <h6>
+          Bringing your project to life through clean code, intuitive interfaces
+          and seamless user experiences that leave a lasting impression.
+        </h6>
+      </div>
+    </div>
+    <div class="card card-vi">
+      <div class="card-icon"><h3>VI</h3></div>
+      <div>
+        <h4>Visual Identity</h4>
+        <h6>
+          Aligning business goals with beauty, creating stunning online
+          presences that resonate with audiences.
+        </h6>
+      </div>
+    </div>
+    <div class="card card-ds">
+      <div class="card-icon"><h3>DS</h3></div>
+      <div>
+        <h4>Digital Strategy</h4>
+        <h6>
+          Identifying transformative possibilities for your business, helping
+          you stay on top in an ever-evolving digital landscape.
+        </h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .expertise-wrapper {
+    text-align: center;
+    p {
+      color: var(--grey-300);
+      margin-bottom: 6rem;
+    }
+  }
+  .card-flex {
+    display: flex;
+    width: 97.5%;
+    margin: 0 auto;
+
+    .card {
+      flex: 1;
+      border-radius: var(--border-xl);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      aspect-ratio: 1/1;
+      margin: 0 1rem;
+      h4 {
+        margin: 2rem 0;
+      }
+      h6 {
+        max-width: 90%;
+        margin: 0 auto;
+      }
+    }
+
+    .card-icon {
+      border-radius: 23%;
+      aspect-ratio: 1/1;
+      width: 30%;
+      height: auto;
+      display: grid;
+      place-items: center;
+      h3 {
+        padding-top: 0.65rem;
+      }
+    }
+    .card-wd {
+      background: #fffdd1;
+      h6 {
+        color: #b6ae00;
+      }
+      .card-icon {
+        background: linear-gradient(216deg, #f6f162 0%, #fff600 100%);
+        h3 {
+          background: linear-gradient(to right, #878100, #b6ae00);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-fill-color: transparent;
+        }
+      }
+    }
+    .card-vi {
+      background: #dcffcb;
+      h6 {
+        color: #3db805;
+      }
+      .card-icon {
+        background: linear-gradient(215deg, #91f662 0%, #49e700 100%);
+        h3 {
+          color: #dcffcb;
+        }
+      }
+    }
+    .card-ds {
+      background: #ffebd3;
+      h6 {
+        color: #db7c0b;
+      }
+      .card-icon {
+        background: linear-gradient(213deg, #fb9216 0%, #feb055 100%);
+        h3 {
+          color: #ffebd3;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .card-flex {
+      flex-direction: column;
+      margin: 1rem auto;
+      row-gap: 2rem;
+      .card {
+        h4 {
+          font-size: 24px;
+          margin: 0.5rem auto;
+          margin-top: 1.5rem;
+        }
+        h6 {
+          max-width: unset;
+          font-size: 16px;
+        }
+      }
+      .card-icon {
+        h3 {
+          padding: 0 .1rem;
+          padding-top: 0.1rem;
+        }
+      }
+    }
+    .expertise-wrapper {
+      h1 {
+        padding-top: 4rem;
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .expertise-wrapper {
+      padding-bottom: 2rem;
+      p {
+        margin-bottom: 3rem;
+      }
+    }
+  }
+</style>

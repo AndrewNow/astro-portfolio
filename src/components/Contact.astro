@@ -508,7 +508,9 @@ const NUM_SLIDES = 4;
 
 <style lang="scss">
   .wrapper {
-    width: 700px;
+    // aspect-ratio: 1/1;
+    width: min(100%, 700px);
+    height: min(100%, 700px);
     height: 700px;
     margin: 0 auto;
     position: relative;
@@ -803,5 +805,11 @@ const NUM_SLIDES = 4;
     visibility: hidden;
     opacity: 0;
     position: absolute;
+  }
+
+  @media (max-width: 768px) {
+    .wrapper {
+
+    }
   }
 </style>

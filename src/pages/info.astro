@@ -2,6 +2,7 @@
 import Layout from "../layouts/BaseLayout.astro";
 import ProcessSection from "../components/info/ProcessSection.astro";
 import Contact from "../components/Contact.astro";
+import ExpertiseSection from "../components/info/ExpertiseSection.astro";
 
 const seo = {};
 ---
@@ -10,12 +11,12 @@ const seo = {};
   <div class="page-backdrop">
     <section class="section">
       <header class="header-text-wrapper">
-        <p class="pill">About Me</p>
-        <h2>
+        <p class="pill" id="pill">About Me</p>
+        <h2 id="header">
           As a freelance UX/UI designer and web developer, I create online
           experiences that are as unique as the projects they stand for.
         </h2>
-        <p class="subheader">
+        <p class="subheader" id="subheader">
           Throughout 5 years of professional experience working across diverse
           digital areas, I approach creative problem-solving with a holistic
           perspective, developing future-proof, scalable solutions that bring
@@ -24,43 +25,7 @@ const seo = {};
       </header>
     </section>
     <section class="section">
-      <div class="expertise-wrapper">
-        <h1>Expertise</h1>
-        <p>Here's how I can help.</p>
-        <div class="card-flex">
-          <div class="card card-wd">
-            <div class="card-icon"><h3>WD</h3></div>
-            <div>
-              <h4>Web development</h4>
-              <h6>
-                Bringing your project to life through clean code, intuitive
-                interfaces and seamless user experiences that leave a lasting
-                impression.
-              </h6>
-            </div>
-          </div>
-          <div class="card card-vi">
-            <div class="card-icon"><h3>VI</h3></div>
-            <div>
-              <h4>Visual Identity</h4>
-              <h6>
-                Aligning business goals with beauty. <br />Creating stunning
-                online presences that resonate with audiences.
-              </h6>
-            </div>
-          </div>
-          <div class="card card-ds">
-            <div class="card-icon"><h3>DS</h3></div>
-            <div>
-              <h4>Digital Strategy</h4>
-              <h6>
-                Identifying transformative possibilities for your business,
-                helping you stay on top in an ever-evolving digital landscape.
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ExpertiseSection />
     </section>
     <ProcessSection />
     <section class="section contact">
@@ -69,7 +34,66 @@ const seo = {};
   </div>
 </Layout>
 
+<script>
+  import { animate } from "motion";
+
+  const pill = document.getElementById("pill");
+  const header = document.getElementById("header");
+  const subheader = document.getElementById("subheader");
+
+  animate(
+    pill,
+    {
+      opacity: 1,
+      transform: `translateY(0px)`,
+    },
+    {
+      easing: [0.215, 0.61, 0.355, 1],
+      duration: 1.25,
+    }
+  );
+
+  animate(
+    header,
+    {
+      opacity: 1,
+      transform: `translateY(0px)`,
+    },
+    {
+      duration: 1.5,
+      delay: 0.2,
+      easing: [0.19, 1, 0.22, 1],
+    }
+  );
+
+  animate(
+    subheader,
+    {
+      opacity: 1,
+      transform: `translateY(0px)`,
+    },
+    {
+      easing: [0.19, 1, 0.22, 1],
+      duration: 1.85,
+      delay: 0.35,
+    }
+  );
+</script>
+
 <style lang="scss">
+  #pill {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  #header {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  #subheader {
+    opacity: 0;
+    transform: translateY(50px);
+  }
   .page-backdrop {
     background: var(--grey-100);
     padding: 0.5rem;
@@ -106,89 +130,22 @@ const seo = {};
     }
   }
 
-  .expertise-wrapper {
-    text-align: center;
-    p {
-      color: var(--grey-300);
-      margin-bottom: 6rem;
-    }
-  }
-  .card-flex {
-    display: flex;
-    width: 97.5%;
-    margin: 0 auto;
-
-    .card {
-      flex: 1;
-      border-radius: var(--border-xl);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      aspect-ratio: 1/1;
-      margin: 0 1rem;
-      h4 {
-        margin: 2rem 0;
-      }
-      h6 {
-        max-width: 90%;
-        margin: 0 auto;
-      }
-    }
-    .card-icon {
-      border-radius: 50px;
-      width: 155px;
-      height: 155px;
-      display: grid;
-      place-items: center;
-      h3 {
-        padding-top: 0.65rem;
-      }
-    }
-    .card-wd {
-      background: #fffdd1;
-      h6 {
-        color: #b6ae00;
-      }
-      .card-icon {
-        background: linear-gradient(216deg, #f6f162 0%, #fff600 100%);
-        h3 {
-          background: linear-gradient(to right, #878100, #b6ae00);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          text-fill-color: transparent;
-        }
-      }
-    }
-    .card-vi {
-      background: #dcffcb;
-      h6 {
-        color: #3db805;
-      }
-      .card-icon {
-        background: linear-gradient(215deg, #91f662 0%, #49e700 100%);
-        h3 {
-          color: #dcffcb;
-        }
-      }
-    }
-    .card-ds {
-      background: #ffebd3;
-      h6 {
-        color: #db7c0b;
-      }
-      .card-icon {
-        background: linear-gradient(213deg, #fb9216 0%, #feb055 100%);
-        h3 {
-          color: #ffebd3;
-        }
-      }
-    }
-  }
-
   .section.contact {
     background: linear-gradient(139deg, #75a9f8 0%, #2997ff 100%), #3c86f4;
+  }
+
+  @media (max-width: 576px) {
+    .header-text-wrapper {
+      h2 {
+        margin: 2rem auto;
+        margin-top: 2rem;
+      }
+      .pill {
+        padding: .5rem 1.5rem;
+      }
+    }
+    .section {
+      padding: 0;
+    }
   }
 </style>
