@@ -148,7 +148,9 @@ const NUM_SLIDES = 4;
     </div>
     <div class="slide form-slide" id="slide4">
       <label>
-        <h3 class="more-margin-top">Tell me about your ambitions for this project!</h3>
+        <h3 class="more-margin-top">
+          Tell me about your ambitions for this project!
+        </h3>
       </label>
       <textarea
         required
@@ -808,8 +810,22 @@ const NUM_SLIDES = 4;
   }
 
   @media (max-width: 768px) {
-    .wrapper {
-
+    .get-started-inner {
+      padding: 1.25rem 2.5rem;
+      border-radius: 50px;
+    }
+    .form-input {
+      border-radius: 70px;
+      padding: 1.25rem 2.5rem;
+    }
+  }
+  .input-confirm-btn,
+  .email-input-confirm-btn {
+    width: 45px;
+    height: 45px;
+    right: .75rem;
+    svg {
+      scale: .65;
     }
   }
 </style>
