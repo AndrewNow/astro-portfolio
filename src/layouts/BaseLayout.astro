@@ -9,7 +9,7 @@ const { seo } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead {...seo} />
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- <slot name="head-bottom" /> -->
   </head>
@@ -21,11 +21,12 @@ const { seo } = Astro.props;
     </main>
     <!-- <slot name="footer" /> -->
     <script src="../components/utils/BlurUp.js"></script>
+    <script src="../components/utils/linkHover.js"></script>
     <script>
       import Lenis from "@studio-freight/lenis";
 
       // Check if user is on macOS
-      const isMacOS = navigator.userAgent.indexOf('Mac OS X') !== -1;
+      const isMacOS = navigator.userAgent.indexOf("Mac OS X") !== -1;
 
       if (!isMacOS) {
         const lenis = new Lenis({
@@ -40,9 +41,8 @@ const { seo } = Astro.props;
 
         // Assign the Lenis instance to a global variable
         window.lenis = lenis;
-      }
-      else {
-          const lenis = new Lenis({
+      } else {
+        const lenis = new Lenis({
           lerp: 0.4,
         });
 

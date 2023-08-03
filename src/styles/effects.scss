@@ -1,0 +1,16 @@
+#link-hover-text {
+  position: relative;
+  overflow-y: hidden;
+  display: inline-block;
+  padding: .25rem 0;
+  white-space: pre; // this value causes CLS on page load for some reason
+  transform: translateY(0);
+}
+
+#link-hover-text span {
+  display: inline-block;
+  transform: translateY(0);
+  position: relative;
+  line-height: 100%;
+  text-shadow: 0px 1em 0px var(--black);
+}
