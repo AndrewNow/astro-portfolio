@@ -1,10 +1,35 @@
+@keyframes hovered {
+  0% {
+    color: var(--black);
+    filter: blur(1px);
+  }
+  100% {
+    color: var(--yellow);
+    filter: blur(10px);
+  }
+}
+
+
 #link-hover-text {
   position: relative;
   overflow-y: hidden;
-  display: inline-block;
+  display: inline-flex;
   padding: .25rem 0;
   white-space: pre; // this value causes CLS on page load for some reason
   transform: translateY(0);
+  &:hover {
+    &::after {
+      // transform: translateX(50px);
+      clip-path: inset(0%)
+    }
+  }
+  &::after {
+    transition: .4s all cubic-bezier(.6, 0.4, 0, 0.2);
+    content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDYiIGhlaWdodD0iNDYiIHZpZXdCb3g9IjAgMCA0NiA0NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTM1LjA4OCA2LjU2NDIxTDguOTk3ODIgNi41NjQyMUw4Ljk5NzgyIDAuNDg3NTI4SDQ1LjQ2MjJMNDUuNDYyMiAzLjUyNTg3TDQ1LjQ2MjIgMzYuOTUxOUwzOS4zODU1IDM2Ljk1MTlMMzkuMzg1NSAxMC44NjE3TDQuNjM1ODQgNDUuNjExNEwwLjMzODMzMSA0MS4zMTM5TDM1LjA4OCA2LjU2NDIxWiIgZmlsbD0iYmxhY2siLz4KPC9zdmc+Cg==");
+    display: inline-block;
+    transform: translateX(0%);
+    clip-path: inset(0% 100% 0% 0%);
+  }
 }
 
 #link-hover-text span {
