@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/BaseLayout.astro";
+---
+
+<Layout>
+  <div class="canvas-container">
+    <canvas class="image-bulge-scene"></canvas>
+  </div>
+</Layout>
+
+<style lang="scss">
+  .canvas-container {
+    background: yellow;
+    width: 400px;
+    aspect-ratio: 4/3;
+    height: auto;
+    position: relative;
+    
+  }
+
+  .image-bulge-scene {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
+<script>
+  import Scene from "../components/utils/imageBulge/components/scene.js";
+
+  const getCanvas = document.querySelectorAll(".canvas-container");
+
+  getCanvas.forEach((canvas) => {
+    new Scene();
+  });
+</script>

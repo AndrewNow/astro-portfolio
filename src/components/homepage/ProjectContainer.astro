@@ -18,7 +18,11 @@ const { data } = Astro.props;
     </div>
     <div class="text-wrapper">
       <h1>
-        <a href=`/work/${data.slug}` id="link-hover-text">
+        <a
+          href=`/work/${data.slug}`
+          id="link-hover-text"
+          data-hide-arrow="false"
+        >
           {data.title}
         </a>
       </h1>

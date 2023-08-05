@@ -1,41 +1,63 @@
 @keyframes hovered {
   0% {
-    color: var(--black);
-    filter: blur(1px);
+    fill: var(--black);
   }
   100% {
-    color: var(--yellow);
-    filter: blur(10px);
+    fill: var(--yellow);
   }
 }
-
 
 #link-hover-text {
+  line-height: 100%!important;
   position: relative;
-  overflow-y: hidden;
   display: inline-flex;
-  padding: .25rem 0;
-  white-space: pre; // this value causes CLS on page load for some reason
-  transform: translateY(0);
-  &:hover {
-    &::after {
-      // transform: translateX(50px);
-      clip-path: inset(0%)
-    }
-  }
+  padding-right: 5%;
+  padding-bottom: 0.25%;
+  letter-spacing: unset;
+  overflow-y: hidden;
+  // white-space: pre; // this value causes CLS on page load for some reason
+  // vertical-align: bottom;
+}
+
+#link-hover-text[data-hide-arrow = false] {
+  // padding: .25rem 0;
+  position: relative;
+  height: auto;
   &::after {
-    transition: .4s all cubic-bezier(.6, 0.4, 0, 0.2);
-    content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDYiIGhlaWdodD0iNDYiIHZpZXdCb3g9IjAgMCA0NiA0NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTM1LjA4OCA2LjU2NDIxTDguOTk3ODIgNi41NjQyMUw4Ljk5NzgyIDAuNDg3NTI4SDQ1LjQ2MjJMNDUuNDYyMiAzLjUyNTg3TDQ1LjQ2MjIgMzYuOTUxOUwzOS4zODU1IDM2Ljk1MTlMMzkuMzg1NSAxMC44NjE3TDQuNjM1ODQgNDUuNjExNEwwLjMzODMzMSA0MS4zMTM5TDM1LjA4OCA2LjU2NDIxWiIgZmlsbD0iYmxhY2siLz4KPC9zdmc+Cg==");
-    display: inline-block;
-    transform: translateX(0%);
-    clip-path: inset(0% 100% 0% 0%);
+    content: "";
+    display: grid;
+    place-items: center;
+    display: block;
+    transition: .25s all cubic-bezier(0.34, 1.8, 0.64, 1);
+    transform: translate(5%, 10.025%);
+    
+    width: .45em;
+    background-image: url("../src/assets/topRightArrow.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    clip-path: inset(100% 100% 0% 0%);
+    opacity: 0;
+    scale: 0.7;
   }
 }
 
-#link-hover-text span {
+#link-hover-text[data-hover-complete = true] {
+  &::after {
+    scale: 1;
+    opacity: 1;
+    clip-path: inset(0%);
+    transform: translate(50%, -15%);
+  }
+}
+
+.whitespace-character {
+  width: .2em;
+}
+
+.staggered-character {
   display: inline-block;
   transform: translateY(0);
   position: relative;
   line-height: 100%;
-  text-shadow: 0px 1em 0px var(--black);
+  text-shadow: 0px 1em 0px var(--char-color);
 }

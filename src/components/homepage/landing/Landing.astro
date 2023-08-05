@@ -17,12 +17,16 @@ import Marquee from "../../Marquee.astro";
       ><span class="label">Socials</span>
       <span>
         <a
+          id="link-hover-text"
+          data-hide-arrow="true"
           href="https://www.are.na/andrew-nowacki/"
           rel="noreferrer"
           target="_blank">Are.na</a
         >
         <br />
         <a
+          id="link-hover-text"
+          data-hide-arrow="true"
           href="https://www.instagram.com/andrewnowacki_/"
           rel="noreferrer"
           target="_blank">Instagram</a
@@ -33,12 +37,16 @@ import Marquee from "../../Marquee.astro";
       ><span class="label">Contact</span>
       <span>
         <a
+          id="link-hover-text"
+          data-hide-arrow="true"
           href="mailto:andrew.p.nowacki@gmail.com"
           rel="noreferrer"
           target="_blank">andrew.p.nowacki@gmail.com</a
         >
-        <br />
-        <a href="sms:4388847079"> (438) 884-7079</a>
+        <!-- <br /> -->
+        <a href="sms:4388847079" id="link-hover-text" data-hide-arrow="true">
+          (438) 884-7079</a
+        >
       </span>
     </small>
   </div>
@@ -89,8 +97,8 @@ import Marquee from "../../Marquee.astro";
     }
   }
   a:hover {
+    // animation: blink 0.76s infinite ease-in-out;
     // transition: var(--hover-transition);
-    animation: blink 0.76s infinite ease-in-out;
     // color: var(--grey-200);
   }
   .details-flex {

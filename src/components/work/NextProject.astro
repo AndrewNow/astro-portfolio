@@ -8,7 +8,9 @@ const { data } = Astro.props;
   <div class="next-project-inner">
     <h4>Next project</h4>
     <h2>
-      {data.title}
+      <a href=`${data.url}` id="link-hover-text" data-hide-arrow="false">
+        {data.title}
+      </a>
     </h2>
     <div class="img-container container-md">
       <Image
@@ -82,7 +84,8 @@ const { data } = Astro.props;
       width: 90vw;
       padding: 5rem 0;
       padding-top: 1rem;
-      h4, h2 {
+      h4,
+      h2 {
         width: 95%;
         margin: 0 auto;
       }
@@ -90,7 +93,7 @@ const { data } = Astro.props;
         margin: 1rem auto;
         &:before {
           transform: translateY(-3px);
-          margin-right: .5rem;
+          margin-right: 0.5rem;
           width: 9px;
           height: 9px;
         }
