@@ -1,14 +1,18 @@
 ---
-import { Image } from "@astrojs/image/components";
+// import { Image } from "@astrojs/image/components";
 const { data } = Astro.props;
 ---
 
 <div class="project-wrapper">
   <div class="project-inner">
     <div class="image-wrapper canvas-wrapper">
-      <div class="canvas-container" data-texture={data.imageUrl}>
+      <a
+        href=`/work/${data.slug}`
+        class="canvas-container"
+        data-texture={data.imageUrl}
+      >
         <canvas class="image-bulge-scene"></canvas>
-      </div>
+      </a>
     </div>
     <!-- <div class="image-wrapper">
       <Image
