@@ -5,15 +5,8 @@ import GUI from 'lil-gui'
 
 export default class App {
   #components
-  #guiCard = {
-    bulge: 0,
-    strength: 1.1,
-    radius: .95,
-  }
-  #debug
   constructor() {
     this.#components = this.createComponents()
-    this.#debug = this.createDebugger()
     this.events()
   }
 
@@ -27,7 +20,7 @@ export default class App {
       const canvas = el.querySelector('.image-bulge-scene')
       const textureUrl = el.getAttribute("data-texture")
       // scene
-      components.push(new Scene({ el: canvas, src: textureUrl, index, guiObj: this.#guiCard }))
+      components.push(new Scene({ el: canvas, src: textureUrl, index}))
     })
 
     return components
@@ -86,25 +79,5 @@ export default class App {
         comp.scroll(e.progress)
       }
     }
-  }
-
-  createDebugger() {
-    const gui = new GUI()
-
-    const handleChange = () => {
-      for (let i = 0; i < this.#components.length; i++) {
-        const comp = this.#components[i]
-
-        if (comp.type === 'card') {
-          comp.program.uniforms.uRadius.value = this.#guiCard.radius
-          comp.program.uniforms.uStrength.value = this.#guiCard.strength
-        }
-      }
-    }
-
-    gui.add(this.#guiCard, 'radius', 0, 2).onChange(handleChange)
-    gui.add(this.#guiCard, 'strength', 0, 3).onChange(handleChange)
-
-    return gui
   }
 }

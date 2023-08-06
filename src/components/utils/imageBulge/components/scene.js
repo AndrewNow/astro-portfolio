@@ -1,4 +1,3 @@
-import GUI from "lil-gui";
 import { Renderer, Program, Mesh, Triangle, Vec2 } from "ogl";
 import vertex from "../glsl/main.vert";
 import fragment from "../glsl/main.frag";
@@ -6,16 +5,6 @@ import LoaderManager from "../managers/LoaderManager";
 import { gsap } from "gsap/gsap-core";
 import { isTouch } from "../utils/isTouch";
 import IntersectionObserver from "../managers/IntersectionObserver";
-
-// Vanilla JavaScript clamp function
-const clamp = (value, min, max) => {
-  return Math.min(Math.max(value, min), max);
-};
-
-// Vanilla JavaScript interpolate function
-const interpolate = (a, b, progress) => {
-  return a + (b - a) * progress;
-};
 
 export default class Scene {
   #el;
@@ -29,13 +18,11 @@ export default class Scene {
   #src;
   #index;
   #isTouch;
-  #guiObj;
   #visible;
-  constructor({ el, src, index, guiObj }) {
+  constructor({ el, src, index }) {
     this.#el = el;
     this.#src = src;
     this.#index = index;
-    this.#guiObj = guiObj;
     this.setScene();
 
     this.#el.dataset.intersectId = index;
@@ -106,8 +93,8 @@ export default class Scene {
         uMouseIntro: { value: new Vec2(0.5, 0) },
         uIntro: { value: 0 },
         uBulge: { value: 0 },
-        uRadius: { value: this.#guiObj.radius },
-        uStrength: { value: this.#guiObj.strength },
+        uStrength: { value: 1.1 },
+        uRadius: { value: 0.975 },
       },
     });
 

@@ -64,11 +64,7 @@
 
   .canvas-wrapper {
     opacity: 0;
-    width: 80vw;
-    max-width: 800px;
-    max-height: 600px;
-    height: 60vh;
-    margin: 25vh auto;
+    margin: 0 auto;
   }
   .canvas-wrapper.is-visible {
     opacity: 1;
@@ -80,22 +76,22 @@
 
   .canvas-container {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100%!important;
+    height: 100%!important;
 
     // border-radius: 3vw;
     // border-radius: 50%;
-    overflow: hidden;
+    // overflow: hidden;
     cursor: pointer;
     z-index: 1;
+    // transform: scale(0.5);
 
-    transform: scale(0.5);
   }
 
   .image-bulge-scene {
+    width: 100%!important;
+    height: 100%!important;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
   }
