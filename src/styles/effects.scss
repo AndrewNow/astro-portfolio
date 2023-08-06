@@ -32,7 +32,7 @@
     transform: translate(5%, 10.025%);
     
     width: .45em;
-    background-image: url("./assets/topRightArrow.svg");
+    background-image: url("./src/assets/topRightArrow.svg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     clip-path: inset(100% 100% 0% 0%);
@@ -64,9 +64,11 @@
 
   .canvas-wrapper {
     opacity: 0;
-    height: 100%;
-    width: 100%;
-    margin: 0 auto;
+    width: 80vw;
+    max-width: 800px;
+    max-height: 600px;
+    height: 60vh;
+    margin: 25vh auto;
   }
   .canvas-wrapper.is-visible {
     opacity: 1;
