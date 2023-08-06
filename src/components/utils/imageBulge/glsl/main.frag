@@ -1,6 +1,5 @@
 precision highp float;
 
-uniform float uTime;
 uniform sampler2D uTexture;
 uniform vec2 uMouse;
 uniform vec2 uMouseIntro;

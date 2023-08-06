@@ -63,25 +63,13 @@ export default class Scene {
 
     this.resize();
 
-    // Rather than using a plane (two triangles) to cover the viewport here is a
-    // triangle that includes -1 to 1 range for 'position', and 0 to 1 range for 'uv'.
-    // Excess will be out of the viewport.
-
-    //         position                uv
-    //      (-1, 3)                  (0, 2)
-    //         |\                      |\
-    //         |__\(1, 1)              |__\(1, 1)
-    //         |__|_\                  |__|_\
-    //   (-1, -1)   (3, -1)        (0, 0)   (2, 0)
-
     const geometry = new Triangle(gl);
-
     const texture = LoaderManager.get(`${this.#src}`);
+
     this.#program = new Program(gl, {
       vertex,
       fragment,
       uniforms: {
-        uTime: { value: 0 },
         uTexture: { value: texture },
         uTextureResolution: {
           value: new Vec2(texture.image.width, texture.image.height),
@@ -166,9 +154,8 @@ export default class Scene {
     this.#el.addEventListener("mouseleave", this.handleMouseLeave, false);
   }
 
-  render = (t) => {
+  render = () => {
     if (!this.#program) return;
-    // this.#program.uniforms.uTime.value = t * 0.001
 
     this.#mouseTarget.x = gsap.utils.interpolate(
       this.#mouseTarget.x,
