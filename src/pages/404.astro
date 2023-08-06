@@ -3,34 +3,55 @@ import Layout from "../layouts/BaseLayout.astro";
 ---
 
 <Layout>
-  <div class="canvas-container">
-    <canvas class="image-bulge-scene"></canvas>
+  <div class="wrapper">
+    <div class="canvas-container" data-texture="/assets/rm/thumbnail.png">
+      <canvas class="image-bulge-scene"></canvas>
+    </div>
+  </div>
+  <div class="wrapper">
+    <div class="canvas-container" data-texture="/assets/ww/thumbnail.png">
+      <canvas class="image-bulge-scene"></canvas>
+    </div>
   </div>
 </Layout>
 
 <style lang="scss">
+  .wrapper {
+    opacity: 0;
+    width: 80vw;
+    max-width: 800px;
+    max-height: 600px;
+    height: 60vh;
+    margin: 25vh auto;
+  }
+  .wrapper.is-visible {
+    opacity: 1;
+    transition: opacity 1.5s ease;
+    .canvas-container {
+      transform: none;
+    }
+  }
+
   .canvas-container {
     background: yellow;
-    width: 400px;
-    aspect-ratio: 4/3;
-    height: auto;
     position: relative;
-    
+    width: 100%;
+    height: 100%;
+
+    border-radius: 3vw;
+    // border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+
+    transform: scale(0.5);
   }
 
   .image-bulge-scene {
-    position: relative;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
   }
 </style>
-
-<script>
-  import Scene from "../components/utils/imageBulge/components/scene.js";
-
-  const getCanvas = document.querySelectorAll(".canvas-container");
-
-  getCanvas.forEach((canvas) => {
-    new Scene();
-  });
-</script>
