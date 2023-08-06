@@ -1,5 +1,5 @@
 import Scene from '../components/scene.js'
-import { gsap } from 'gsap'
+import { gsap } from 'gsap/gsap-core'
 import { isTouch } from '../utils/isTouch'
 import GUI from 'lil-gui'
 
