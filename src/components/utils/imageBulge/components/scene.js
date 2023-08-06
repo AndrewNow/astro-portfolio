@@ -7,6 +7,16 @@ import { gsap } from "gsap/gsap-core";
 import { isTouch } from "../utils/isTouch";
 import IntersectionObserver from "../managers/IntersectionObserver";
 
+// Vanilla JavaScript clamp function
+const clamp = (value, min, max) => {
+  return Math.min(Math.max(value, min), max);
+};
+
+// Vanilla JavaScript interpolate function
+const interpolate = (a, b, progress) => {
+  return a + (b - a) * progress;
+};
+
 export default class Scene {
   #el;
   #renderer;

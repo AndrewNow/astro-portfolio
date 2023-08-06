@@ -102,7 +102,7 @@ export default class App {
       }
     }
 
-    gui.add(this.#guiCard, 'radius', 0, 1).onChange(handleChange)
+    gui.add(this.#guiCard, 'radius', 0, 2).onChange(handleChange)
     gui.add(this.#guiCard, 'strength', 0, 3).onChange(handleChange)
 
     return gui

@@ -5,7 +5,12 @@ const { data } = Astro.props;
 
 <div class="project-wrapper">
   <div class="project-inner">
-    <div class="image-wrapper">
+    <div class="image-wrapper canvas-wrapper">
+      <div class="canvas-container" data-texture={data.imageUrl}>
+        <canvas class="image-bulge-scene"></canvas>
+      </div>
+    </div>
+    <!-- <div class="image-wrapper">
       <Image
         src={data.imageUrl}
         alt=`Project thumbnail for ${data.title}`
@@ -15,7 +20,7 @@ const { data } = Astro.props;
         quality={100}
         class="image-inner"
       />
-    </div>
+    </div> -->
     <div class="text-wrapper">
       <h1>
         <a
@@ -63,6 +68,7 @@ const { data } = Astro.props;
     width: 90%;
   }
   .image-wrapper {
+    position: relative;
     overflow: hidden;
     border-radius: 20px;
     aspect-ratio: 1463/686;
