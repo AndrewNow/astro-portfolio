@@ -96,6 +96,11 @@ if (currentPath.startsWith("/work") || currentPath === "/") {
     transition: color 0.23s ease;
     color: var(--white);
   }
+  @media (max-width: 576px) {
+    .nav-wrapper {
+      bottom: 1.25rem;
+    }
+  }
 </style>
 
 <script>
