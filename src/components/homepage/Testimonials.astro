@@ -13,10 +13,10 @@ const testimonialData = [
       "Andrew brings an artisanal outlook and an uncompromising professionalism to the table. He created a website for our company, fully hitting the mark in terms of aesthetics and functionality. Working seamlessly together with another contractor, Andrew gracefully orchestrated the maturation of the end product among multiple parties. We enjoyed our spirited exchanges and are looking forward to doing business again, having full trust in his ability and diligence!",
   },
   {
-    name: "Valerie Savard",
-    from: "Revue Moebius",
+    name: "M (Assistant Director)",
+    from: "Exposé Noir",
     message:
-      "Since its launch, the number of site visits has significantly increased, the number of sales made through the website has doubled, and we have given several interviews regarding the unique integration of hypermedia literature works in the site, notably for the Carnet de la Fabrique du numerique, which provides insights into innovations in the world of digital literary and scientific publishing.",
+      "Andrew is a true professional who was great at understanding our particular needs and finding solutions to make sure we were fully satisfied with our website. He is highly responsive, even while on the road, and always a pleasure to work with. You won't be disappointed by his results.",
   },
   {
     name: "Valerie Savard",
@@ -65,6 +65,7 @@ const length = testimonialData.length;
     </div>
   </div>
 </div>
+
 <script>
   // Get all note wrapper elements
   const noteWrappers = document.querySelectorAll(".note-wrapper");
@@ -138,10 +139,10 @@ const length = testimonialData.length;
   }
 
   .note-wrapper {
-    // background: var(--grey-100);
+    background: var(--grey-100);
     // border: 1px solid var(--grey-200);
     width: 90%;
-    margin: 0 auto;
+    margin: 0.5rem auto;
     border-radius: 10px;
     transition: var(--hover-transition);
     border: 1px solid transparent;
@@ -172,6 +173,10 @@ const length = testimonialData.length;
     width: 60px;
     height: 60px;
     text-align: center;
+    p {
+      transform: translateY(2px);
+      line-height: 100%;
+    }
   }
   .note-text {
     margin: 0 2rem;
