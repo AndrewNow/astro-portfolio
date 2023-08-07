@@ -157,9 +157,7 @@ const NUM_SLIDES = 4;
         name="message"
         id="message"
         class="form-input-textarea"
-        placeholder="Hey what's up! I'm looking to..."
-      >
-      </textarea>
+        placeholder="Hey what's up! I'm looking to..."></textarea>
       <div class="textarea-apply-btn-wrapper">
         <button type="button" class="carousel-next" id="textarea-apply">
           <h6>Done</h6>
@@ -181,7 +179,7 @@ const NUM_SLIDES = 4;
       <label>
         <h3>Great! Now I'll just need your email.</h3>
       </label>
-      <div class="input-wrapper text">
+      <div class="input-wrapper text input-wrapper-email">
         <input
           required
           type="email"
@@ -664,9 +662,9 @@ const NUM_SLIDES = 4;
     transform: translateY(-50%);
     display: grid;
     place-items: center;
-    width: 70px;
-    height: 70px;
     aspect-ratio: 1/1;
+    width: 70px;
+    height: auto;
     border-radius: 100%;
     cursor: pointer;
   }
@@ -792,7 +790,7 @@ const NUM_SLIDES = 4;
     font-family: "Allnce-regular";
     padding: 1rem;
     letter-spacing: 0.05rem;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .carousel-next {
@@ -806,6 +804,18 @@ const NUM_SLIDES = 4;
   }
 
   @media (max-width: 768px) {
+    .input-wrapper-email {
+      width: 100%;
+      font-size: 16px;
+      font-family: "Allnce-regular";
+      .form-input {
+        width: 90%;
+      }
+    }
+    input {
+      font-size: 16px;
+      font-family: "Allnce-regular";
+    }
     .wrapper {
       height: 100%;
       width: 100%;
@@ -821,7 +831,6 @@ const NUM_SLIDES = 4;
     .input-confirm-btn,
     .email-input-confirm-btn {
       width: 45px;
-      height: 45px;
       right: 0.75rem;
       svg {
         scale: 0.65;
@@ -848,11 +857,11 @@ const NUM_SLIDES = 4;
     }
 
     #select-apply,
-  #textarea-apply {
-    padding: 1rem 1.5rem;
-    svg {
-      scale: .75;
+    #textarea-apply {
+      padding: 1rem 1.5rem;
+      svg {
+        scale: 0.75;
+      }
     }
-  }
   }
 </style>
