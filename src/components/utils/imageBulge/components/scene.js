@@ -228,7 +228,6 @@ export default class Scene {
     if (this.#program) {
       this.#program.uniforms.uResolution.value = new Vec2(w, h);
     }
-
     this.#isTouch = isTouch();
   };
 }

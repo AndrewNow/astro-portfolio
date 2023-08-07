@@ -3,7 +3,9 @@ import Marquee from "../../Marquee.astro";
 ---
 
 <div class="landing-wrapper">
-  <div class="marquee-wrapper"><Marquee text="A.Nowacki" /></div>
+  <div class="marquee-wrapper">
+    <Marquee text="A.Nowacki" />
+  </div>
   <div class="details-wrapper-flex">
     <small class="detail-text">
       Montreal, QC
@@ -72,6 +74,8 @@ import Marquee from "../../Marquee.astro";
     position: relative;
   }
   .marquee-wrapper {
+    clip-path: inset(100% 0% 0% 0%);
+
     overflow: hidden;
     border-radius: var(--border-l);
     margin: 2.5rem auto;
@@ -91,6 +95,7 @@ import Marquee from "../../Marquee.astro";
     align-items: flex-start;
   }
   .detail-text {
+    flex: 25%;
     text-transform: uppercase;
     &:not(.label) {
       color: var(--grey-300);
@@ -104,7 +109,6 @@ import Marquee from "../../Marquee.astro";
   .details-flex {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
     .label {
       margin-right: 2rem;
       color: var(--grey-200);
@@ -151,29 +155,22 @@ import Marquee from "../../Marquee.astro";
 </style>
 
 <script>
-  // get clock
-  // function updateClock() {
-  //   const now = new Date();
-  //   let hours = now.getHours();
-  //   let minutes = now.getMinutes();
-  //   let seconds = now.getSeconds();
+  import { animate } from "motion";
+  const marqueeWrapper = document.querySelector(".marquee-wrapper");
 
-  //   // Format the time
-  //   const timeString = `${hours.toString().padStart(2, "0")}:${minutes
-  //     .toString()
-  //     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  animate(
+    marqueeWrapper,
+    {
+      clipPath: `inset(0% 0% 0% 0%)`,
+    },
+    {
+      duration: 1.45,
+      easing: [0.6, 0.3, 0, 1],
+    }
+  );
+</script>
 
-  //   // Update the clock element
-  //   const clockElement = document.querySelector(".clock");
-  //   clockElement.textContent = timeString;
-  // }
-
-  // // Update the clock immediately
-  // updateClock();
-
-  // // Update the clock every second
-  // setInterval(updateClock, 1000);
-
+<script>
   // get weather
   const apiKey = import.meta.env.PUBLIC_WEATHER_API_KEY;
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Montreal&units=metric&appid=${apiKey}`;
@@ -182,42 +179,12 @@ import Marquee from "../../Marquee.astro";
     .then((res) => res.json())
     .then((data) => {
       console.log(data.weather[0].description);
-      const weatherID = data.weather[0].id;
 
-      function getWeatherEmoji(weatherID) {
-        if (weatherID === 800) {
-          return "Sunny ☀️";
-        } else if (weatherID > 800 && weatherID < 804) {
-          return "Some clouds 🌤";
-        } else if (weatherID === 804) {
-          return "Overcast ☁";
-        } else if (weatherID < 781 && weatherID > 700) {
-          return "Foggy 🌫";
-        } else if (weatherID === 781) {
-          return "Tornado 🌪";
-        } else if (weatherID < 700 && weatherID >= 600) {
-          return "Snowy 🌨";
-        } else if (weatherID < 600 && weatherID > 500) {
-          return "🌧";
-        } else if (weatherID === 500) {
-          return "Light Rain 🌦";
-        } else if (weatherID < 500 && weatherID >= 300) {
-          return "Drizzle 🌨";
-        } else if (weatherID <= 221 && weatherID >= 200) {
-          return "Thunderstorm 🌩";
-        } else if (weatherID <= 232 && weatherID >= 230) {
-          return "Thunderstorm ⛈";
-        }
-        return "";
-      }
       // const weatherDescription = getWeatherEmoji(weatherID);
       const weatherDescription = data.weather[0].description;
       const temperature = Math.trunc(`${data.main.temp}`);
 
       const weatherElement = document.querySelector(".weather");
       weatherElement.textContent = `${temperature}°C, ${weatherDescription}`;
-
-      const areaElement = document.querySelector(".area");
-      areaElement.textContent = `${data.name}, QC`;
     });
 </script>

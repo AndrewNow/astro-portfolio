@@ -5,13 +5,13 @@ const { text } = Astro.props;
 <div class="wrapper">
   <div class="loop-container">
     <div class="loop-item">
-      <h1>
+      <h1 id="marquee-text">
         {" "}{text}{" "}
         {" "}{text}{" "}
       </h1>
     </div>
     <div class="loop-item">
-      <h1>
+      <h1 id="marquee-text">
         {" "}{text}{" "}
         {" "}{text}{" "}
       </h1>
@@ -28,6 +28,12 @@ const { text } = Astro.props;
     width: 100%;
   }
 
+  #marquee-text {
+    opacity: 0;
+    transform: translateY(20px) scaleY(4);
+    transform-origin: top;
+  }
+
   .loop-container {
     white-space: nowrap;
   }
@@ -36,7 +42,7 @@ const { text } = Astro.props;
     position: absolute;
     top: 52%;
     padding-right: 5rem;
-    h1 {
+    #marquee-text {
       color: var(--grey-200);
       font-size: 33vw;
       line-height: 100%;
@@ -47,7 +53,7 @@ const { text } = Astro.props;
 
   @media (max-width: 1280px) {
     .loop-item {
-      h1 {
+      #marquee-text {
         letter-spacing: -1rem;
         font-size: 30vw;
       }
@@ -58,7 +64,7 @@ const { text } = Astro.props;
       height: calc(100vw / 2.75);
     }
     .loop-item {
-      h1 {
+      #marquee-text {
         letter-spacing: -0.75rem;
         font-size: 30vw;
       }
@@ -69,7 +75,7 @@ const { text } = Astro.props;
       height: calc(100vw / 2.5);
     }
     .loop-item {
-      h1 {
+      #marquee-text {
         letter-spacing: -0.1rem;
         font-size: 35vw;
         margin-top: 1rem;
@@ -79,6 +85,22 @@ const { text } = Astro.props;
 </style>
 
 <script>
+  import { animate } from "motion";
+  const marqueeText = document.querySelectorAll("#marquee-text");
+
+  marqueeText.forEach((text) => {
+    animate(
+      text,
+      { opacity: 1, transform: `translateY(0) scaleY(1)` },
+      {
+        delay: 0.24,
+        duration: 1.45,
+        easing: [0.6, 0.3, 0, 1],
+      }
+      // { duration: 2, delay: 0.25 }
+    );
+  });
+
   // // if user is on mobile, disable the scroll direction effects
   // function isMobile() {
   //   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(

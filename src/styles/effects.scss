@@ -79,13 +79,28 @@
     width: 100%!important;
     height: 100%!important;
 
-    // border-radius: 3vw;
-    // border-radius: 50%;
-    // overflow: hidden;
     cursor: pointer;
     z-index: 1;
-    // transform: scale(0.5);
 
+    &:hover {
+      .view-project {
+        opacity: 1;
+      }
+    }
+  }
+  
+  .view-project {
+    opacity: 0;
+    transition: var(--hover-transition-slow);
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--black);
+    color: var(--white);
+    padding: 1rem 3rem;
+    border-radius: var(--border-xl);
   }
 
   .image-bulge-scene {
