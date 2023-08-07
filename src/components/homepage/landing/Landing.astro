@@ -75,16 +75,13 @@ import Marquee from "../../Marquee.astro";
   }
   .marquee-wrapper {
     clip-path: inset(100% 0% 0% 0%);
-
     overflow: hidden;
     border-radius: var(--border-l);
-    margin: 2.5rem auto;
-    // background: var(--grey-200);
     background: #e7e7e7;
-    // height: 500px;
     height: auto;
     position: relative;
-    width: 96%;
+    margin: 2.5rem;
+    width: auto;
   }
   .details-wrapper-flex {
     width: 90%;
@@ -124,8 +121,7 @@ import Marquee from "../../Marquee.astro";
   }
   @media (max-width: 992px) {
     .marquee-wrapper {
-      width: 92.5%;
-      margin: 1.25rem auto;
+      margin: 1.25rem;
     }
     .details-wrapper-flex {
       display: grid;
@@ -147,6 +143,8 @@ import Marquee from "../../Marquee.astro";
 
   @media (max-width: 576px) {
     .details-wrapper-flex {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
       small {
         font-size: 12px;
       }
@@ -178,12 +176,8 @@ import Marquee from "../../Marquee.astro";
   fetch(apiUrl)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.weather[0].description);
-
-      // const weatherDescription = getWeatherEmoji(weatherID);
       const weatherDescription = data.weather[0].description;
       const temperature = Math.trunc(`${data.main.temp}`);
-
       const weatherElement = document.querySelector(".weather");
       weatherElement.textContent = `${temperature}°C, ${weatherDescription}`;
     });

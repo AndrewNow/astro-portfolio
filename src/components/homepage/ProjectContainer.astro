@@ -60,17 +60,17 @@ const { data } = Astro.props;
 <style lang="scss">
   .project-wrapper {
     background: var(--white);
-    border-radius: var(--border-l);
+    border-radius: var(--border-xl);
     margin: 1.25rem auto;
-    padding: 5rem 0rem;
-    padding-top: 5rem;
+    padding: 2.5rem;
+    padding-bottom: 5rem;
   }
   .project-wrapper:first-of-type {
     margin-top: 0;
   }
   .project-inner {
     margin: 0 auto;
-    width: 90%;
+    width: 100%;
   }
   .image-wrapper {
     position: relative;
@@ -87,7 +87,7 @@ const { data } = Astro.props;
       object-fit: contain;
     }
     canvas {
-      border-radius: var(--border-m);
+      border-radius: var(--border-l);
     }
   }
   .text-wrapper {
@@ -115,12 +115,9 @@ const { data } = Astro.props;
   @media (max-width: 992px) {
     .project-wrapper {
       // border-radius: var(--border-m);
-      padding: 4rem 2rem;
-      padding-top: 2rem;
+      padding: 1.25rem;
+      padding-bottom: 2.5rem;
       margin: 50px auto;
-    }
-    .image-wrapper {
-      border-radius: 10px;
     }
     .text-wrapper {
       margin-top: 2rem;
@@ -128,8 +125,8 @@ const { data } = Astro.props;
   }
   @media (max-width: 576px) {
     .project-wrapper {
-      padding: 2rem 1.25rem;
-      padding-top: 1.25rem;
+      padding: 1.25rem;
+      padding-bottom: 2.5rem;
       margin: 1rem auto;
     }
     .image-wrapper {
