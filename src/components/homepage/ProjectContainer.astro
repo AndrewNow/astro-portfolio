@@ -60,7 +60,7 @@ const { data } = Astro.props;
 <style lang="scss">
   .project-wrapper {
     background: var(--white);
-    border-radius: 30px;
+    border-radius: var(--border-l);
     margin: 1.25rem auto;
     padding: 5rem 0rem;
     padding-top: 5rem;
@@ -75,7 +75,7 @@ const { data } = Astro.props;
   .image-wrapper {
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
+    // border-radius: var(--border-m);
     aspect-ratio: 1463/686;
     height: auto;
     width: 100%;
@@ -85,6 +85,9 @@ const { data } = Astro.props;
       width: 100%;
       height: auto;
       object-fit: contain;
+    }
+    canvas {
+      border-radius: var(--border-m);
     }
   }
   .text-wrapper {
@@ -104,14 +107,14 @@ const { data } = Astro.props;
 
     .pill {
       margin-right: 1rem;
-      border-radius: 20px;
+      border-radius: var(--border-m);
       padding: 8px 30px;
     }
   }
 
   @media (max-width: 992px) {
     .project-wrapper {
-      // border-radius: 20px;
+      // border-radius: var(--border-m);
       padding: 4rem 2rem;
       padding-top: 2rem;
       margin: 50px auto;
@@ -130,7 +133,7 @@ const { data } = Astro.props;
       margin: 1rem auto;
     }
     .image-wrapper {
-      border-radius: 10px;
+      // border-radius: 10px;
     }
     .project-inner {
       width: 100%;

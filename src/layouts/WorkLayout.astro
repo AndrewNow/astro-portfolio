@@ -2,6 +2,7 @@
 import Layout from "./BaseLayout.astro";
 import Heading from "../components/work/Heading.astro";
 import NextProject from "../components/work/NextProject.astro";
+import EndArticleStamp from "../components/EndArticleStamp.astro";
 
 const { seo, data } = Astro.props;
 ---
@@ -11,31 +12,7 @@ const { seo, data } = Astro.props;
     <Heading data={data} />
     <slot />
   </article>
-  <div class="end-article">
-    <svg
-      width="61"
-      height="21"
-      viewBox="0 0 61 21"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M16.8298 2.76562C16.1066 3.52042 15.4416 4.36329 15.9238 5.42721C16.5102 6.72132 17.7751 7.68065 19.2212 7.75975C19.7326 7.78772 20.6636 7.78688 21.0779 7.44533C21.8218 6.83215 21.5882 5.22755 21.5087 4.42545C21.3879 3.20694 20.9017 2.11498 19.6074 2.34152C19.065 2.43646 17.549 1.99764 17.4982 2.89724C17.4582 3.60598 17.2281 3.93245 17.7656 4.52782C17.8673 4.6405 18.0684 4.65263 18.1964 4.73987C18.5318 4.96853 18.5037 5.46354 18.5677 5.82206C18.8213 7.242 18.414 6.26736 18.2409 5.53689C18.1344 5.08747 18.1143 4.16365 18.8425 4.23534C19.6267 4.31255 19.8866 5.96473 19.9045 6.58251C19.9172 7.02126 19.6718 6.18668 19.8377 6.05604C20.4381 5.58314 21.6009 5.69614 22.3108 5.66119"
-        stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"></path>
-      <path
-        d="M36.3307 4.14546C35.1369 3.3545 35.0025 1.92606 36.5581 1.44075C36.9598 1.31545 39.0021 0.956286 39.1544 1.55775C39.3617 2.37639 39.1804 3.29019 38.4485 3.8977C38.0727 4.20957 36.5193 4.34119 36.0797 3.99405C35.568 3.58998 37.0394 2.31418 37.2955 2.06703C38.163 1.22971 38.2307 2.55663 38.2916 3.2783C38.3607 4.0963 38.5343 5.55006 37.2562 4.86121C37.0195 4.73361 35.15 3.79626 35.4836 3.64994"
-        stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"></path>
-      <path
-        d="M1.56641 8.31641C7.18344 13.8757 15.2686 16.6686 22.9278 18.0235C26.8894 18.7243 30.9342 19.0012 34.9498 19.1894C38.2979 19.3463 41.5687 19.0977 44.8498 18.4168C47.0708 17.9559 48.9329 16.7914 50.8111 15.5862C52.2662 14.6524 53.7799 13.7893 55.2041 12.8117C56.3789 12.0053 57.6457 11.1813 58.5112 10.0302C58.8504 9.57905 58.9605 8.88152 59.4338 8.56927"
-        stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"></path>
-    </svg>
-  </div>
+  <EndArticleStamp />
   <NextProject data={data.nextProjectData} />
 </Layout>
 
@@ -44,39 +21,5 @@ const { seo, data } = Astro.props;
     width: var(--project-width);
     margin: 0 auto;
     position: relative;
-  }
-  .end-article {
-    width: 110px;
-    height: 110px;
-    background: var(--blue);
-    color: var(--white);
-    border-radius: 20px;
-    display: grid;
-    place-items: center;
-    margin: 10rem auto;
-    position: relative;
-    svg {
-      display: block;
-      position: relative;
-      width: 70%;
-      height: 70%;
-    }
-  }
-  @media (max-width: 992px) {
-    .end-article {
-      width: 75px;
-      height: 75px;
-    }
-  }
-  @media (max-width: 576px) {
-    .end-article {
-      border-radius: 7px;
-      width: 40px;
-      height: 40px;
-      svg {
-        width: 70%;
-        height: 70%;
-      }
-    }
   }
 </style>
