@@ -94,5 +94,14 @@ const animateCharacters = () => {
   });
 };
 
-// Call the function to animate all instances
-animateCharacters();
+// Call the function to animate all instances, ONLY if a user is not on mobile
+
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+if (isMobileDevice()) {
+  return
+} else {
+  animateCharacters();
+}
