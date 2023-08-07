@@ -103,14 +103,14 @@ const NUM_SLIDES = 4;
             class="button-option"
             value="Design or visual identity"
           >
-            <h6>Design / visual identity</h6>
+            <h6>Design / Visual identity</h6>
           </button>
           <button
             type="button"
             class="button-option"
             value="Website Development"
           >
-            <h6>Website development</h6>
+            <h6>Website Development</h6>
           </button>
           <button
             type="button"
@@ -629,7 +629,7 @@ const NUM_SLIDES = 4;
     font-family: "Allnce-regular";
     transition: var(--hover-transition);
     border: unset;
-    border-radius: var(--border-xl);
+    border-radius: 60px;
 
     &:hover {
       filter: brightness(0.9);
@@ -678,7 +678,7 @@ const NUM_SLIDES = 4;
   }
 
   input.invalid {
-    border: 2px solid red;
+    outline: 2px solid red;
   }
 
   .select-buttons {
@@ -806,6 +806,10 @@ const NUM_SLIDES = 4;
   }
 
   @media (max-width: 768px) {
+    .wrapper {
+      height: 100%;
+      width: 100%;
+    }
     .get-started-inner {
       padding: 1.25rem 2.5rem;
       border-radius: 50px;
@@ -823,5 +827,32 @@ const NUM_SLIDES = 4;
         scale: 0.65;
       }
     }
+    .button-options {
+      column-gap: 0.75rem;
+      margin-top: 0;
+      grid-template-columns: 1fr;
+      min-width: unset;
+      width: 65%;
+      margin: 0 auto;
+    }
+    .button-option {
+      padding: 1rem 0.5rem;
+      min-height: unset;
+      height: 50px;
+      h6 {
+        transform: translate(-12px, 0);
+      }
+    }
+    .button-option.selected {
+      padding: 1rem 0.5rem;
+    }
+
+    #select-apply,
+  #textarea-apply {
+    padding: 1rem 1.5rem;
+    svg {
+      scale: .75;
+    }
+  }
   }
 </style>

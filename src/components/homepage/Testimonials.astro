@@ -99,9 +99,9 @@ const length = testimonialData.length;
     position: relative;
   }
   .header {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
-
+    padding: 0 5%;
     h3 {
       display: flex;
       justify-content: flex-start;
@@ -140,10 +140,10 @@ const length = testimonialData.length;
     margin: 0 auto;
     border-radius: 10px;
     transition: var(--hover-transition);
-    outline: 1px solid transparent;
+    border: 1px solid transparent;
     &.open {
       background: var(--grey-100);
-      outline: 1px solid var(--grey-200);
+      border: 1px solid var(--grey-200);
     }
   }
 
@@ -197,6 +197,9 @@ const length = testimonialData.length;
     }
   }
   @media (max-width: 576px) {
+    .testimonial-wrapper {
+      margin-bottom: 1rem;
+    }
     .testimonial-inner {
       padding: 2rem 0;
     }
@@ -207,6 +210,26 @@ const length = testimonialData.length;
         height: 30px;
         margin-right: 1rem;
       }
+      position: relative;
+      &::before {
+        content: "";
+        display: block;
+        background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 1) 50%,
+          rgb(255, 255, 255, 1) 100%
+        );
+        position: absolute;
+        bottom: -2rem;
+        left: 0;
+        width: 100%;
+        height: 2rem;
+      }
+    }
+    .notes {
+      margin-top: 0rem;
+      padding-top: 2rem;
     }
     .note-wrapper {
       width: 100%;
@@ -216,6 +239,7 @@ const length = testimonialData.length;
       height: 48px;
     }
     .note-inner {
+      margin: .25rem 0;
       padding: 0.75rem 0.5rem;
     }
     .note-text {

@@ -138,7 +138,7 @@ const seo = {};
     }
     .project-section-header {
       h4 {
-        letter-spacing: -0.05rem;
+        letter-spacing: 0.025rem;
       }
 
       .project-length:before {
@@ -150,11 +150,18 @@ const seo = {};
   }
 
   @media (max-width: 576px) {
+    .footer-flex-wrapper {
+      display: block;
+    }
     .page-backdrop {
       padding-top: 1rem;
     }
     .footer-flex-item {
       height: 70vh;
+      margin-bottom: 1rem;
+    }
+    .footer-flex-item.contact {
+      margin-bottom: 6rem;
     }
     .project-section-header {
       border-radius: 50px;
