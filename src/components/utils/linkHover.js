@@ -1,12 +1,7 @@
 import { animate, stagger } from 'motion';
 
-
-function isMobileDevice() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
 const isMobile =  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-console.log(isMobile)
+
 if (isMobile == false) {
     // Function to animate characters on hover for all instances
   const animateCharacters = () => {

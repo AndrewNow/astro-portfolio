@@ -24,33 +24,33 @@ export default class App {
   }
 
   handleRAF = (time) => {
-    for (const comp of this.#components) {
-      if (typeof comp.render === 'function') {
-        comp.render(time);
+    for (const component of this.#components) {
+      if (typeof component.render === 'function') {
+        component.render(time);
       }
     }
   }
 
   handleResize = () => {
-    for (const comp of this.#components) {
-      if (typeof comp.resize === 'function') {
-        comp.resize();
+    for (const component of this.#components) {
+      if (typeof component.resize === 'function') {
+        component.resize();
       }
     }
   }
 
   handleMouseMove = (e) => {
-    for (const comp of this.#components) {
-      if (typeof comp.mouseMove === 'function') {
-        comp.mouseMove(e);
+    for (const component of this.#components) {
+      if (typeof component.mouseMove === 'function') {
+        component.mouseMove(e);
       }
     }
   }
 
   handleScroll = (e) => {
-    for (const comp of this.#components) {
-      if (typeof comp.scroll === 'function') {
-        comp.scroll(e.progress);
+    for (const component of this.#components) {
+      if (typeof component.scroll === 'function') {
+        component.scroll(e.progress);
       }
     }
   }
