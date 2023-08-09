@@ -78,6 +78,11 @@
     position: relative;
     width: 100%!important;
     height: 100%!important;
+    z-index: 2;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+    border-radius: var(--border-l);
 
     cursor: pointer;
     z-index: 1;
@@ -88,14 +93,6 @@
       }
     }
   }
-  
-  // .view-project {
-  //   transform: translate(-50%, -50%);
-  //   background: var(--black);
-  //   color: var(--white);
-  //   padding: 1rem 3rem;
-  //   border-radius: var(--border-xl);
-  // }
 
   .image-bulge-scene {
     width: 100%!important;
