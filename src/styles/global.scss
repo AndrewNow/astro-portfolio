@@ -254,16 +254,19 @@ small > p {
     --border-m: 14px;
   }
   h1 {
-    font-size: 70px;
+    font-size: 60px;
   }
   h2 {
-    font-size: 55px;
+    font-size: 45px;
   }
   h4 {
-    font-size: 26px;
+    font-size: 24px;
+  }
+  h6 {
+    font-size: 16px;
   }
   p {
-    font-size: 22px;
+    font-size: 18px;
   }
   .img-container {
     margin: 100px auto;
@@ -278,11 +281,11 @@ small > p {
 
 @media (max-width: 992px) {
   h1 {
-    font-size: 65px;
+    font-size: 40px;
   }
   h2 {
     // letter-spacing: -0.1rem;
-    font-size: 40px;
+    font-size: 35px;
   }
   h3 {
     font-size: 36px;
@@ -291,10 +294,10 @@ small > p {
     font-size: 24px;
   }
   h6 {
-    font-size: 18px;
+    font-size: 14px;
   }
   p {
-    font-size: 18px;
+    font-size: 16px;
   }
   small {
     font-size: 16px;
@@ -316,6 +319,9 @@ small > p {
     --border-l: 20px;
 
   }
+  h1 {
+    font-size: 35px;
+  }
   h2 {
     font-size: 35px;
   }
@@ -323,7 +329,7 @@ small > p {
     font-size: 22px;
   }
   h6 {
-    font-size: 16px;
+    font-size: 14px;
   }
   .img-container {
     margin: 50px auto;
