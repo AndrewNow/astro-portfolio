@@ -24,29 +24,12 @@ const { seo } = Astro.props;
       <slot />
     </main>
     <!-- <slot name="footer" /> -->
-    <script>
-      // import Lenis from "@studio-freight/lenis";
-
-      // // Check if user is on macOS
-      // const isMacOS = navigator.userAgent.indexOf("Mac OS X") !== -1;
-
-      // const lerp = isMacOS ? 0.4 : 0.1;
-      // const lenis = new Lenis({
-      //   lerp,
-      // });
-
-      // function raf(time) {
-      //   lenis.raf(time);
-      //   requestAnimationFrame(raf);
-      // }
-      // requestAnimationFrame(raf);
-
-      // // Assign the Lenis instance to a global variable
-      // window.lenis = lenis;
-    </script>
     <script src="../components/utils/BlurUp.js"></script>
-    <!-- <script src="../components/utils/threeJs/scene.js"></script> -->
     <script src="../components/utils/linkHover.js"></script>
-    <script src="../components/utils/initializeApp.js"></script>
+
+    <!-- <script src="../components/utils/viewProjectCursor.js"></script> -->
+    <!-- <script src="../components/utils/threeJs/scene.js"></script> -->
+    <!-- <script src="../components/utils/initializeApp.js"></script> -->
+    <script src="../components/utils/effects/script.js"></script>
   </body>
 </html>

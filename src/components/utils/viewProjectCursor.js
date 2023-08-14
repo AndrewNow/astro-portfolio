@@ -1,7 +1,9 @@
-class Cursor {
+import Effects from "./effects/effects";
+
+export default class Cursor {
   constructor({ el }) {
     this.el = el;
-
+    this.effects = new Effects()
     // Create a new div for the cursor
     this.cursorDiv = document.createElement('div');
     this.cursorDiv.classList.add('custom-cursor');
@@ -24,13 +26,7 @@ class Cursor {
     this.el.addEventListener('mousemove', this.handleMouseMove.bind(this));
     this.el.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
 
-    // Initialize animation loop
-    this.animationFrameId = null;
-    this.animationDelay = 0.1;
-    this.lastTimestamp = 0;
-
-    // Start animation loop
-    this.startAnimationLoop();
+    this.lerpAmount = .2
   }
 
   handleMouseEnter() {
@@ -49,37 +45,16 @@ class Cursor {
     this.cursorDiv.style.opacity = 0;
   }
 
-  startAnimationLoop() {
-    this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
-  }
-
-  animate(timestamp) {
-    if (!this.lastTimestamp) {
-      this.lastTimestamp = timestamp;
-    }
-
-    const elapsed = (timestamp - this.lastTimestamp) / 1000; // Convert to seconds
-    this.lastTimestamp = timestamp;
-
+  update() {
     // Calculate lerp values
-    const lerpAmount = Math.min(1, elapsed / this.animationDelay);
-    this.cursorX = this.lerp(this.cursorX, this.targetX, lerpAmount);
-    this.cursorY = this.lerp(this.cursorY, this.targetY, lerpAmount);
+    this.cursorX = this.lerp(this.cursorX, this.targetX, this.lerpAmount);
+    this.cursorY = this.lerp(this.cursorY, this.targetY, this.lerpAmount);
 
     // Update cursor position
     this.cursorDiv.style.transform = `translate(${this.cursorX}px, ${this.cursorY}px)`;
-
-    // Request the next animation frame
-    this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
   }
 
   lerp(a, b, t) {
     return (1 - t) * a + t * b;
   }
 }
-
-const containers = document.querySelectorAll('.canvas-container');
-
-containers.forEach((container) => {
-  new Cursor({ el: container });
-});

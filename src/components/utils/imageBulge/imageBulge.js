@@ -1,12 +1,12 @@
 import { Renderer, Program, Mesh, Triangle, Vec2 } from "ogl";
-import vertex from "../glsl/main.vert";
-import fragment from "../glsl/main.frag";
-import LoaderManager from "../managers/LoaderManager";
+import vertex from "./glsl/main.vert";
+import fragment from "./glsl/main.frag";
+import LoaderManager from "./managers/LoaderManager";
 import { gsap } from "gsap/gsap-core";
-import { isTouch } from "../utils/isTouch";
-import IntersectionObserver from "../managers/IntersectionObserver";
+import { isTouch } from "./utils/isTouch";
+import IntersectionObserver from "./managers/IntersectionObserver";
 
-export default class Scene {
+export default class ImageBulge {
   #el;
   #renderer;
   #mesh;
@@ -24,10 +24,10 @@ export default class Scene {
     this.#src = src;
     this.#index = index;
     this.setScene();
-
     this.#el.dataset.intersectId = index;
-
+    
     this.#isTouch = isTouch();
+    // this.effects = new Effects()
   }
 
   get type() {
@@ -152,35 +152,23 @@ export default class Scene {
   events() {
     this.#el.addEventListener("mouseenter", this.handleMouseEnter, false);
     this.#el.addEventListener("mouseleave", this.handleMouseLeave, false);
+    this.#el.addEventListener('mousemove', this.mouseMove, false);
+  }
+  
+  destroyEvents() {    
+    this.#el.removeEventListener("mouseenter", this.handleMouseEnter, false);
+    this.#el.removeEventListener("mouseleave", this.handleMouseLeave, false);
+    this.#el.removeEventListener('mousemove', this.mouseMove, false);
   }
 
-  render = () => {
-    if (!this.#program) return;
-
-    this.#mouseTarget.x = gsap.utils.interpolate(
-      this.#mouseTarget.x,
-      this.#mouse.x,
-      0.1
-    );
-    this.#mouseTarget.y = gsap.utils.interpolate(
-      this.#mouseTarget.y,
-      this.#mouse.y,
-      0.1
-    );
-
-    this.#program.uniforms.uMouse.value = this.#mouseTarget;
-
-    // Don't need a camera if camera uniforms aren't required
-    this.#renderer.render({ scene: this.#mesh });
-  };
-
   mouseMove = (e) => {
+    console.log('mouse moved within bulge')
     if (!this.#canMove || !this.#program || !this.#visible) return;
 
     this.#elRect = this.#el.getBoundingClientRect();
 
-    let eventX = this.#isTouch ? e.touches[0].pageX : e.clientX;
-    let eventY = this.#isTouch ? e.touches[0].pageY : e.clientY;
+    let eventX = this.#isTouch ? e.touches[0].clientX : e.clientX;
+    let eventY = this.#isTouch ? e.touches[0].clientY : e.clientY;
 
     const x = (eventX - this.#elRect.left) / this.#el.offsetWidth;
     const y = 1 - (eventY - this.#elRect.top) / this.#el.offsetHeight;
@@ -206,7 +194,7 @@ export default class Scene {
       ease: "expo.out",
     });
   };
-
+  
   handleMouseLeave = () => {
     if (!this.#canMove) return;
     this.tlForceIntro?.kill();
@@ -219,15 +207,36 @@ export default class Scene {
   };
 
   resize = () => {
-    const w = this.#el.parentNode.offsetWidth;
-    const h = this.#el.parentNode.offsetHeight;
-    this.#renderer.setSize(w, h);
+    const width = this.#el.parentNode.offsetWidth;
+    const height = this.#el.parentNode.offsetHeight;
+    this.#renderer.setSize(width, height);
 
     this.#elRect = this.#el.getBoundingClientRect();
 
     if (this.#program) {
-      this.#program.uniforms.uResolution.value = new Vec2(w, h);
+      this.#program.uniforms.uResolution.value = new Vec2(width, height);
     }
     this.#isTouch = isTouch();
+  };
+
+  
+  update = () => {
+    if (!this.#program) return;
+
+    this.#mouseTarget.x = gsap.utils.interpolate(
+      this.#mouseTarget.x,
+      this.#mouse.x,
+      0.1
+    );
+    this.#mouseTarget.y = gsap.utils.interpolate(
+      this.#mouseTarget.y,
+      this.#mouse.y,
+      0.1
+    );
+
+    this.#program.uniforms.uMouse.value = this.#mouseTarget;
+
+    // Don't need a camera if camera uniforms aren't required
+    this.#renderer.render({ scene: this.#mesh });
   };
 }
