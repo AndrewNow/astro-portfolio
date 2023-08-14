@@ -6,6 +6,7 @@ import { inView } from 'motion';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import * as dat from 'dat-gui'
+import { gsap } from "gsap/gsap-core";
 
 export default class AsciiArtRenderer {
   constructor({ element, index }) {
@@ -16,16 +17,19 @@ export default class AsciiArtRenderer {
     this.scene = null;
     this.renderer = null;
     this.asciiEffect = null;
-    this.controls = null;
+    // this.controls = null;
     this.sizes = null;
     this.sphere = null;
     this.plane = null;
     this.textLoader = null;
     this.textMesh = null;
+    this.textMaterial = null;
+    this.scale = { value: 0 };
+    this.positionX = { value: 0 };
     this.effects = new Effects()
     
     // delete
-    this.gui = new dat.GUI()
+    // this.gui = new dat.GUI()
     
     inView(this.element, () => {
       this.intialized = true;
@@ -44,8 +48,8 @@ export default class AsciiArtRenderer {
     
     // CAMERA
     this.camera = new THREE.PerspectiveCamera(70, this.sizes.width / this.sizes.height, 1, 1000);
-    this.camera.position.y = 150;
-    this.camera.position.z = 200;
+    this.camera.position.y = 0;
+    this.camera.position.z = 250;
     
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0, 0, 0);
@@ -55,21 +59,25 @@ export default class AsciiArtRenderer {
     pointLight1.position.set(500, 500, 500);
     this.scene.add(pointLight1);
 
+    const ambientLight = new THREE.AmbientLight(0xffffff, .5); // Color and intensity
+    this.scene.add(ambientLight);
+
     // GEOMETRY
     const textLoader = new FontLoader();
     textLoader.load('/fonts/allnce-neue-regular-2.json', (font) => {
       const textGeometry = new TextGeometry('@', {
         font: font,
         size: 180,
-        height: 15,
+        height: 20,
         bevelEnabled: true,
         bevelThickness: 2,
         bevelSize: 3,
       });
 
-      const textMaterial = new THREE.MeshStandardMaterial({ color: 0xe0e0e0 });
+      this.textMaterial = new THREE.MeshStandardMaterial({ color: 0xe0e0e0 });
+      this.textMaterial.transparent = true;
       // const textMaterial = new THREE.MeshBasicMaterial({ color: 0xe0e0e0 });
-      this.textMesh = new THREE.Mesh(textGeometry, textMaterial);
+      this.textMesh = new THREE.Mesh(textGeometry, this.textMaterial);
       this.textMesh.scale.set(1.5, 1.5, 1.5);
       textGeometry.center();
 
@@ -81,15 +89,15 @@ export default class AsciiArtRenderer {
     this.renderer.setSize(this.sizes.width, this.sizes.height);
     
     // ASCII POST PROCESSING
-    this.asciiEffect = new AsciiEffect(this.renderer, ' .:-+*=%@#', { invert: true });
+    this.asciiEffect = new AsciiEffect(this.renderer, ' .:-+=*%$@#', { invert: true });
     this.asciiEffect.setSize(this.sizes.width, this.sizes.height);
     this.asciiEffect.domElement.style.color = "#CBE4FF";
     this.asciiEffect.domElement.style.backgroundColor = 'transparent';
 
     this.element.appendChild(this.asciiEffect.domElement);
     
-    this.controls = new OrbitControls(this.camera, this.asciiEffect.domElement);
-    this.controls.enableDamping = true;
+    // this.controls = new OrbitControls(this.camera, this.asciiEffect.domElement);
+    // this.controls.enableDamping = true;
 
     this.initialized = true;
 
@@ -117,14 +125,34 @@ export default class AsciiArtRenderer {
   update() {
     if (!this.initialized) return;
 
-    this.controls.update();
-
+    // this.controls.update();
     if (this.textMesh) {
-      this.textMesh.rotation.x = this.effects.time.elapsed / 1000;
-      this.textMesh.rotation.z = this.effects.time.elapsed / 1000;
-      this.textMesh.position.y =  Math.abs(Math.sin(this.effects.time.elapsed / 1000)) * 10
+      if (window.isFirstContactSlide == true) {
+        // fade opacity and scale in to 1 over 2 seconds
+        gsap.to(this.scale, { value: 1.5, duration: 2.5, ease: "expo.out" });
+        gsap.to(this.positionX, { value: 0.0, duration: 3.5, ease: "expo.out" });
+        // this.textMaterial.opacity = this.opacity.value;
+        this.textMesh.scale.x = this.scale.value
+        this.textMesh.scale.y = this.scale.value
+        this.textMesh.scale.z = this.scale.value
+        
+        this.textMesh.rotation.x = this.effects.time.elapsed / 1000;
+        this.textMesh.rotation.z = this.effects.time.elapsed / 1000;
+        this.textMesh.position.y = Math.abs(Math.sin(this.effects.time.elapsed / 1000)) * 10
+        this.textMesh.position.x = this.positionX.value
+      } else {
+        // scale textmesh to 0 as opacity also fades to 0 over 2 seconds
+        gsap.to(this.scale, { value: 0.0, duration: .25, ease: "expo.out" });
+        gsap.to(this.positionX, { value: -500.0, duration: 5.25, ease: "expo.out" });
+        // this.textMaterial.opacity = this.opacity.value;
+        // this.textMesh.scale.x = this.opacity.value
+        this.textMesh.rotation.x = this.effects.time.elapsed / 1000;
+        this.textMesh.rotation.z = this.effects.time.elapsed / 1000;
+        this.textMesh.position.y = Math.abs(Math.sin(this.effects.time.elapsed / 1000)) * 10
+        this.textMesh.position.x = this.positionX.value
+      }
     }
-
+    
     this.asciiEffect.render(this.scene, this.camera);
   }
 
@@ -132,7 +160,7 @@ export default class AsciiArtRenderer {
     if (!this.initialized) return;
 
     // Stop controls
-    this.controls.dispose();
+    // this.controls.dispose();
 
     // Dispose geometries, materials, and textures
     this.textMesh.geometry.dispose();
