@@ -42,7 +42,7 @@ export default class Effects {
       const canvas = el.querySelector('.image-bulge-scene');
       const textureUrl = el.getAttribute('data-texture');
       components.push(new ImageBulge({ el: canvas, src: textureUrl, index }));
-      components.push(new Cursor({el: el}))
+      components.push(new Cursor({ el: el }))
     });
 
 
@@ -50,11 +50,14 @@ export default class Effects {
     asciiCanvas.forEach((el, index) => {
       const AsciiInstance = new AsciiArtRenderer({ element: el, index })
       components.push(AsciiInstance)
-    }) 
+    })
 
     const marqueeElements = document.querySelectorAll('.loop-item')
-    components.push( new LoopingElement(marqueeElements[0], 0, 0.015) )
-    components.push( new LoopingElement(marqueeElements[1], -100, 0.015) )
+
+    if (marqueeElements.length) {
+      components.push(new LoopingElement(marqueeElements[0], 0, 0.015))
+      components.push( new LoopingElement(marqueeElements[1], -100, 0.015) )
+    }
     
     return components;
   }
