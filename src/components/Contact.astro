@@ -358,7 +358,6 @@ const NUM_SLIDES = 4;
       carousel.style.transform = `translateX(${currentPosition}px)`;
       activeSlideNumber++; // Increment activeSlideNumber
       isFirstContactSlide = activeSlideNumber === 0;
-      console.log(isFirstContactSlide);
       updateButtonEnabledState();
       updateNameOnSlide3();
     } else {
@@ -372,7 +371,6 @@ const NUM_SLIDES = 4;
     carousel.style.transform = `translateX(${currentPosition}px)`;
     activeSlideNumber--; // Decrement activeSlideNumber
     isFirstContactSlide = activeSlideNumber === 0;
-    console.log(isFirstContactSlide);
     updateButtonEnabledState();
     updateNameOnSlide3();
   }
