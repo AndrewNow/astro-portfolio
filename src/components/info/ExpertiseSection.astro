@@ -151,6 +151,20 @@
   }
 
   @media (max-width: 576px) {
+    .card-flex {
+      display: block;
+      
+      .card {
+        margin: 2rem auto;
+
+      }
+      :first-child {
+        margin-top: 0;
+      }
+      :last-child {
+        margin-bottom: 0;
+      }
+    }
     .expertise-wrapper {
       padding-bottom: 2rem;
       p {
