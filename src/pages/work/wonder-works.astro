@@ -1,0 +1,111 @@
+---
+import ProjectBrief from "../../components/work/ProjectBrief.astro";
+import WorkLayout from "../../layouts/WorkLayout.astro";
+import { Image } from "@astrojs/image/components";
+
+const seo = {
+  //
+};
+
+const projectData = {
+  title:
+    "Wonder Works is a full service, premier gaming studio for the growing Roblox metaverse landscape.",
+  url: "https://saved-state.wonderworks.gg/",
+  details: [
+    {
+      label: "Role",
+      data: ["Web development"],
+    },
+    { label: "Team", data: [{ name: "Blanck Studio", role: "design" }] },
+    {
+      label: "Tools",
+      data: ["GatsbyJS", "Framer Motion", "Figma"],
+    },
+    {
+      label: "Date",
+      data: ["2021"],
+    },
+  ],
+  mainDescription:
+    "With 67% of Roblox users under the age of 16, we sought to create a playful and engaging website that that would appeal to this younger demographic.",
+  secondaryDescription:
+    "The website had to equally appeal to prospective employees and potential investors, which posed a few interesting design challenges.",
+  nextProjectData: {
+    title: "Revue Moebius",
+    url: "/work/revue-moebius",
+    image: "/assets/rm/thumbnail.png",
+  },
+};
+---
+
+<WorkLayout seo={seo} data={projectData}>
+  <div class="cover-img container-md">
+    <video
+      class="image-fill video-landing"
+      width="1200"
+      height="784"
+      loop
+      autoplay
+      muted
+    >
+      <source src="/assets/ww/ww-main-video.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <ProjectBrief
+    mainDesc={projectData.mainDescription}
+    secondaryDesc={projectData.secondaryDescription}
+  />
+  <div class="img-container container-lg">
+      <video
+      class="image-fill video-landing"
+      width="1681"
+      height="961"
+      loop
+      autoplay
+      muted
+    >
+      <source src="/assets/ww/ww-secondary-video.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="img-container container-lg">
+    <Image
+      src="/assets/rm/3.png"
+      alt=`Project thumbnail for Revue Moebius`
+      width={893}
+      height={806}
+      quality={100}
+      format="webp"
+      class="image-contain"
+      background="rgba(248, 248, 248, 1)"
+    />
+  </div>
+  <div class="img-container container-lg">
+    <Image
+      src="/assets/rm/5.png"
+      alt=`Project thumbnail for Revue Moebius`
+      width={1652}
+      height={701}
+      quality={100}
+      format="webp"
+      class="image-contain"
+      background="rgba(248, 248, 248, 1)"
+    />
+  </div>
+</WorkLayout>
+
+<style lang="scss">
+  .image-fill {
+    object-fit: cover;
+    height: 100%;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+  }
+  .cover-img {
+    background-color: rgb(26, 23, 73);
+  }
+  .image-contain {
+    object-fit: contain;
+    height: 100%;
+  }
+</style>
