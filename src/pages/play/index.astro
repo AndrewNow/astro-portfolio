@@ -10,17 +10,17 @@ const projectData = [
   },
   {
     name: "Photography",
-    slug: "photography",
+    // slug: "photography",
     imageSrc: "/assets/play/photography/thumbnail.png",
   },
   {
     name: "Generative Artwork",
-    slug: "generative",
+    // slug: "generative",
     imageSrc: "/assets/play/generative/thumbnail.png",
   },
   {
     name: "Additional Projects",
-    slug: "other",
+    // slug: "other",
     imageSrc: "/assets/play/other/thumbnail.png",
   },
 ];
@@ -38,8 +38,27 @@ const projectData = [
       {
         projectData.map((project) => {
           return (
-            <div class="content-item">
+            <div class="content-item" id="project-title">
               <div class="image-wrapper canvas-wrapper">
+                {!project.slug && (
+                  <div class="hidden">
+                    <div class="hidden-flex">
+                      <h6>Coming soon</h6>
+                      <svg
+                        width="44"
+                        height="37"
+                        viewBox="0 0 44 37"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M1.58984 1.93605L3.52344 0L38.543 35.0424L36.5879 37L26.7695 27.1692C25.9961 27.6711 25.2441 28.0512 24.5137 28.3093C23.7832 28.5674 22.9453 28.6965 22 28.6965C20.8542 28.6965 19.7799 28.4814 18.7773 28.0512C17.7747 27.6209 16.901 27.0329 16.1562 26.2872C15.4115 25.5415 14.8242 24.6667 14.3945 23.6628C13.9648 22.6589 13.75 21.5833 13.75 20.436C13.75 19.5039 13.8789 18.6721 14.1367 17.9407C14.3945 17.2093 14.7741 16.4492 15.2754 15.6605L8.40039 8.77674C6.61003 10.2826 5.2207 12.0107 4.23242 13.961C3.24414 15.9114 2.75 18.0698 2.75 20.436H0C0 19.131 0.150391 17.8475 0.451172 16.5855C0.751953 15.3234 1.18164 14.1045 1.74023 12.9285C2.29883 11.7525 2.97201 10.6554 3.75977 9.63721C4.54753 8.61899 5.44987 7.68682 6.4668 6.8407L1.58984 1.93605ZM16.5 20.436C16.5 21.1961 16.6432 21.906 16.9297 22.5657C17.2161 23.2254 17.61 23.8134 18.1113 24.3297C18.6126 24.8459 19.1927 25.2403 19.8516 25.5128C20.5104 25.7853 21.2266 25.9287 22 25.943C22.5156 25.943 22.9954 25.8785 23.4395 25.7494C23.8835 25.6203 24.3275 25.4267 24.7715 25.1686L17.2734 17.661C17.0299 18.1056 16.8438 18.5502 16.7148 18.9948C16.5859 19.4393 16.5143 19.9198 16.5 20.436ZM23.5469 15.1657L20.6895 12.3047L21.334 12.2186C21.5488 12.1899 21.7708 12.1756 22 12.1756C23.1315 12.1756 24.1986 12.3907 25.2012 12.8209C26.2038 13.2512 27.0775 13.8391 27.8223 14.5849C28.5671 15.3306 29.1615 16.2126 29.6055 17.2308C30.0495 18.249 30.2643 19.3174 30.25 20.436C30.25 20.6512 30.2357 20.8663 30.207 21.0814C30.1784 21.2965 30.1497 21.5188 30.1211 21.7483L27.2637 18.8872C26.6621 17.0085 25.4232 15.768 23.5469 15.1657ZM44 20.436H41.25C41.25 18.7438 40.9922 17.1591 40.4766 15.682C39.9609 14.2048 39.252 12.8568 38.3496 11.6378C37.4473 10.4188 36.373 9.32888 35.127 8.36802C33.8809 7.40717 32.556 6.5969 31.1523 5.93721C29.7487 5.27752 28.2591 4.77558 26.6836 4.4314C25.1081 4.08721 23.5469 3.91512 22 3.91512C20.5964 3.91512 19.2214 4.05136 17.875 4.32384C16.5286 4.59632 15.2038 4.99787 13.9004 5.52849L11.7949 3.42035C13.4564 2.66027 15.1107 2.0938 16.7578 1.72093C18.4049 1.34806 20.1523 1.16163 22 1.16163C24.0625 1.16163 26.1035 1.4126 28.123 1.91453C30.1426 2.41647 32.0404 3.16938 33.8164 4.17326C35.5924 5.17713 37.2109 6.39612 38.6719 7.83023C40.1328 9.26434 41.3216 10.9422 42.2383 12.864C42.8112 14.0399 43.248 15.2661 43.5488 16.5424C43.8496 17.8188 44 19.1167 44 20.436Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                )}
                 <a
                   href={`/play/${project.slug}`}
                   class="canvas-container"
@@ -48,7 +67,13 @@ const projectData = [
                   <canvas class="image-bulge-scene" />
                 </a>
               </div>
-              <h4>{project.name}</h4>
+              <h4>
+                {project.slug ? (
+                  <a href={`/play/${project.slug}`}>{project.name}</a>
+                ) : (
+                  <span class="disabled">{project.name}</span>
+                )}
+              </h4>
             </div>
           );
         })
@@ -60,24 +85,88 @@ const projectData = [
 <script>
   import { animate } from "motion";
   const heading = document.getElementById("heading");
+  const projectTitles = document.querySelectorAll("#project-title");
+  const hidden = document.querySelectorAll(".hidden");
+
   animate(
     heading,
     {
-      transform: "translateY(0px)",
       opacity: 1,
+      transform: `translateY(0px)`,
     },
     {
-      delay: 0.5,
-      duration: 0.5,
+      duration: 1.5,
+      delay: 0.2,
+      easing: [0.19, 1, 0.22, 1],
     }
   );
+
+  projectTitles.forEach((title) => {
+    animate(
+      title,
+      {
+        opacity: 1,
+        transform: `translateY(0px)`,
+      },
+      {
+        easing: [0.19, 1, 0.22, 1],
+        duration: 1.85,
+        delay: 0.35,
+      }
+    );
+  });
+
+  hidden.forEach((el) => {
+    animate(
+      el,
+      {
+        clipPath: `inset(0% 0% 0% 0%)`,
+      },
+      {
+        duration: 1.45,
+        delay: .67,
+        easing: [0.6, 0.3, 0, 1],
+      }
+    );
+  });
 </script>
 
 <style lang="scss">
   #heading {
-    transform: translateY(-150px);
+    transform: translateY(-40px);
     opacity: 0;
   }
+  #project-title {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  .hidden {
+    clip-path: inset(100% 0% 0% 0%);
+    position: absolute;
+    place-items: center;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000090;
+    color: var(--white);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--border-s);
+    display: grid;
+  }
+
+  .hidden-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    svg {
+      margin-top: 1rem;
+    }
+  }
+
   .page-wrapper {
     background: var(--grey-100);
   }
