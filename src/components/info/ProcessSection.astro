@@ -220,9 +220,9 @@ const processData = [
     background: var(--orange-300);
     // background: var(--black);
     margin: 0 auto;
-    width: 100%;
+    // width: 100%;
     width: min(1100px, 98.5%);
-    height: min(62vh, 90%);
+    height: min(60vh, 90%);
   }
   .perspective {
     perspective: 100px;
@@ -278,6 +278,8 @@ const processData = [
   @media (max-width: 576px) {
     .sticky-card-container {
       overflow: hidden;
+      top: 55%;
+      background: none;
     }
     .process-card {
       margin: 3rem auto;
@@ -286,8 +288,12 @@ const processData = [
         font-size: 16px;
       }
       .card-title-flex {
-        padding: 1rem 2rem;
+        padding: 1rem 1rem;
         margin-right: 0;
+        p {
+          width: 30px;
+          height: 30px;
+        }
       }
     }
   }
