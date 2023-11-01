@@ -25,6 +25,7 @@
     right: 1rem;
     background: #1e1e1e99;
     backdrop-filter: blur(10px) brightness(0.5);
+    -webkit-backdrop-filter: blur(10px) brightness(0.5);
     border-radius: 7px;
     border: 1px solid #6c6c6c50;
     color: var(--white);
@@ -55,7 +56,7 @@
     transition: var(--hover-transition);
     :hover {
       cursor: pointer;
-      opacity: .75;
+      opacity: 0.75;
     }
   }
   .toast-button {
@@ -74,7 +75,8 @@
       width: 92.5%;
       right: 3.5%;
     }
-    .toast-text, .toast-button {
+    .toast-text,
+    .toast-button {
       p {
         font-size: 10px;
       }
@@ -84,7 +86,6 @@
 
 <script>
   import { animate } from "motion";
-
 
   document.addEventListener("DOMContentLoaded", function () {
     const toast = document.querySelector(".toast-wrapper");

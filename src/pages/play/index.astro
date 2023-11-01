@@ -29,7 +29,7 @@ const projectData = [
 <Layout>
   <div class="page-wrapper">
     <div class="heading">
-      <h2>
+      <h2 id="heading">
         This section is reserved for work I've created when not working on web
         development projects.
       </h2>
@@ -39,23 +39,16 @@ const projectData = [
         projectData.map((project) => {
           return (
             <div class="content-item">
-              <a href={`/play/${project.slug}`}>
-                <Image
-                  src={project.imageSrc}
-                  width={806}
-                  height={552}
-                  alt="test"
-                  style={{
-                    objectFit: "cover",
-                    aspectRatio: "806/552",
-                    height: "auto",
-                    width: "100%",
-                  }}
-                  quality={100}
-                  format="webp"
-                />
-                <h4>{project.name}</h4>
-              </a>
+              <div class="image-wrapper canvas-wrapper">
+                <a
+                  href={`/play/${project.slug}`}
+                  class="canvas-container"
+                  data-texture={project.imageSrc}
+                >
+                  <canvas class="image-bulge-scene" />
+                </a>
+              </div>
+              <h4>{project.name}</h4>
             </div>
           );
         })
@@ -64,7 +57,27 @@ const projectData = [
   </div>
 </Layout>
 
+<script>
+  import { animate } from "motion";
+  const heading = document.getElementById("heading");
+  animate(
+    heading,
+    {
+      transform: "translateY(0px)",
+      opacity: 1,
+    },
+    {
+      delay: 0.5,
+      duration: 0.5,
+    }
+  );
+</script>
+
 <style lang="scss">
+  #heading {
+    transform: translateY(-150px);
+    opacity: 0;
+  }
   .page-wrapper {
     background: var(--grey-100);
   }
@@ -93,6 +106,22 @@ const projectData = [
       border-radius: 10px;
     }
   }
+
+  .image-wrapper {
+    position: relative;
+    aspect-ratio: 824/564;
+    height: auto;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    canvas {
+      overflow: hidden;
+    }
+    .canvas-container {
+      border-radius: var(--border-s);
+    }
+  }
+
   @media (max-width: 992px) {
     .content {
       display: block;
