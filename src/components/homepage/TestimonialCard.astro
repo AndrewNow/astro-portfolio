@@ -194,29 +194,7 @@ const { index, note } = Astro.props;
     }
   }
 
-  @media (max-width: 992px) {
-    .testimonial-wrapper {
-      margin-bottom: 1rem;
-    }
-  }
   @media (max-width: 576px) {
-    .testimonial-inner {
-      padding: 2rem 0;
-    }
-    .header {
-      padding: 2rem 0.5rem;
-      padding-bottom: 1rem;
-      -webkit-backdrop-filter: unset;
-      backdrop-filter: unset;
-      background: var(--white);
-
-      h3:before {
-        font-size: 14px;
-        width: 30px;
-        height: 30px;
-        margin-right: 1rem;
-      }
-    }
     .notes {
       margin-top: 0rem;
       padding-bottom: 1rem;
@@ -241,6 +219,9 @@ const { index, note } = Astro.props;
         font-size: 12px;
         line-height: 160%;
       }
+    }
+    .translation-buttons {
+      display: none;
     }
   }
 </style>
