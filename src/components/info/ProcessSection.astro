@@ -57,6 +57,7 @@ const processData = [
   import { scroll, timeline } from "motion";
 
   const scrollContainer = document.getElementById("scroll-container");
+  const processText = document.querySelector(".process-text");
   const card1 = document.querySelector(".card0");
   const card2 = document.querySelector(".card1");
   const card3 = document.querySelector(".card2");
@@ -83,6 +84,10 @@ const processData = [
   const fadeOutFinal = {
     opacity: [null, 0],
     transform: [null, `translate3d(-50%, -50%, -60px)`],
+  };
+
+  const opacityOut = {
+    opacity: [null, 0],
   };
 
   const sequence: any[] = [
@@ -169,6 +174,13 @@ const processData = [
       fadeOut,
       { at: "<" },
     ],
+    [
+      processText,
+      opacityOut,
+      {
+        at: "<",
+      },
+    ],
   ];
 
   scroll(timeline(sequence), {
@@ -206,8 +218,10 @@ const processData = [
     transform: translateY(-50%);
     border-radius: var(--border-xl);
     background: var(--orange-300);
+    // background: var(--black);
     margin: 0 auto;
-    width: min(1300px, 98.5%);
+    width: 100%;
+    width: min(1100px, 98.5%);
     height: min(62vh, 90%);
   }
   .perspective {

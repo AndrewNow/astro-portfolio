@@ -1,0 +1,132 @@
+<div class="toast-wrapper">
+  <div class="toast-flex">
+    <div class="toast-text">
+      <p class="ding">DING DING</p>
+      <p>
+        👋 Hey there! Here’s a first look at my new portfolio, which is
+        currently still in beta. Come back soon for a finalized version!
+      </p>
+    </div>
+    <div class="toast-dismiss">
+      <button class="toast-button">
+        <p>DISMISS</p>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .toast-wrapper {
+    user-select: none;
+    z-index: 20000;
+    opacity: 0;
+    position: fixed;
+    bottom: 2rem;
+    right: 1rem;
+    background: #1e1e1e99;
+    backdrop-filter: blur(10px) brightness(0.5);
+    border-radius: 7px;
+    border: 1px solid #6c6c6c50;
+    color: var(--white);
+    max-width: 470px;
+  }
+  .toast-flex {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+    height: 100%;
+  }
+  .toast-text {
+    padding: 1rem;
+    .ding {
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 12px;
+    }
+    border-right: 1px solid #6c6c6c50;
+  }
+
+  .toast-dismiss {
+    flex: 1;
+    align-self: center;
+    height: 100%;
+    position: relative;
+    transition: var(--hover-transition);
+    :hover {
+      cursor: pointer;
+      opacity: .75;
+    }
+  }
+  .toast-button {
+    background: unset;
+    border: none;
+    outline: none;
+    color: var(--white);
+    p {
+      padding: 1rem;
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 576px) {
+    .toast-wrapper {
+      bottom: 6rem;
+      width: 92.5%;
+      right: 3.5%;
+    }
+    .toast-text, .toast-button {
+      p {
+        font-size: 10px;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { animate } from "motion";
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const toast = document.querySelector(".toast-wrapper");
+    const dismissButton = document.querySelector(".toast-button");
+
+    // Check if the toast has been dismissed before
+    if (localStorage.getItem("toastDismissed") === "true") {
+      // If it has been dismissed, hide the toast
+      toast.style.display = "none";
+    } else {
+      // If it hasn't been dismissed, show the toast
+      animate(
+        toast,
+        {
+          opacity: 1,
+          x: [200, 0],
+        },
+        {
+          duration: 0.5,
+          delay: 2,
+        }
+      );
+    }
+
+    // Add a click event listener to the dismiss button
+    dismissButton.addEventListener("click", function () {
+      // Set a flag in local storage to mark the toast as dismissed
+      localStorage.setItem("toastDismissed", "true");
+      // Hide the toast
+
+      animate(
+        toast,
+        {
+          opacity: 0,
+          y: 150,
+          x: 150,
+          rotate: 140,
+        },
+        {
+          duration: 0.25,
+        }
+      );
+    });
+  });
+</script>

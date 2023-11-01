@@ -1,0 +1,246 @@
+---
+const { index, note } = Astro.props;
+---
+
+<div class="note-wrapper" data-note-index={index}>
+  <!-- if translation exists, create translation buttons -->
+  {
+    note.translation ? (
+      <div class="translation-buttons">
+        <div class="button-english language-active">EN</div>
+        <div class="button-french">FR</div>
+      </div>
+    ) : null
+  }
+  <div class="note-inner">
+    <div class="icon">
+      <p>{note.name.slice(0, 1)}</p>
+    </div>
+    <div class="note-text">
+      <h6>
+        {note.name} &#8226; {note.from}
+      </h6>
+      {
+        note.translation ? (
+          <small
+            class="note-message"
+            data-note-message={note.translation}
+            data-fr={note.translation}
+            data-en={note.message}
+          >
+            {note.translation}
+          </small>
+        ) : (
+          <small class="note-message" data-note-message={note.message}>
+            {note.message}
+          </small>
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  // Get all note wrapper elements
+  const noteWrappers = document.querySelectorAll(".note-inner");
+
+  // Add event listener to each note wrapper
+  function handleClick(event) {
+    toggleNote(event);
+    toggleLanguage(event);
+  }
+
+  noteWrappers.forEach((noteWrapper) => {
+    noteWrapper.addEventListener("click", handleClick);
+  });
+
+  // Toggle the note's visibility
+  function toggleNote(event) {
+    const noteMessageElement =
+      event.currentTarget.querySelector(".note-message");
+
+    if (noteMessageElement) {
+      noteMessageElement.classList.toggle("open");
+    }
+
+    // Toggle the background color of note-wrapper
+    event.currentTarget.classList.toggle("open");
+  }
+
+  function toggleLanguage(event) {
+    if (document.querySelector(".translation-buttons")) {
+      const frenchBtn = document.querySelector(".button-french");
+      const englishBtn = document.querySelector(".button-english");
+
+      const translatedMessage =
+        event.currentTarget.querySelector(".note-message");
+
+      if (frenchBtn && englishBtn) {
+        frenchBtn.addEventListener("click", () => {
+          translatedMessage.textContent =
+            translatedMessage.getAttribute("data-fr");
+
+          frenchBtn.classList.add("language-active");
+          englishBtn.classList.remove("language-active");
+        });
+
+        englishBtn.addEventListener("click", () => {
+          translatedMessage.textContent =
+            translatedMessage.getAttribute("data-en");
+
+          englishBtn.classList.add("language-active");
+          frenchBtn.classList.remove("language-active");
+        });
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+  .note-wrapper {
+    width: 90%;
+    margin: 0.5rem auto;
+    border-radius: 10px;
+    transition: var(--hover-transition);
+    border: 1px solid transparent;
+    position: relative;
+
+    &:first-child {
+      margin-top: 9rem;
+    }
+
+    &.open {
+      background: var(--grey-100);
+      border: 1px solid var(--grey-200);
+    }
+  }
+
+  .note-wrapper:hover {
+    background: var(--grey-100);
+    cursor: pointer;
+  }
+
+  .translation-buttons {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 200;
+    color: var(--grey-200);
+    display: flex;
+    align-items: center;
+  }
+
+  .button-french,
+  .button-english {
+    padding: 0.15rem 0.5rem;
+    margin: 0.25rem;
+    background: #ececec;
+    font-size: 12px;
+    color: var(--grey-300);
+    border: 1px solid var(--grey-100);
+    border-radius: 4px;
+    opacity: 0.5;
+  }
+
+  .button-french.language-active {
+    opacity: 1;
+    border: 1px solid var(--grey-200);
+  }
+  .button-english.language-active {
+    opacity: 1;
+    border: 1px solid var(--grey-200);
+  }
+
+  .note-inner {
+    display: flex;
+    justify-content: flex-start;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem auto;
+  }
+
+  .icon {
+    border-radius: 5px;
+    background: var(--grey-300);
+    color: var(--white);
+    padding: 1rem;
+    aspect-ratio: 1/1;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    p {
+      transform: translateY(2px);
+      line-height: 100%;
+    }
+  }
+  .note-text {
+    margin: 0 2rem;
+
+    small {
+      margin-top: 0.5rem;
+      color: var(--grey-300);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 150%;
+      line-height: 150%;
+      transition: var(--hover-transition);
+      &.open {
+        overflow: visible;
+        text-overflow: unset;
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .testimonial-wrapper {
+      margin-bottom: 1rem;
+    }
+  }
+  @media (max-width: 576px) {
+    .testimonial-inner {
+      padding: 2rem 0;
+    }
+    .header {
+      padding: 2rem 0.5rem;
+      padding-bottom: 1rem;
+      -webkit-backdrop-filter: unset;
+      backdrop-filter: unset;
+      background: var(--white);
+
+      h3:before {
+        font-size: 14px;
+        width: 30px;
+        height: 30px;
+        margin-right: 1rem;
+      }
+    }
+    .notes {
+      margin-top: 0rem;
+      padding-bottom: 1rem;
+    }
+    .note-wrapper {
+      width: 100%;
+      &:first-child {
+        margin-top: 4rem;
+      }
+    }
+    .icon {
+      width: 48px;
+      height: 48px;
+    }
+    .note-inner {
+      margin: 0.25rem 0;
+      padding: 0.75rem 0.5rem;
+    }
+    .note-text {
+      margin: 0 1rem;
+      small {
+        font-size: 12px;
+        line-height: 160%;
+      }
+    }
+  }
+</style>

@@ -1,11 +1,11 @@
 import * as THREE from 'three';
 import { AsciiEffect } from 'three/addons/effects/AsciiEffect.js';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+// import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Effects from '../effects/effects.js';
 import { inView } from 'motion';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import * as dat from 'dat-gui'
+// import * as dat from 'dat-gui'
 import { gsap } from "gsap/gsap-core";
 
 export default class AsciiArtRenderer {
@@ -143,7 +143,7 @@ export default class AsciiArtRenderer {
       } else {
         // scale textmesh to 0 as opacity also fades to 0 over 2 seconds
         gsap.to(this.scale, { value: 0.0, duration: .25, ease: "expo.out" });
-        gsap.to(this.positionX, { value: -500.0, duration: 5.25, ease: "expo.out" });
+        gsap.to(this.positionX, { value: -800.0, duration: 5.25, ease: "expo.out" });
         // this.textMaterial.opacity = this.opacity.value;
         // this.textMesh.scale.x = this.opacity.value
         this.textMesh.rotation.x = this.effects.time.elapsed / 1000;

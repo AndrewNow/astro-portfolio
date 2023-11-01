@@ -1,4 +1,5 @@
 ---
+import TestimonialCard from "./TestimonialCard.astro";
 const testimonialData = [
   {
     name: "Valerie Savard",
@@ -13,22 +14,24 @@ const testimonialData = [
       "Andrew brings an artisanal outlook and an uncompromising professionalism to the table. He created a website for our company, fully hitting the mark in terms of aesthetics and functionality. Working seamlessly together with another contractor, Andrew gracefully orchestrated the maturation of the end product among multiple parties. We enjoyed our spirited exchanges and are looking forward to doing business again, having full trust in his ability and diligence!",
   },
   {
-    name: "M (Assistant Director)",
+    name: "MH (Assistant Director #1)",
     from: "Exposé Noir",
     message:
       "Andrew is a true professional who was great at understanding our particular needs and finding solutions to make sure we were fully satisfied with our website. He is highly responsive, even while on the road, and always a pleasure to work with. You won't be disappointed by his results.",
   },
   {
-    name: "Valerie Savard",
-    from: "Revue Moebius",
+    name: "MA (Assistant Director #2)",
+    from: "Exposé Noir",
     message:
-      "Since its launch, the number of site visits has significantly increased, the number of sales made through the website has doubled, and we have given several interviews regarding the unique integration of hypermedia literature works in the site, notably for the Carnet de la Fabrique du numerique, which provides insights into innovations in the world of digital literary and scientific publishing.",
+      "We couldn’t have asked for a better experience. Andrew is distinctly capable at what he does and thoroughly attentive to every detail discussed. He shared his time around the clock with us to realize precisely the website we had envisioned, making reality of what was an abstract idea in our minds. He swiftly responds to any adjustments that come up and has proactively shared new tools relevant to our website. Thank you for your exceptional service, Andrew.",
   },
   {
     name: "Valerie Savard",
     from: "Revue Moebius",
     message:
-      "Since its launch, the number of site visits has significantly increased, the number of sales made through the website has doubled, and we have given several interviews regarding the unique integration of hypermedia literature works in the site, notably for the Carnet de la Fabrique du numerique, which provides insights into innovations in the world of digital literary and scientific publishing.",
+      "Notre expérience avec Andrew a été au-delà de nos attentes. Nous avons trouvé en lui quelqu’un de très sensible à nos désirs et besoins, quelqu’un avec un regard artistique développé, qu’il sait mettre au profit de la vision du client. Plus encore, M. Nowacki a su faire valoir son expertise et son expérience pour adapter nos demandes aux contraintes du Web. Nous avons pu compter sur un suivi constant, un dialogue ouvert et un plan de travail clair et respecté. Pour chaque besoin particulier que nous exprimions, M. Nowacki nous proposait de multiples solutions, certaines sortant des sentiers battus, pour nous accommoder au mieux. Depuis son lancement en septembre 2022, le nombre de consultations du site a augmenté considérablement, le nombre de ventes effectuées à partir du site a doublé, et nous avons accordé plusieurs entrevues au sujet de l’intégration des œuvres de littérature hypermédiatique, entre pour le Carnet de la Fabrique du numérique, qui offre une veille sur les nouveautés dans le monde de l’édition littéraire et scientifique en contexte numérique. La création de zéro d’un nouveau site nous semblait, au départ, un chantier énorme. Néanmoins, le talent, les connaissances, la créativité, la patience et la fiabilité de M. Nowacki ont rendu cette expérience enrichissante, et nous ne pourrions être plus satisfait·e·s de notre site Web et de sa réception par le public.",
+    translation:
+      "Our experience with Andrew exceeded our expectations. We found in him someone very attuned to our desires and needs, someone with a developed artistic perspective that he skillfully applies to the client's vision. Furthermore, Mr. Nowacki was able to leverage his expertise and experience to tailor our requests to the constraints of the web. We could rely on constant follow-up, open dialogue, and a clear and respected work plan. For every specific need we expressed, Mr. Nowacki proposed multiple solutions, some of which were unconventional, to best accommodate us. Since its launch in September 2022, the number of site visits has significantly increased, the number of sales made through the site has doubled, and we have given several interviews regarding the integration of hypermedia literary works for the Carnet de la Fabrique du numérique, which provides updates on innovations in the digital literary and scientific publishing world. Initially, the idea of creating a new website from scratch seemed like a massive undertaking. However, Mr. Nowacki's talent, knowledge, creativity, patience, and reliability made this experience enriching, and we couldn't be more satisfied with our website and its reception by the public.",
   },
 ];
 
@@ -43,47 +46,12 @@ const length = testimonialData.length;
     <div class="notes" data-lenis-prevent>
       {
         testimonialData.map((note, index) => {
-          return (
-            <div class="note-wrapper" data-note-index={index}>
-              <div class="note-inner">
-                <div class="icon">
-                  <p>{note.name.slice(0, 1)}</p>
-                </div>
-                <div class="note-text">
-                  <h6>
-                    {note.name} &#8226; {note.from}
-                  </h6>
-                  <small class="note-message" data-note-message={note.message}>
-                    {note.message}
-                  </small>
-                </div>
-              </div>
-            </div>
-          );
+          return <TestimonialCard note={note} index={index} />;
         })
       }
     </div>
   </div>
 </div>
-
-<script>
-  // Get all note wrapper elements
-  const noteWrappers = document.querySelectorAll(".note-wrapper");
-
-  // Add event listener to each note wrapper
-  noteWrappers.forEach((noteWrapper) => {
-    noteWrapper.addEventListener("click", toggleNote);
-  });
-
-  // Toggle the note's visibility
-  function toggleNote() {
-    const noteMessageElement = this.querySelector(".note-message");
-    noteMessageElement.classList.toggle("open");
-
-    // Toggle the background color of note-wrapper
-    this.classList.toggle("open");
-  }
-</script>
 
 <style lang="scss">
   .testimonial-wrapper {
@@ -164,118 +132,4 @@ const length = testimonialData.length;
     }
   }
 
-  .note-wrapper {
-    width: 90%;
-    margin: 0.5rem auto;
-    border-radius: 10px;
-    transition: var(--hover-transition);
-    border: 1px solid transparent;
-
-    &:first-child {
-      margin-top: 9rem;
-    }
-
-    &.open {
-      background: var(--grey-100);
-      border: 1px solid var(--grey-200);
-    }
-  }
-
-  .note-wrapper:hover {
-    background: var(--grey-100);
-    cursor: pointer;
-  }
-
-  .note-inner {
-    display: flex;
-    justify-content: flex-start;
-    padding: 1.25rem 1.5rem;
-    margin: 1rem auto;
-  }
-
-  .icon {
-    border-radius: 5px;
-    background: var(--grey-300);
-    color: var(--white);
-    padding: 1rem;
-    aspect-ratio: 1/1;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    p {
-      transform: translateY(2px);
-      line-height: 100%;
-    }
-  }
-  .note-text {
-    margin: 0 2rem;
-
-    small {
-      margin-top: 0.5rem;
-      color: var(--grey-300);
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-height: 150%;
-      line-height: 150%;
-      transition: var(--hover-transition);
-      &.open {
-        overflow: visible;
-        text-overflow: unset;
-        display: block;
-      }
-    }
-  }
-
-  @media (max-width: 992px) {
-    .testimonial-wrapper {
-      margin-bottom: 1rem;
-    }
-  }
-  @media (max-width: 576px) {
-    .testimonial-inner {
-      padding: 2rem 0;
-    }
-    .header {
-      padding: 2rem 0.5rem;
-      padding-bottom: 1rem;
-      -webkit-backdrop-filter: unset;
-      backdrop-filter: unset;
-      background: var(--white);
-
-      h3:before {
-        font-size: 14px;
-        width: 30px;
-        height: 30px;
-        margin-right: 1rem;
-      }
-    }
-    .notes {
-      margin-top: 0rem;
-      padding-bottom: 1rem;
-    }
-    .note-wrapper {
-      width: 100%;
-      &:first-child {
-        margin-top: 4rem;
-      }
-    }
-    .icon {
-      width: 48px;
-      height: 48px;
-    }
-    .note-inner {
-      margin: 0.25rem 0;
-      padding: 0.75rem 0.5rem;
-    }
-    .note-text {
-      margin: 0 1rem;
-      small {
-        font-size: 12px;
-        line-height: 160%;
-      }
-    }
-  }
 </style>
