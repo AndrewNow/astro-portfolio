@@ -39,7 +39,7 @@ const projectData = {
 ---
 
 <WorkLayout seo={seo} data={projectData}>
-  <div class="cover-img container-md">
+  <div class="cover-img container-md square">
     <video
       class="image-fill video-landing"
       width="1200"
@@ -75,7 +75,7 @@ const projectData = {
       height={961}
       quality={100}
       format="webp"
-      class="image-cover"
+      class="image-contain"
       background="rgba(248, 248, 248, 1)"
     />
   </div>
@@ -87,7 +87,7 @@ const projectData = {
       height={961}
       quality={100}
       format="webp"
-      class="image-cover"
+      class="image-contain"
       background="rgba(248, 248, 248, 1)"
     />
   </div>
@@ -96,10 +96,19 @@ const projectData = {
 <style lang="scss">
   .image-fill {
     object-fit: cover;
-    height: 100%;
+    height: auto;
+    width: 100%;
     margin: 0 auto;
     display: grid;
     place-items: center;
+  }
+  .video-landing {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .cover-img {
     background-color: rgb(26, 23, 73);
@@ -107,5 +116,12 @@ const projectData = {
   .image-contain {
     object-fit: contain;
     height: 100%;
+  }
+
+  @media (max-width: 576px) {
+    .square {
+      aspect-ratio: 1/1;
+      height: auto;
+    }
   }
 </style>

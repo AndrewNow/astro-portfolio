@@ -1,6 +1,5 @@
 ---
-import { Image } from "@astrojs/image/components";
-
+// import { Image } from "@astrojs/image/components";
 const { data } = Astro.props;
 ---
 
@@ -13,13 +12,22 @@ const { data } = Astro.props;
       </a>
     </h2>
     <div class="img-container container-md">
-      <Image
+      <div class="image-wrapper canvas-wrapper">
+        <a
+          href=`${data.url}`
+          class="canvas-container"
+          data-texture={data.image}
+        >
+          <canvas class="image-bulge-scene"></canvas>
+        </a>
+      </div>
+      <!-- <Image
         class="image-fill"
         src={data.image}
         alt=`Preview thumbnail for ${data.title}`
         width={1682}
         height={784}
-      />
+      /> -->
     </div>
   </div>
 </footer>
@@ -32,6 +40,24 @@ const { data } = Astro.props;
   .next-project-wrapper {
     background: var(--grey-100);
     border-radius: 90px 90px 0px 0px;
+  }
+
+  .image-wrapper {
+    position: relative;
+    aspect-ratio: 1463/686;
+    height: auto;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    .image-inner {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    canvas {
+      border-radius: var(--border-l);
+      overflow: hidden;
+    }
   }
 
   .next-project-inner {
