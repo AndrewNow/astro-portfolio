@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/BaseLayout.astro";
 import MapAlbumArt from "../../components/play/MapAlbumArt.astro";
+import EndArticleStamp from "../../components/EndArticleStamp.astro";
 
 const ArtworkData = [
   {
@@ -87,6 +88,7 @@ const ArtworkData = [
           return <MapAlbumArt data={album} key={idx} />;
         })
       }
+      <EndArticleStamp />
     </div>
   </div>
 </Layout>

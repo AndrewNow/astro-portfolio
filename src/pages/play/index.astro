@@ -42,7 +42,7 @@ const projectData = [
               <div class="image-wrapper canvas-wrapper">
                 {!project.slug && (
                   <div class="hidden">
-                    <div class="hidden-flex">
+                    <div class="hidden-flex" id="coming-soon">
                       <h6>Coming soon</h6>
                       <svg
                         width="44"
@@ -69,7 +69,13 @@ const projectData = [
               </div>
               <h4>
                 {project.slug ? (
-                  <a href={`/play/${project.slug}`}>{project.name}</a>
+                  <a
+                    href={`/play/${project.slug}`}
+                    id="link-hover-text"
+                    data-hide-arrow="false"
+                  >
+                    {project.name}
+                  </a>
                 ) : (
                   <span class="disabled">{project.name}</span>
                 )}
@@ -83,10 +89,11 @@ const projectData = [
 </Layout>
 
 <script>
-  import { animate } from "motion";
+  import { animate, stagger, inView } from "motion";
   const heading = document.getElementById("heading");
   const projectTitles = document.querySelectorAll("#project-title");
-  const hidden = document.querySelectorAll(".hidden");
+  const hiddenProject = document.querySelectorAll(".hidden");
+  const comingSoon = document.querySelectorAll("#coming-soon");
 
   animate(
     heading,
@@ -102,32 +109,49 @@ const projectData = [
   );
 
   projectTitles.forEach((title) => {
-    animate(
-      title,
-      {
-        opacity: 1,
-        transform: `translateY(0px)`,
-      },
-      {
-        easing: [0.19, 1, 0.22, 1],
-        duration: 1.85,
-        delay: 0.35,
-      }
-    );
+    inView(title, () => {
+      animate(
+        title,
+        {
+          opacity: 1,
+          transform: `translateY(0px)`,
+        },
+        {
+          easing: [0.19, 1, 0.22, 1],
+          duration: 1.85,
+          delay: 0.35,
+        }
+      );
+    });
   });
 
-  hidden.forEach((el) => {
-    animate(
-      el,
-      {
-        clipPath: `inset(0% 0% 0% 0%)`,
-      },
-      {
-        duration: 1.45,
-        delay: .67,
-        easing: [0.6, 0.3, 0, 1],
-      }
-    );
+  hiddenProject.forEach((hiddenProj) => {
+    inView(hiddenProj, () => {
+      animate(
+        hiddenProj,
+        {
+          clipPath: `inset(0% 0% 0% 0%)`,
+        },
+        {
+          duration: 1.45,
+          delay: 0.75,
+          easing: [0.6, 0.3, 0, 1],
+        }
+      ).finished.then(() => {
+        comingSoon.forEach((comingSoon) => {
+          animate(
+            comingSoon,
+            {
+              opacity: 1,
+              transform: `translateY(0px)`,
+            },
+            {
+              duration: 0.7,
+            }
+          );
+        });
+      });
+    });
   });
 </script>
 
@@ -138,6 +162,10 @@ const projectData = [
   }
   #project-title {
     transform: translateY(40px);
+    opacity: 0;
+  }
+  #coming-soon {
+    transform: translateY(20px);
     opacity: 0;
   }
   .hidden {
@@ -220,6 +248,14 @@ const projectData = [
     }
   }
   @media (max-width: 576px) {
+    .hidden-flex {
+      h6 {
+        font-size: 16px;
+      }
+      svg {
+        scale: 0.8;
+      }
+    }
     .heading {
       h2 {
         padding: 1.5rem 0;

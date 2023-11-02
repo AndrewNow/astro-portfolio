@@ -53,6 +53,16 @@ import MagneticButton from "../work/MagneticButton.astro";
     padding: 5rem 0;
     margin: 1.25rem auto;
   }
+  .artwork-wrapper:nth-child(odd) {
+    .artwork-flex {
+      flex-direction: row-reverse;
+    }
+    .artwork-text {
+      padding-right: 0;
+      padding-left: 10%;
+    }
+  }
+
   .artwork-flex {
     display: flex;
     margin: 0 auto;
@@ -109,6 +119,14 @@ import MagneticButton from "../work/MagneticButton.astro";
   }
 
   @media (max-width: 768px) {
+    .artwork-wrapper:nth-child(odd) {
+      .artwork-flex {
+        flex-direction: column;
+      }
+      .artwork-text {
+        padding: 0;
+      }
+    }
     .artwork-wrapper {
       padding: 2.5rem 0;
       padding-bottom: 1rem;

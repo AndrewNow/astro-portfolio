@@ -19,17 +19,17 @@ if (currentPath.startsWith("/work") || currentPath === "/") {
     <div class="nav-link-wrapper" data-page={currentPath}>
       <div class="nav-inner-bg"></div>
       <a
-        class=`nav-link ${currentPath.startsWith("/work") || currentPath === "/" ? "test" : ""}`
+        class=`nav-link ${currentPath.startsWith("/work") || currentPath === "/" ? "active" : ""}`
         data-slug="work"
         href="/">Work</a
       >
       <a
-        class=`nav-link ${currentPath.startsWith("/play") ? "test" : ""}`
+        class=`nav-link ${currentPath.startsWith("/play") ? "active" : ""}`
         data-slug="play"
         href="/play">Play</a
       >
       <a
-        class=`nav-link ${currentPath.startsWith("/info") ? "test" : ""}`
+        class=`nav-link ${currentPath.startsWith("/info") ? "active" : ""}`
         data-slug="info"
         href="/info">Info</a
       >
