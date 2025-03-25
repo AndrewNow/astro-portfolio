@@ -1,0 +1,149 @@
+<div
+  id="global-lightbox"
+  class="fixed inset-0 z-[9999] hidden"
+  style="position: fixed; isolation: isolate;"
+>
+  <div
+    id="lightbox-backdrop"
+    class="absolute inset-0 bg-black/30 backdrop-blur-sm"
+    style="z-index: 9999;"
+  >
+  </div>
+  <div
+    class="relative w-full h-full flex items-center justify-center p-4"
+    style="z-index: 10000;"
+  >
+    <button
+      id="close-global-lightbox"
+      class="absolute top-4 right-4 text-white hover:text-gray-300 z-10 cursor-pointer"
+    >
+      [ CLOSE ]
+    </button>
+    <div
+      id="global-lightbox-content"
+      class="transform translate-y-8 opacity-0"
+      style="z-index: 10000;"
+    >
+    </div>
+  </div>
+</div>
+
+<script>
+  // Global event listeners for the lightbox
+  document.addEventListener("DOMContentLoaded", () => {
+    const lightbox = document.getElementById("global-lightbox");
+    const lightboxContent = document.getElementById("global-lightbox-content");
+    const closeButton = document.getElementById("close-global-lightbox");
+    const backdrop = document.getElementById("lightbox-backdrop");
+
+    // Store scroll position
+    let scrollPosition = 0;
+
+    // Listen for custom event to open lightbox
+    document.addEventListener("openGlobalLightbox", (e) => {
+      const detail = (e as CustomEvent).detail;
+      openLightbox(detail.content, detail.isVideo);
+    });
+
+    function openLightbox(src: string, isVideo: boolean) {
+      // Store current scroll position
+      scrollPosition = window.scrollY;
+
+      // Clear previous content
+      if (lightboxContent) {
+        lightboxContent.innerHTML = "";
+
+        // Create appropriate element based on type
+        if (isVideo) {
+          const video = document.createElement("video");
+          video.src = src;
+          video.classList.add("max-w-full", "max-h-[80vh]", "object-contain");
+          video.autoplay = true;
+          video.loop = true;
+          video.muted = false; // Unmuted in lightbox
+          video.controls = true;
+          video.playsInline = true;
+          lightboxContent.appendChild(video);
+        } else {
+          const img = document.createElement("img");
+          img.src = src;
+          img.classList.add("max-w-full", "max-h-[80vh]", "object-contain");
+          lightboxContent.appendChild(img);
+        }
+
+        // Show lightbox
+        lightbox?.classList.remove("hidden");
+
+        // Lock document scrolling
+        document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.width = "100%";
+
+        // Animate in
+        import("gsap").then(({ gsap }) => {
+          gsap.to(lightboxContent, {
+            y: 0,
+            opacity: 1,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        });
+      }
+    }
+
+    function closeLightbox() {
+      import("gsap").then(({ gsap }) => {
+        // Animate out
+        gsap.to(lightboxContent, {
+          y: 20,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            lightbox?.classList.add("hidden");
+            // Stop video if playing
+            const video = lightboxContent?.querySelector("video");
+            if (video) video.pause();
+
+            // Restore document scrolling
+            document.body.style.position = "";
+            document.body.style.width = "";
+            document.body.style.top = "";
+            document.body.style.overflow = "";
+
+            // Restore scroll position
+            window.scrollTo(0, scrollPosition);
+          },
+        });
+      });
+    }
+
+    // Close lightbox when clicking the close button
+    if (closeButton) {
+      closeButton.addEventListener("click", closeLightbox);
+    }
+
+    // Close lightbox when clicking the backdrop
+    if (backdrop) {
+      backdrop.addEventListener("click", closeLightbox);
+    }
+
+    // Close lightbox when clicking outside the content (the main lightbox container)
+    if (lightbox) {
+      lightbox.addEventListener("click", (e) => {
+        // Only close if clicking directly on the lightbox container (not its children)
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+    }
+
+    // Close lightbox with Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !lightbox?.classList.contains("hidden")) {
+        closeLightbox();
+      }
+    });
+  });
+</script>

@@ -1,0 +1,122 @@
+---
+import ProjectEntry from "./ProjectEntry.astro";
+const projects = [
+  {
+    title:
+      "Navattic: YC-Backed SaaS company specialising in interactive product demos.",
+    description:
+      "Deliverables include turning over a designed and developed website in a 2 week sprint, with multiple animated graphics and dozens of CMS routes to account for.",
+    stack: ["Next.js", "Tailwind", "TypeScript", "Motion", "Sanity CMS"],
+    images: [
+      {
+        src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZaP76SsZy1lc0sKuLjWZDTnftBhG3U7YIxikP",
+        aspectRatio: "aspect-[1700/1080]",
+        isHorizontal: true,
+      },
+      {
+        src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZbAm3iofCILuZ0wFeDfxhiR59sGnET6qBz3Qc",
+        aspectRatio: "aspect-[1700/1080]",
+        isHorizontal: true,
+        isVideo: true,
+      },
+    ],
+  },
+  {
+    title: "Lazyrecords: ALGORITHM-FREE MUSIC DISCOVERY APP (SIDE PROJECT).",
+    description:
+      "Product design, development, branding, logo design and marketing for an algo-free music discovery tool I made with my close friend Marcus (@comfortzonedj).",
+    stack: [
+      "Next.js",
+      "Tailwind",
+      "TypeScript",
+      "Motion",
+      "Three.js",
+      "Stripe",
+      "Supabase",
+    ],
+    images: [
+      {
+        src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZ0C0XraMoQFWieS5JjcpCAfZBUn7hEDXO8vIP",
+        isVideo: true,
+        aspectRatio: "aspect-[1/1]",
+        isHorizontal: false,
+      },
+      {
+        src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZPt5K2Pik9ZnVM4Tza6vQhKIGJUypAbNd0oWF",
+        aspectRatio: "aspect-[3/2]",
+        isHorizontal: true,
+      },
+      {
+        src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZPV7bsLvik9ZnVM4Tza6vQhKIGJUypAbNd0oW",
+        aspectRatio: "aspect-[3/2]",
+        isHorizontal: true,
+      },
+    ],
+  },
+  {
+    title: "Seeyousoon: culinary creative founded by ex-michelin chefs.",
+    description:
+      "Branding, design and development for a simple one-page website that would allow Seeyousoon to showcase their past and upcoming events. ",
+    stack: ["Astro", "Matter.js", "Motion", "Sanity CMS"],
+    images: [
+      {
+        src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZmwmHjA2i2Pq9xFK3Cwsg1nW0Q8jlRS6ZYbXe",
+        isVideo: true,
+        aspectRatio: "aspect-[4/3]",
+        isHorizontal: true,
+      },
+      {
+        src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZPTOaazik9ZnVM4Tza6vQhKIGJUypAbNd0oWF",
+        isVideo: true,
+        aspectRatio: "aspect-[4/5]",
+        isHorizontal: false,
+      },
+      {
+        src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZflLbcM7rJORFv206nNp14sTemWUSo75ci8dt",
+        isVideo: true,
+        aspectRatio: "aspect-[4/5]",
+        isHorizontal: false,
+      },
+    ],
+  },
+  // {
+  //   title: "Sequence: All-in-one development platform for web3 games.",
+  //   description:
+  //     "Product design, design system development and maintenance in collaboration with 56.digital.",
+  //   stack: ["Figma"],
+  //   images: [
+  //     {
+  //       src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZ6kC1BPgcqDNHchOJ4syvYzouQg5MwkEUtpFP",
+  //       aspectRatio: "aspect-[3/2]",
+  //       isHorizontal: true,
+  //     },
+  //     {
+  //       src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZJHhxprWiFBCM7ojU9VpIYmufd3sXreO6hnbt",
+  //       aspectRatio: "aspect-[3/2]",
+  //       isHorizontal: true,
+  //     },
+  //     {
+  //       src: "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZ0VjUX7MoQFWieS5JjcpCAfZBUn7hEDXO8vIP",
+  //       aspectRatio: "aspect-[3/2]",
+  //       isHorizontal: true,
+  //     },
+  //   ],
+  // },
+];
+---
+
+<section class="w-full mx-auto p-4 pb-[40vh] md:pb-[70vh] pt-10">
+  <div
+    class="w-fit md:w-sm md:text-center text-xs font-medium uppercase bg-white px-2 py-1 md:py-2"
+  >
+    Recent work
+  </div>
+  <div class="relative z-10">
+    {
+      projects.map((project) => {
+        return <ProjectEntry project={project} />;
+      })
+    }
+    <div id="show-footer" class="opacity-0 size-0"></div>
+  </div>
+</section>

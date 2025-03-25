@@ -1,0 +1,154 @@
+<div
+  id="loader"
+  class="fixed inset-0 bg-[#1a1a1a] flex items-center justify-center z-[10001]"
+>
+  <div class="text-white text-4xl font-bold overflow-hidden flex gap-1.5">
+    <div
+      id="loader-text-nice"
+      class="opacity-0 text-xs font-semibold uppercase"
+    >
+      nice
+    </div>
+    <div id="loader-text-to" class="opacity-0 text-xs font-semibold uppercase">
+      to
+    </div>
+    <div
+      id="loader-text-meet"
+      class="opacity-0 text-xs font-semibold uppercase"
+    >
+      meet
+    </div>
+    <div id="loader-text-you" class="opacity-0 text-xs font-semibold uppercase">
+      you!
+    </div>
+    <div
+      id="loader-text-hand"
+      class="opacity-0 text-xs font-semibold uppercase"
+    >
+      👋
+    </div>
+  </div>
+</div>
+
+<script>
+  // Initialize loader animation
+  document.addEventListener("DOMContentLoaded", () => {
+    const loader = document.getElementById("loader");
+    const loaderTextNice = document.getElementById("loader-text-nice");
+    const loaderTextTo = document.getElementById("loader-text-to");
+    const loaderTextMeet = document.getElementById("loader-text-meet");
+    const loaderTextYou = document.getElementById("loader-text-you");
+    const loaderTextHand = document.getElementById(
+      "loader-text-hand"
+    );
+
+    // Store scroll position
+    let scrollPosition = window.scrollY;
+
+    // Create a div to prevent scrolling but keep scrollbar visible
+    const scrollLock = document.createElement("div");
+    scrollLock.id = "scroll-lock";
+    scrollLock.style.cssText = `
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 10000;
+      pointer-events: all;
+    `;
+    document.body.appendChild(scrollLock);
+
+    import("gsap").then(({ gsap }) => {
+      // Apply flicker animation to "hello" with a slight delay
+      gsap.set(loaderTextNice, { opacity: 0 }); // Ensure it starts invisible
+
+      gsap
+        .timeline({ delay: 0.15 })
+        .to(loaderTextNice, { opacity: 0.8, scale: 1, duration: 0.08 })
+        .to(loaderTextNice, { opacity: 0.3, scale: 0.9, duration: 0.04 })
+        .to(loaderTextNice, { opacity: 1, scale: 1.05, duration: 0.06 })
+        .to(loaderTextNice, { opacity: 0.5, scale: 0.95, duration: 0.03 })
+        .to(loaderTextNice, { opacity: 1, scale: 1, duration: 0.07 });
+
+      gsap
+        .timeline({ delay: 0.45 })
+        .to(loaderTextTo, { opacity: 0.8, scale: 1, duration: 0.08 })
+        .to(loaderTextTo, { opacity: 0.3, scale: 0.9, duration: 0.04 })
+        .to(loaderTextTo, { opacity: 1, scale: 1.05, duration: 0.06 })
+        .to(loaderTextTo, { opacity: 0.5, scale: 0.95, duration: 0.03 })
+        .to(loaderTextTo, { opacity: 1, scale: 1, duration: 0.07 });
+
+      gsap
+        .timeline({ delay: 0.35 })
+        .to(loaderTextMeet, { opacity: 0.8, scale: 1, duration: 0.08 })
+        .to(loaderTextMeet, { opacity: 0.3, scale: 0.9, duration: 0.04 })
+        .to(loaderTextMeet, { opacity: 1, scale: 1.05, duration: 0.06 })
+        .to(loaderTextMeet, { opacity: 0.5, scale: 0.95, duration: 0.03 })
+        .to(loaderTextMeet, { opacity: 1, scale: 1, duration: 0.07 });
+
+      gsap
+        .timeline({ delay: 0.4 })
+        .to(loaderTextYou, { opacity: 0.8, scale: 1, duration: 0.08 })
+        .to(loaderTextYou, { opacity: 0.3, scale: 0.9, duration: 0.04 })
+        .to(loaderTextYou, { opacity: 1, scale: 1.05, duration: 0.06 })
+        .to(loaderTextYou, { opacity: 0.5, scale: 0.95, duration: 0.03 })
+        .to(loaderTextYou, { opacity: 1, scale: 1, duration: 0.07 });
+
+      // Apply flicker animation to "loaderTextHand" with a slightly longer delay
+      gsap.set(loaderTextHand, { opacity: 0 }); // Ensure it starts invisible
+
+      gsap
+        .timeline({ delay: 0.3 })
+        .to(loaderTextHand, { opacity: 0.8, scale: 1, rotation: 5, duration: 0.08 })
+        .to(loaderTextHand, { opacity: 0.3, scale: 0.9, rotation: -3, duration: 0.04 })
+        .to(loaderTextHand, { opacity: 1, scale: 1.05, rotation: 4, duration: 0.06 })
+        .to(loaderTextHand, { opacity: 0.5, scale: 0.95, rotation: -2, duration: 0.03 })
+        .to(loaderTextHand, { opacity: 1, scale: 1, rotation: 0, duration: 0.07 });
+
+      // Wait a moment before hiding the loader
+      gsap.delayedCall(2, () => {
+        // Swipe up animation to hide the loader
+        gsap.to(loader, {
+          y: "-100%",
+          duration: 0.7,
+          ease: "power3.inOut",
+          onComplete: () => {
+            // @ts-ignore
+            loader.style.display = "none";
+
+            // Remove the scroll lock
+            document.getElementById("scroll-lock")?.remove();
+          },
+        });
+      });
+    });
+
+    // Preload critical images immediately
+    const criticalImages = document.querySelectorAll('[fetchpriority="high"]');
+
+    // Create an array of promises for critical image loading
+    const imagePromises = Array.from(criticalImages).map((img) => {
+      return new Promise((resolve) => {
+        if ((img as HTMLImageElement).complete) {
+          resolve(null);
+        } else {
+          img.addEventListener("load", () => resolve(null));
+          img.addEventListener("error", () => resolve(null)); // Resolve even on error
+        }
+      });
+    });
+
+    // Wait for critical images to load before hiding loader
+    Promise.all(imagePromises).then(() => {
+      // Hide loader after critical images are loaded
+      const loader = document.querySelector(".loader");
+      if (loader) {
+        loader.classList.add("loaded");
+        setTimeout(() => {
+          loader.remove();
+        }, 200); // Adjust timing as needed
+      }
+    });
+  });
+</script>
