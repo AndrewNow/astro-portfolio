@@ -1,0 +1,261 @@
+<div
+  class="px-4 pb-10 flex flex-col gap-10 fixed bottom-0 left-0 footer-container z-0"
+>
+  <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-2 max-w-xs">
+    <div
+      class="w-full md:w-[130px] flex flex-col text-xs opacity-50 text-white/50 uppercase translate-y-0.5"
+    >
+      [ Contact ]
+    </div>
+    <div class="flex flex-col items-start whitespace-nowrap min-w-max">
+      <a
+        href="mailto:hello@sling.online"
+        class="email-link"
+        data-email="hello@sling.online"
+      >
+        <div id="email-text" class="text-white text-sm flex items-center">
+          hello@sling.online <span class="text-white/50 ml-1">[work]</span>
+          <span class="copy-icon ml-1 opacity-0">📋</span>
+        </div>
+      </a>
+      <a
+        href="mailto:andrew.p.nowacki@gmail.com"
+        class="email-link"
+        data-email="andrew.p.nowacki@gmail.com"
+      >
+        <div id="email-text" class="text-white text-sm flex items-center">
+          andrew.p.nowacki@gmail.com <span class="text-white/50 ml-1">
+            [personal]</span
+          >
+          <span class="copy-icon ml-1 opacity-0">📋</span>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-2 max-w-xs">
+    <div
+      class="w-full md:w-[130px] flex flex-col text-xs opacity-50 text-white/50 uppercase translate-y-0.5"
+    >
+      [ Socials ]
+    </div>
+    <div class="flex flex-col items-start">
+      <a
+        href="https://x.com/nowaccki"
+        target="_blank"
+        rel="noreferrer"
+        class="social-link"
+      >
+        <div id="footer-link" class="text-white text-sm flex items-center">
+          Twitter/X
+          <span class="arrow-icon ml-1 opacity-0">↗</span>
+        </div>
+      </a>
+      <a
+        href="https://www.instagram.com/andrewnowacki_/"
+        target="_blank"
+        rel="noreferrer"
+        class="social-link"
+      >
+        <div id="footer-link" class="text-white text-sm flex items-center">
+          Instagram
+          <span class="arrow-icon ml-1 opacity-0">↗</span>
+        </div>
+      </a>
+      <a
+        href="https://www.are.na/andrew-nowacki/channels"
+        target="_blank"
+        rel="noreferrer"
+        class="social-link"
+      >
+        <div id="footer-link" class="text-white text-sm flex items-center">
+          Are.na
+          <span class="arrow-icon ml-1 opacity-0">↗</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Get all section headers in the footer
+  const sectionHeaders = document.querySelectorAll(
+    ".footer-container [class*='uppercase']"
+  );
+
+  // Get all links in the footer
+  const links = document.querySelectorAll(".footer-container a");
+
+  // Set initial state - elements invisible
+  gsap.set(sectionHeaders, { opacity: 0 });
+  gsap.set(links, { opacity: 0 });
+
+  // Function to animate elements in
+  function animateFooterElementsIn() {
+    console.log("Animating footer elements in");
+
+    // Animate section headers
+    sectionHeaders.forEach((header, index) => {
+      const randomDelay = 0.2 + index * 0.15 + Math.random() * 0.1;
+
+      gsap
+        .timeline({ delay: randomDelay })
+        .to(header, { opacity: 0.8, scale: 1.1, duration: 0.08 })
+        .to(header, { opacity: 0.3, scale: 0.9, duration: 0.04 })
+        .to(header, { opacity: 1, scale: 1.05, duration: 0.06 })
+        .to(header, { opacity: 0.5, scale: 0.95, duration: 0.03 })
+        .to(header, { opacity: 1, scale: 1, duration: 0.07 });
+    });
+
+    // Animate links
+    links.forEach((link, index) => {
+      const randomDelay = 0.3 + index * 0.08 + Math.random() * 0.15;
+
+      gsap
+        .timeline({ delay: randomDelay })
+        .from(link, { x: -5, opacity: 0, duration: 0.1 })
+        .to(link, { x: 0, opacity: 0.7, duration: 0.05 })
+        .to(link, { opacity: 0.3, duration: 0.03 })
+        .to(link, { opacity: 1, duration: 0.08 });
+    });
+  }
+
+  // Function to animate elements out
+  function animateFooterElementsOut() {
+    console.log("Animating footer elements out");
+
+    // Animate section headers out
+    gsap.to(sectionHeaders, {
+      opacity: 0,
+      duration: 0.3,
+      stagger: 0.05,
+    });
+
+    // Animate links out
+    gsap.to(links, {
+      opacity: 0,
+      x: -5,
+      duration: 0.3,
+      stagger: 0.05,
+    });
+  }
+
+  // Wait for DOM to be fully loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // Check if #show-footer element exists
+    const showFooterElement = document.querySelector("#show-footer");
+
+    if (showFooterElement) {
+      // Create ScrollTrigger to detect when #show-footer enters and leaves view
+      ScrollTrigger.create({
+        trigger: "#show-footer",
+        start: "top 80%", // Trigger when the top of #show-footer reaches 80% down the viewport
+        end: "bottom 20%", // End when the bottom of #show-footer reaches 20% from the top of viewport
+        onEnter: () => {
+          console.log("#show-footer entered view");
+          animateFooterElementsIn();
+        },
+        onLeave: () => {
+          console.log("#show-footer left view");
+          animateFooterElementsOut();
+        },
+        onEnterBack: () => {
+          console.log("#show-footer entered view again");
+          animateFooterElementsIn();
+        },
+        onLeaveBack: () => {
+          console.log("#show-footer left view (scrolling up)");
+          animateFooterElementsOut();
+        },
+      });
+    } else {
+      console.warn("#show-footer element not found");
+    }
+
+    // Add hover effects for social links
+    const socialLinks = document.querySelectorAll(".social-link");
+    socialLinks.forEach((link) => {
+      const arrowIcon = link.querySelector(".arrow-icon");
+
+      link.addEventListener("mouseenter", () => {
+        // Slower blink effect
+        gsap
+          .timeline()
+          .to(link, { opacity: 0.5, duration: 0.12 })
+          .to(link, { opacity: 1, duration: 0.12 });
+
+        // Show arrow
+        gsap.to(arrowIcon, { opacity: 1, x: 2, duration: 0.2 });
+      });
+
+      link.addEventListener("mouseleave", () => {
+        // Hide arrow
+        gsap.to(arrowIcon, { opacity: 0, x: 0, duration: 0.2 });
+      });
+    });
+
+    // Add hover effects for email links
+    const emailLinks = document.querySelectorAll(".email-link");
+    emailLinks.forEach((link) => {
+      const copyIcon = link.querySelector(".copy-icon");
+
+      link.addEventListener("mouseenter", () => {
+        // Slower blink effect
+        gsap
+          .timeline()
+          .to(link, { opacity: 0.5, duration: 0.12 })
+          .to(link, { opacity: 1, duration: 0.12 });
+
+        // Show copy icon
+        gsap.to(copyIcon, { opacity: 1, x: 2, duration: 0.2 });
+      });
+
+      link.addEventListener("mouseleave", () => {
+        // Hide copy icon
+        gsap.to(copyIcon, { opacity: 0, x: 0, duration: 0.2 });
+      });
+
+      // Add click to copy functionality
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const textElement = link.querySelector("#email-text");
+        if (!textElement) return;
+
+        const originalText = textElement.innerHTML;
+        const email = link.getAttribute("data-email");
+        if (!email) return;
+
+        navigator.clipboard
+          .writeText(email)
+          .then(() => {
+            textElement.innerHTML = "Copied!";
+            (textElement as HTMLElement).style.color = "green";
+
+            // Show checkmark
+            gsap
+              .timeline()
+              .to(copyIcon, { textContent: "✓", duration: 0 })
+              .to(copyIcon, { opacity: 1, scale: 1.2, duration: 0.1 })
+              .to(copyIcon, { scale: 1, duration: 0.1 });
+
+            // Reset after delay
+            setTimeout(() => {
+              textElement.innerHTML = originalText;
+              (textElement as HTMLElement).style.color = "white";
+              if (copyIcon) {
+                copyIcon.textContent = "📋";
+                gsap.set(copyIcon, { opacity: 0, x: 0 });
+              }
+            }, 1500);
+          })
+          .catch((err) => {
+            console.error("Failed to copy email: ", err);
+          });
+      });
+    });
+  });
+</script>

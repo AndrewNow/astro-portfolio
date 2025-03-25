@@ -1,0 +1,339 @@
+---
+import { Image } from "astro:assets";
+
+const src =
+  "https://iiodzelpjz.ufs.sh/f/uU55CSHY2nOZ7RgnZEjgWDshvJnYAldFxpEVczuwk3LX2THK";
+---
+
+<div
+id="hero-bg"
+class="z-10 relative md:h-screen pt-0 p-4 flex flex-col gap-10 hero-container bg-white"
+>
+<div
+    class="flex flex-col-reverse md:flex-row justify-between h-full relative"
+  >
+    <div class="flex flex-col gap-8 self-end my-2 mt-8 md:mx-2 md:mb-1">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-2 max-w-xl">
+        <div
+          class="w-full md:w-[130px] flex flex-col text-xs opacity-100 text-black/50 uppercase translate-y-0.5"
+        >
+          [ Experience ]
+        </div>
+        <div class="flex flex-col items-start">
+          <div class="text-black text-sm flex items-center">
+            6+ Years of experience as a FE developer and web designer, 5+ as a
+            photographer prior. Proficient with Astro, Next.js, Tailwind,
+            Typescript, Three.js, Sanity CMS, Payload CMS, Stripe, Shopify
+            Liquid, Motion & GSAP.
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-2 max-w-xl">
+        <div
+          class="w-full md:w-[130px] flex flex-col text-xs opacity-100 text-black/50 uppercase translate-y-0.5"
+        >
+          [ Location ]
+        </div>
+        <div class="flex flex-col items-start">
+          <div class="text-black text-sm flex items-center">Montréal, QC</div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-2 max-w-xl">
+        <div
+          class="w-full md:w-[130px] flex flex-col text-xs opacity-100 text-black/50 uppercase translate-y-0.5"
+        >
+          [ Contact ]
+        </div>
+        <div class="flex flex-col items-start whitespace-nowrap min-w-max">
+          <a
+            href="mailto:hello@sling.online"
+            class="email-link"
+            data-email="hello@sling.online"
+          >
+            <div class="text-black text-sm flex items-center hero-email-text">
+              hello@sling.online <span class="text-black/50 ml-1">[work]</span>
+              <span class="copy-icon ml-1 opacity-0">📋</span>
+            </div>
+          </a>
+          <a
+            href="mailto:andrew.p.nowacki@gmail.com"
+            class="email-link"
+            data-email="andrew.p.nowacki@gmail.com"
+          >
+            <div class="text-black text-sm flex items-center hero-email-text">
+              andrew.p.nowacki@gmail.com <span class="text-black/50 ml-1">
+                [personal]</span
+              >
+              <span class="copy-icon ml-1 opacity-0">📋</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-2 max-w-xl">
+        <div
+          class="w-full md:w-[130px] flex flex-col text-xs opacity-100 text-black/50 uppercase translate-y-0.5"
+        >
+          [ Socials ]
+        </div>
+        <div class="flex flex-col items-start">
+          <a
+            href="https://x.com/nowaccki"
+            target="_blank"
+            rel="noreferrer"
+            class="social-link"
+          >
+            <div class="text-black text-sm flex items-center">
+              Twitter/X
+              <span class="arrow-icon ml-1 opacity-0">↗</span>
+            </div>
+          </a>
+          <a
+            href="https://www.instagram.com/andrewnowacki_/"
+            target="_blank"
+            rel="noreferrer"
+            class="social-link"
+          >
+            <div class="text-black text-sm flex items-center">
+              Instagram
+              <span class="arrow-icon ml-1 opacity-0">↗</span>
+            </div>
+          </a>
+          <a
+            href="https://www.are.na/andrew-nowacki/channels"
+            target="_blank"
+            rel="noreferrer"
+            class="social-link"
+          >
+            <div class="text-black text-sm flex items-center">
+              Are.na
+              <span class="arrow-icon ml-1 opacity-0">↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <Image
+      width={801}
+      height={952}
+      format="webp"
+      quality={70}
+      src={src}
+      alt="Andrew Nowacki"
+      priority
+      loading="eager"
+      fetchpriority="high"
+      class="w-auto h-full object-contain"
+    />
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  const heroBgAnimation = {
+    opacity: 0,
+    duration: 0.5,
+    scrollTrigger: {
+      trigger: "#hero-bg",
+      scrub: 0.9,
+      start: "bottom center",
+      end: "bottom top",
+      onLeave: () =>
+        gsap.to("#hero-bg", {
+          opacity: 0,
+          duration: 0.5,
+        }),
+      onEnter: () =>
+        gsap.to("#hero-bg", {
+          opacity: 0.4,
+          duration: 0.5,
+        }),
+    },
+  };
+
+  // Set different start/end points based on screen size
+  if (window.innerWidth <= 768) {
+    heroBgAnimation.scrollTrigger.start = "bottom center";
+    heroBgAnimation.scrollTrigger.end = "bottom top";
+  } else {
+    heroBgAnimation.scrollTrigger.start = "top [80%]";
+    heroBgAnimation.scrollTrigger.end = "bottom top";
+  }
+
+  gsap.to("#hero-bg", heroBgAnimation);
+</script>
+
+<script>
+  import { gsap } from "gsap";
+
+  // Wait for DOM to be fully loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get all section headers in the hero
+    const sectionHeaders = document.querySelectorAll(
+      ".hero-container [class*='uppercase']"
+    );
+
+    // Get all text elements and links in the hero
+    const textElements = document.querySelectorAll(".hero-container .text-sm");
+
+    // Set initial state - elements invisible
+    gsap.set(sectionHeaders, { opacity: 0 });
+    gsap.set(textElements, { opacity: 0 });
+
+    // Function to animate hero elements in
+    function animateHeroElementsIn() {
+      // Animate section headers
+      sectionHeaders.forEach((header, index) => {
+        const randomDelay = 0.05 + index * 0.08 + Math.random() * 0.05; // Faster delays
+
+        gsap
+          .timeline({ delay: randomDelay })
+          .to(header, { opacity: 0.8, scale: 1.1, duration: 0.06 }) // Faster durations
+          .to(header, { opacity: 0.3, scale: 0.9, duration: 0.03 })
+          .to(header, { opacity: 1, scale: 1.05, duration: 0.04 })
+          .to(header, { opacity: 0.5, scale: 0.95, duration: 0.02 })
+          .to(header, { opacity: 1, scale: 1, duration: 0.05 });
+      });
+
+      // Animate text elements
+      textElements.forEach((element, index) => {
+        const randomDelay = 0.1 + index * 0.05 + Math.random() * 0.08; // Faster delays
+
+        gsap
+          .timeline({ delay: randomDelay })
+          .from(element, { x: -5, opacity: 0, duration: 0.08 }) // Faster durations
+          .to(element, { x: 0, opacity: 0.7, duration: 0.04 })
+          .to(element, { opacity: 0.3, duration: 0.02 })
+          .to(element, { opacity: 1, duration: 0.06 });
+      });
+    }
+
+    // Check if loader exists
+    const loader = document.getElementById("loader");
+
+    if (loader) {
+      // If loader exists, set up a MutationObserver to detect when it's hidden
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            mutation.target === loader &&
+            (loader.style.display === "none" ||
+              getComputedStyle(loader).display === "none")
+          ) {
+            // Loader is now hidden, trigger animation immediately
+            animateHeroElementsIn();
+            observer.disconnect(); // Stop observing once triggered
+          }
+        });
+      });
+
+      // Start observing the loader for attribute changes
+      observer.observe(loader, {
+        attributes: true,
+        attributeFilter: ["style", "class"],
+      });
+
+      // Also set a backup timer in case the mutation observer misses the change
+      setTimeout(() => {
+        if (
+          loader.style.display === "none" ||
+          getComputedStyle(loader).display === "none"
+        ) {
+          animateHeroElementsIn();
+          observer.disconnect();
+        }
+      }, 3000); // Check after loader should definitely be done
+    } else {
+      // No loader found, trigger animation immediately
+      animateHeroElementsIn();
+    }
+
+    // Add hover effects for email links
+    const emailLinks = document.querySelectorAll(".hero-container .email-link");
+    emailLinks.forEach((link) => {
+      const copyIcon = link.querySelector(".copy-icon");
+
+      link.addEventListener("mouseenter", () => {
+        // Slower blink effect
+        gsap
+          .timeline()
+          .to(link, { opacity: 0.5, duration: 0.12 })
+          .to(link, { opacity: 1, duration: 0.12 });
+
+        // Show copy icon
+        gsap.to(copyIcon, { opacity: 1, x: 2, duration: 0.2 });
+      });
+
+      link.addEventListener("mouseleave", () => {
+        // Hide copy icon
+        gsap.to(copyIcon, { opacity: 0, x: 0, duration: 0.2 });
+      });
+
+      // Add click to copy functionality
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const textElement = link.querySelector(".hero-email-text");
+        if (!textElement) return;
+
+        const originalText = textElement.innerHTML;
+        const email = link.getAttribute("data-email");
+        if (!email) return;
+
+        navigator.clipboard
+          .writeText(email)
+          .then(() => {
+            textElement.innerHTML = "Copied!";
+            // @ts-ignore
+            textElement.style.color = "green";
+
+            // Show checkmark
+            gsap
+              .timeline()
+              .to(copyIcon, { textContent: "✓", duration: 0 })
+              .to(copyIcon, { opacity: 1, scale: 1.2, duration: 0.1 })
+              .to(copyIcon, { scale: 1, duration: 0.1 });
+
+            // Reset after delay
+            setTimeout(() => {
+              textElement.innerHTML = originalText;
+              // @ts-ignore
+              textElement.style.color = "black";
+              if (copyIcon) {
+                copyIcon.textContent = "📋";
+                gsap.set(copyIcon, { opacity: 0, x: 0 });
+              }
+            }, 1500);
+          })
+          .catch((err) => {
+            console.error("Failed to copy email: ", err);
+          });
+      });
+    });
+
+    // Add hover effects for social links
+    const socialLinks = document.querySelectorAll(
+      ".hero-container .social-link"
+    );
+    socialLinks.forEach((link) => {
+      const arrowIcon = link.querySelector(".arrow-icon");
+
+      link.addEventListener("mouseenter", () => {
+        // Slower blink effect
+        gsap
+          .timeline()
+          .to(link, { opacity: 0.5, duration: 0.12 })
+          .to(link, { opacity: 1, duration: 0.12 });
+
+        // Show arrow
+        gsap.to(arrowIcon, { opacity: 1, x: 2, duration: 0.2 });
+      });
+
+      link.addEventListener("mouseleave", () => {
+        // Hide arrow
+        gsap.to(arrowIcon, { opacity: 0, x: 0, duration: 0.2 });
+      });
+    });
+  });
+</script>

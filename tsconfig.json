@@ -1,6 +1,11 @@
 {
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
   "compilerOptions": {
-    // Replace `astro/client` with `@astrojs/image/client`
-    "types": ["@astrojs/image/client"]
+    "allowJs": true,
+    "types": ["three"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

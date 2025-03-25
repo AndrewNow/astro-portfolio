@@ -1,0 +1,70 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Lightbox from "../components/Lightbox.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Andrew Nowacki</title>
+    <meta property="description" content="Freelance design engineer based in Montréal, Québec, Canada." />
+    <meta property="og:image" content="https://i.imgur.com/Ua6KLgR.png" />
+  </head>
+  <body>
+    <Navbar />
+    <slot />
+    <Lightbox />
+  </body>
+</html>
+
+<script>
+  import Lenis from "lenis";
+
+  let lenis: Lenis | null = null;
+
+  function initLenis() {
+    // Only initialize Lenis if window width is greater than 768px (mobile breakpoint)
+    if (window.innerWidth > 768) {
+      lenis = new Lenis({
+        autoRaf: true,
+      });
+
+      function raf(time: any) {
+        if (lenis) {
+          lenis.raf(time);
+        }
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+    }
+  }
+
+  // Initialize Lenis on load
+  initLenis();
+
+  // Re-initialize Lenis on window resize
+  window.addEventListener("resize", () => {
+    if (lenis && window.innerWidth <= 768) {
+      lenis.destroy();
+      lenis = null;
+    } else if (!lenis && window.innerWidth > 768) {
+      initLenis();
+    }
+  });
+</script>
+
+<style>
+  html,
+  body {
+    background: #1a1a1a;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
