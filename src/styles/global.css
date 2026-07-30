@@ -2,8 +2,10 @@
 
 @theme {
   --font-sans: "AlteHaas", sans-serif;
+  --color-page: #1a1a1a;
+  --color-selection: #dcdfc4;
+  /* intentionally no --breakpoint-* overrides — keep default md=768px */
 }
-
 
 @font-face {
   font-family: "AlteHaas";
@@ -14,9 +16,13 @@
   src: url("/fonts/AlteHaas-Bold.woff2") format("woff2");
 }
 
+@layer base {
+  html,
+  body {
+    @apply bg-page m-0 w-full h-full;
+  }
 
-::selection {
-  background: #dcdfc4;
-  color: black;
+  ::selection {
+    @apply bg-selection text-black;
+  }
 }
-
